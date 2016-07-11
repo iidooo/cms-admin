@@ -7,7 +7,7 @@ var Footer = React.createClass({
             <footer className="footer bg-222 navbar-fixed-bottom">
                 <div className="container">
                     <p className="text-muted text-center">Powered by 上海轶度网络科技有限公司</p>
-                    <p className="text-muted text-center">version 0.5.14.0 B20160604</p>
+                    <p className="text-muted text-center">{SiteProperties.version}</p>
                 </div>
             </footer>
         );

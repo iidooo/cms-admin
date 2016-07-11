@@ -11,6 +11,8 @@ SiteProperties = {
     //clientURL : "http://www.zgvemc.com",
     //serverURL : "http://zgvemc.iidooo.com/iidooo-cms",
     //plantClientURL: "http://www.zgvemc.com/gauge-web",
+
+    version: "version 0.1.0.0 B20160711"
 };
 
 // 存储在SessionStorage中的key
@@ -22,7 +24,7 @@ SessionKey = {
     channelID: "CHANNEL_ID",
     pageMode: "PAGE_MODE",
     contentID: "CONTENT_ID",
-    searchCondition: "SEARCH_CONDITION"
+    contentType: "CONTENT_TYPE"
 };
 
 SecurityClient = {
@@ -33,14 +35,19 @@ SecurityClient = {
 Message = {
     LOGIN_INFO_REQUIRED: "登陆信息不能为空",
     LOGIN_FAILED: "身份验证失败，请确认登陆信息",
-
     INPUT_REQUIRED: "红色区域为必填项！",
+
     EMAIL_REQUIRED: "请输入正确的Email地址!",
     VERIFY_CODE_REQUIRED: "请输入正确的验证码",
     NO_PERMISSION: "你所在的用户组无权限执行该操作！",
     NO_PERMISSION_BY_READONLY_USER: "只读角色用户，无法进行编辑操作！",
     NO_PERMISSION_BY_CREATE_USER: "非此内容创建者，无法进行编辑操作！",
     NO_PERMISSION_BY_CONTENT_STATUS: "审核权限不够，无法进行编辑操作！"
+};
+
+PageMode = {
+    CREATE: "1",
+    UPDATE: "2"
 };
 
 ContentStatus = {
@@ -57,16 +64,28 @@ ContentStatusMap = {
     "4": "审核驳回修正"
 };
 
-ContentTypeMap = {
-    "1": "自媒体",
-    "2": "新闻"
+ContentType = {
+    DEFAULT: "1",
+    NEWS : "2",
+    DOWNLOAD : "3"
 };
+
+ContentTypeMap = {
+    "1": "默认",
+    "2": "新闻",
+    "3": "下载",
+};
+
+ContentTypeList = [];
 
 API = {
     loginByEmail: "/core/loginByEmail",
     getSiteList: "/admin/getSiteList",
     getChannelTree: "/admin/getChannelTree",
     searchContents: "/admin/searchContents",
+    createContent: "/admin/createContent",
+    updateContent: "/admin/updateContent",
+    getContent: "/admin/getContent",
 
 
     sendVerifyCode: "/core/sendVerifyCode",
@@ -75,10 +94,7 @@ API = {
     getChannelList: "/admin/getChannelList",
     getDictItemList: "/core/getDictItemList",
     uploadFile: "/admin/uploadFile",
-    createContent: "/admin/createContent",
     deleteContent: "/admin/deleteContent",
-    getContent: "/admin/getContent",
-    updateContent: "/admin/updateContent",
     content: "/content"
 };
 

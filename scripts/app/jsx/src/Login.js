@@ -19,7 +19,7 @@ var LoginStore = Reflux.createStore({
                 location.href = location.href = SiteProperties.clientURL + Page.sites;
             } else {
                 var message = Message.LOGIN_FAILED;
-                $("#message").show().text(message);
+                $("#messageBox").show().text(message);
             }
         };
 
@@ -57,7 +57,7 @@ var LoginForm = React.createClass({
     render: function () {
         return (
             <div id="loginForm">
-                <div id="message" className="alert alert-danger" style={{display:"none"}} role="alert">...</div>
+                <MessageBox/>
 
                 <h3 className="text-center">
                     <stong>EDO CMS System</stong>

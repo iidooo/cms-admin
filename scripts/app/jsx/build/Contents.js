@@ -57,10 +57,15 @@ var Contents = React.createClass({displayName: "Contents",
             ContentsActions.search(this.state);
         }
     },
+    handleCreate: function (contentType) {
+        sessionStorage.setItem(SessionKey.pageMode, PageMode.CREATE);
+        sessionStorage.setItem(SessionKey.contentType, contentType);
+        location.href = SiteProperties.clientURL + Page.content;
+    },
     render: function () {
         return (
             React.createElement("div", null, 
-                React.createElement(Header, null), 
+                React.createElement(Header, {activeMenuID: "menuContentManage"}), 
 
                 React.createElement("div", {id: "main", className: "container-fluid margin-top-70"}, 
                     React.createElement("div", {className: "col-sm-2 sidebar margin-top-20"}, 
@@ -81,12 +86,12 @@ var Contents = React.createClass({displayName: "Contents",
                                         React.createElement("i", {className: "fa fa-caret-down"})
                                     ), 
                                     React.createElement("ul", {className: "dropdown-menu"}, 
-                                        React.createElement("li", null, React.createElement("a", {href: SiteProperties.clientURL + Page.sites}, React.createElement("i", {
+                                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.DEFAULT)}, React.createElement("i", {
                                             className: "fa fa-file-o"}), "  默认")), 
-                                        React.createElement("li", null, React.createElement("a", {href: "/account/settings"}, React.createElement("i", {className: "fa fa-newspaper-o"}), " " + ' ' +
+                                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.NEWS)}, React.createElement("i", {className: "fa fa-newspaper-o"}), " " + ' ' +
                                             "新闻")
                                         ), 
-                                        React.createElement("li", null, React.createElement("a", {href: "/signout"}, React.createElement("i", {className: "fa fa-download"}), "  下载")
+                                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.DOWNLOAD)}, React.createElement("i", {className: "fa fa-download"}), "  下载")
                                         )
                                     )
                                 ), 
@@ -143,13 +148,14 @@ var ContentsTable = React.createClass({displayName: "ContentsTable",
 });
 
 var ContentsTableRow = React.createClass({displayName: "ContentsTableRow",
-    handleLink: function (siteID) {
-        sessionStorage.setItem(SessionKey.siteID, siteID);
-        location.href = SiteProperties.clientURL + Page.contents;
+    handleLink: function (contentID) {
+        sessionStorage.setItem(SessionKey.contentID, contentID);
+        sessionStorage.setItem(SessionKey.pageMode, PageMode.UPDATE);
+        location.href = SiteProperties.clientURL + Page.content;
     },
     render: function () {
         return (
-            React.createElement("tr", null, 
+            React.createElement("tr", {onClick: this.handleLink.bind(null, this.props.content.contentID)}, 
                 React.createElement("td", null, this.props.content.channel.channelName), 
                 React.createElement("td", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleLink.bind(null, this.props.content.contentID)}, this.props.content.contentTitle)), 
                 React.createElement("td", null, ContentTypeMap[this.props.content.contentType]), 

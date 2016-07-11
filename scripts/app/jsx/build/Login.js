@@ -19,7 +19,7 @@ var LoginStore = Reflux.createStore({
                 location.href = location.href = SiteProperties.clientURL + Page.sites;
             } else {
                 var message = Message.LOGIN_FAILED;
-                $("#message").show().text(message);
+                $("#messageBox").show().text(message);
             }
         };
 
@@ -57,7 +57,7 @@ var LoginForm = React.createClass({displayName: "LoginForm",
     render: function () {
         return (
             React.createElement("div", {id: "loginForm"}, 
-                React.createElement("div", {id: "message", className: "alert alert-danger", style: {display:"none"}, role: "alert"}, "..."), 
+                React.createElement(MessageBox, null), 
 
                 React.createElement("h3", {className: "text-center"}, 
                     React.createElement("stong", null, "EDO CMS System")

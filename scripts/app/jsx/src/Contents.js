@@ -57,10 +57,15 @@ var Contents = React.createClass({
             ContentsActions.search(this.state);
         }
     },
+    handleCreate: function (contentType) {
+        sessionStorage.setItem(SessionKey.pageMode, PageMode.CREATE);
+        sessionStorage.setItem(SessionKey.contentType, contentType);
+        location.href = SiteProperties.clientURL + Page.content;
+    },
     render: function () {
         return (
             <div>
-                <Header/>
+                <Header activeMenuID="menuContentManage"/>
 
                 <div id="main" className="container-fluid margin-top-70">
                     <div className="col-sm-2 sidebar margin-top-20">
@@ -81,12 +86,12 @@ var Contents = React.createClass({
                                         <i className="fa fa-caret-down"></i>
                                     </a>
                                     <ul className="dropdown-menu">
-                                        <li><a href={SiteProperties.clientURL + Page.sites}><i
+                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.DEFAULT)}><i
                                             className="fa fa-file-o"></i>&nbsp;&nbsp;默认</a></li>
-                                        <li><a href="/account/settings"><i className="fa fa-newspaper-o"></i>&nbsp;
+                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.NEWS)}><i className="fa fa-newspaper-o"></i>&nbsp;
                                             新闻</a>
                                         </li>
-                                        <li><a href="/signout"><i className="fa fa-download"></i>&nbsp;&nbsp;下载</a>
+                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.DOWNLOAD)}><i className="fa fa-download"></i>&nbsp;&nbsp;下载</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -143,13 +148,14 @@ var ContentsTable = React.createClass({
 });
 
 var ContentsTableRow = React.createClass({
-    handleLink: function (siteID) {
-        sessionStorage.setItem(SessionKey.siteID, siteID);
-        location.href = SiteProperties.clientURL + Page.contents;
+    handleLink: function (contentID) {
+        sessionStorage.setItem(SessionKey.contentID, contentID);
+        sessionStorage.setItem(SessionKey.pageMode, PageMode.UPDATE);
+        location.href = SiteProperties.clientURL + Page.content;
     },
     render: function () {
         return (
-            <tr>
+            <tr onClick={this.handleLink.bind(null, this.props.content.contentID)}>
                 <td>{this.props.content.channel.channelName}</td>
                 <td><a href="javascript:void(0)" onClick={this.handleLink.bind(null, this.props.content.contentID)}>{this.props.content.contentTitle}</a></td>
                 <td>{ContentTypeMap[this.props.content.contentType]}</td>

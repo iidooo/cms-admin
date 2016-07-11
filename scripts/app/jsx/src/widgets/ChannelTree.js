@@ -36,8 +36,7 @@ var ChannelTree = React.createClass({
     mixins: [Reflux.connect(ChannelTreeStore, 'channelList')],
     getInitialState: function () {
         return {
-            channelList: [],
-            treeOptions: {}
+            channelList: []
         };
     },
     componentWillMount: function () {

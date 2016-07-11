@@ -4,7 +4,7 @@
 var MessageBox = React.createClass({
     render: function () {
         return (
-            <div id="messageBox" style={{display: 'none'}}>{this.props.message}</div>
+            <div id="messageBox" className="alert alert-danger" style={{display:"none"}} role="alert"></div>
         );
     }
 });

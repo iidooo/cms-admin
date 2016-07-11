@@ -4,7 +4,7 @@
 var MessageBox = React.createClass({displayName: "MessageBox",
     render: function () {
         return (
-            React.createElement("div", {id: "messageBox", style: {display: 'none'}}, this.props.message)
+            React.createElement("div", {id: "messageBox", className: "alert alert-danger", style: {display:"none"}, role: "alert"})
         );
     }
 });
