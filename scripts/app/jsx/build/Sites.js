@@ -60,10 +60,7 @@ var Sites = React.createClass({displayName: "Sites",
                     React.createElement("div", {className: "spacer10"}), 
                     React.createElement(SitesTable, {sites: this.state.sites})
 
-                ), 
-
-
-                React.createElement(Footer, null)
+                )
             )
         );
     }

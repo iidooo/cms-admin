@@ -25,6 +25,19 @@ var ContentStore = Reflux.createStore({
             return false;
         }
 
+            // 内容图片列表解析成json
+            var $pictureList = $(".content-picture-img");
+            var pictureArray = new Array();
+            $.each($pictureList, function (index, object) {
+                var picture = {};
+                picture.pictureID = object.id;
+                picture.pictureName = object.title;
+                picture.pictureURL = object.src;
+                pictureArray[index] = picture;
+            });
+
+            data.pictureList = JSON.stringify(pictureArray);
+
         var self = this;
         var callback = function (result) {
             if (result.status == 200) {
@@ -66,8 +79,7 @@ var Content = React.createClass({displayName: "Content",
     mixins: [Reflux.connect(ContentStore, 'content')],
     getInitialState: function () {
         return {
-            content: {
-            }
+            content: {}
         };
     },
     componentWillMount: function () {
@@ -88,6 +100,15 @@ var Content = React.createClass({displayName: "Content",
         this.refs.inputSourceURL.value = this.state.content.sourceURL;
         this.refs.inputContentBody.value = this.state.content.contentBody;
         showdownPreview(this.state.content.contentBody, "txtContentBodyPreview");
+
+        var pageMode = sessionStorage.getItem(SessionKey.pageMode);
+        if (pageMode == PageMode.UPDATE) {
+            if (this.state.content.pictureList.length > 0) {
+                $.each(this.state.content.pictureList, function (index, object) {
+                    createContentPicture(object);
+                });
+            }
+        }
     },
     handleContentBodyEdit: function () {
         showdownPreview(this.refs.inputContentBody.value, "txtContentBodyPreview");
@@ -103,13 +124,20 @@ var Content = React.createClass({displayName: "Content",
         this.state.content.contentSummary = this.refs.inputContentBody.value.substring(0, 200);
         this.state.content.contentBody = this.refs.inputContentBody.value;
 
-        if(this.state.content.channelID == "" || this.state.content.contentType == "" || this.state.content.title == ""){
+        if (this.state.content.channelID == "" || this.state.content.contentType == "" || this.state.content.contentTitle == "") {
             $("#messageBox").show().text(Message.INPUT_REQUIRED);
             return false;
         }
 
         ContentActions.save(this.state.content);
     },
+    handlePictureDialog: function () {
+        $('#pictureDialog').modal('show');
+    },
+    onPictureDialogConfirm: function (childState) {
+        createContentPicture(childState);
+    },
+
     render: function () {
         return (
             React.createElement("div", null, 
@@ -117,6 +145,8 @@ var Content = React.createClass({displayName: "Content",
 
                 React.createElement("div", {id: "main", className: "container－fluid margin-top-70 margin-bottom-70"}, 
                     React.createElement(MessageBox, null), 
+                    React.createElement(PictureDialog, {callbackParent: this.onPictureDialogConfirm}), 
+
                     React.createElement("div", {className: "row form-horizontal form-group"}, 
                         React.createElement("div", {className: "col-sm-6"}, 
                             React.createElement("div", {className: "col-sm-3 control-label"}, 
@@ -131,7 +161,8 @@ var Content = React.createClass({displayName: "Content",
                                 React.createElement("label", {className: "required"}, "内容类型")
                             ), 
                             React.createElement("div", {className: "col-sm-9"}, 
-                                React.createElement(ContentTypeList, {contentType: sessionStorage.getItem(SessionKey.contentType), disabled: "disabled"})
+                                React.createElement(ContentTypeList, {contentType: sessionStorage.getItem(SessionKey.contentType), 
+                                                 disabled: "disabled"})
                             )
                         )
                     ), 
@@ -187,6 +218,28 @@ var Content = React.createClass({displayName: "Content",
                     ), 
 
                     React.createElement("div", {className: "row form-group form-horizontal"}, 
+                        React.createElement("div", {className: "col-xs-6"}, 
+                            React.createElement("div", {className: "col-xs-3 control-label"}, 
+                                React.createElement("label", null, "展示图上传")
+                            ), 
+                            React.createElement("div", {className: "col-xs-9"}, 
+                                React.createElement("button", {type: "button", className: "btn btn-info", onClick: this.handlePictureDialog}, 
+                                    "上传展示的图片"
+                                )
+                            )
+                        )
+                    ), 
+
+                    React.createElement("div", {className: "row form-group form-horizontal"}, 
+                        React.createElement("div", {className: "col-xs-6"}, 
+                            React.createElement("div", {className: "col-xs-3 control-label"}
+                            ), 
+                            React.createElement("div", {id: "divPictureList", className: "col-xs-9"}
+                            )
+                        )
+                    ), 
+
+                    React.createElement("div", {className: "row form-group form-horizontal"}, 
                         React.createElement("div", {className: "col-sm-6"}, 
                             React.createElement("div", {className: "col-sm-3 control-label"}, 
                                 React.createElement("label", null, "正文")
@@ -230,8 +283,7 @@ var Content = React.createClass({displayName: "Content",
                         " ", 
                         React.createElement("button", {className: "btn btn-danger", type: "button"}, "重 置")
                     )
-                ), 
-                React.createElement(Footer, null)
+                )
             )
         );
     }
@@ -241,3 +293,35 @@ ReactDOM.render(
     React.createElement(Content, null),
     document.getElementById('page')
 );
+
+function createContentPicture(picture){
+    // 加入上传路径
+    var $divInputPic = $("#divPictureList");
+    var index = $("#divPictureList > div").length + 1;
+
+    var $div = $("<div class='pull-left text-center content-picture'></div>");
+    $div.attr("id", "contentPictureWrap" + index);
+
+    var $divPicture = $("<div></div>");
+    var $picture = $("<img class='width-100 content-picture-img'/>");
+    $picture.attr("alt", picture.pictureName);
+    $picture.attr("title", picture.pictureName);
+    $picture.attr("src", picture.pictureURL);
+    if(picture.pictureID != null && picture.pictureID != '') {
+        $picture.attr("id", picture.pictureID);
+    }
+    $divPicture.append($picture);
+    $div.append($divPicture);
+
+    var $divButton = $("<div></div>");
+    // 删除按钮
+    var $deleteButton = $("<button type='button' class='btn btn-danger btn-block btn-xs'>删除</button>");
+    $divButton.append($deleteButton);
+    $div.append($divButton);
+    $deleteButton.bind("click", function () {
+        $("#contentPictureWrap" + index).remove();
+        $(this).remove();
+    });
+
+    $divInputPic.append($div);
+}

@@ -61,9 +61,6 @@ var Sites = React.createClass({
                     <SitesTable sites={this.state.sites}/>
 
                 </div>
-
-
-                <Footer/>
             </div>
         );
     }

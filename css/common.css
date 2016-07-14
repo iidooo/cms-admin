@@ -56,6 +56,10 @@ a {
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
 }
+
+.tab-content{
+    padding: 10px 0;
+}
 /*End*/
 
 /*定义一些常用背景色*/
@@ -102,6 +106,10 @@ a {
 
 .width-200{
     width: 200px;
+}
+
+.width-100{
+    width: 100px;
 }
 
 .h-30{

@@ -86,6 +86,7 @@ API = {
     createContent: "/admin/createContent",
     updateContent: "/admin/updateContent",
     getContent: "/admin/getContent",
+    uploadFile: "/admin/uploadFile",
 
 
     sendVerifyCode: "/core/sendVerifyCode",
@@ -93,7 +94,6 @@ API = {
     getUserByToken: "/core/getUserByToken",
     getChannelList: "/admin/getChannelList",
     getDictItemList: "/core/getDictItemList",
-    uploadFile: "/admin/uploadFile",
     deleteContent: "/admin/deleteContent",
     content: "/content"
 };

@@ -114,9 +114,8 @@ var Contents = React.createClass({displayName: "Contents",
                                currentPage: this.state.contentsData.page.currentPage, 
                                pageSum: this.state.contentsData.page.pageSum})
                     )
-                ), 
+                )
 
-                React.createElement(Footer, null)
             )
         );
     }

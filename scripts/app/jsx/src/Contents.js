@@ -116,7 +116,6 @@ var Contents = React.createClass({
                     </div>
                 </div>
 
-                <Footer/>
             </div>
         );
     }
