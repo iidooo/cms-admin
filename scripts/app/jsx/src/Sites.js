@@ -40,6 +40,9 @@ var Sites = React.createClass({
     componentWillMount: function () {
         SitesActions.getOwnSiteList(this.state);
     },
+    handleCreateSite : function(){
+        alert("还未开放该功能！");
+    },
     render: function () {
         return (
             <div>
@@ -51,7 +54,7 @@ var Sites = React.createClass({
                             我的站点
                         </div>
                         <div className="pull-right">
-                            <a className="btn btn-primary">
+                            <a href="javascript:void(0)" onClick={this.handleCreateSite} className="btn btn-primary">
                                 <i className="fa fa-plus"></i>&nbsp;&nbsp;
                                 <span>增加一个新站点</span>
                             </a>

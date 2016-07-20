@@ -58,8 +58,8 @@ var Contents = React.createClass({
         }
     },
     handleCreate: function (contentType) {
-        sessionStorage.setItem(SessionKey.pageMode, PageMode.CREATE);
         sessionStorage.setItem(SessionKey.contentType, contentType);
+        sessionStorage.removeItem(SessionKey.contentID);
         location.href = SiteProperties.clientURL + Page.content;
     },
     render: function () {
@@ -91,7 +91,7 @@ var Contents = React.createClass({
                                         <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.NEWS)}><i className="fa fa-newspaper-o"></i>&nbsp;
                                             新闻</a>
                                         </li>
-                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.DOWNLOAD)}><i className="fa fa-download"></i>&nbsp;&nbsp;下载</a>
+                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.FILE)}><i className="fa fa-download"></i>&nbsp;&nbsp;文件</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -149,7 +149,6 @@ var ContentsTable = React.createClass({
 var ContentsTableRow = React.createClass({
     handleLink: function (contentID) {
         sessionStorage.setItem(SessionKey.contentID, contentID);
-        sessionStorage.setItem(SessionKey.pageMode, PageMode.UPDATE);
         location.href = SiteProperties.clientURL + Page.content;
     },
     render: function () {

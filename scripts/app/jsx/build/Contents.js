@@ -58,8 +58,8 @@ var Contents = React.createClass({displayName: "Contents",
         }
     },
     handleCreate: function (contentType) {
-        sessionStorage.setItem(SessionKey.pageMode, PageMode.CREATE);
         sessionStorage.setItem(SessionKey.contentType, contentType);
+        sessionStorage.removeItem(SessionKey.contentID);
         location.href = SiteProperties.clientURL + Page.content;
     },
     render: function () {
@@ -91,7 +91,7 @@ var Contents = React.createClass({displayName: "Contents",
                                         React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.NEWS)}, React.createElement("i", {className: "fa fa-newspaper-o"}), " " + ' ' +
                                             "新闻")
                                         ), 
-                                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.DOWNLOAD)}, React.createElement("i", {className: "fa fa-download"}), "  下载")
+                                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.FILE)}, React.createElement("i", {className: "fa fa-download"}), "  文件")
                                         )
                                     )
                                 ), 
@@ -149,7 +149,6 @@ var ContentsTable = React.createClass({displayName: "ContentsTable",
 var ContentsTableRow = React.createClass({displayName: "ContentsTableRow",
     handleLink: function (contentID) {
         sessionStorage.setItem(SessionKey.contentID, contentID);
-        sessionStorage.setItem(SessionKey.pageMode, PageMode.UPDATE);
         location.href = SiteProperties.clientURL + Page.content;
     },
     render: function () {

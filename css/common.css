@@ -60,11 +60,23 @@ a {
 .tab-content{
     padding: 10px 0;
 }
+
+.breadcrumb{
+    border-radius: 0px;
+}
+
+.navbar{
+    border-radius: 0px;
+}
 /*End*/
 
 /*定义一些常用背景色*/
 .bg-222{
     background-color: #222222;
+}
+
+.bg-f5{
+    background-color: #f5f5f5;
 }
 /*End*/
 
@@ -104,12 +116,20 @@ a {
     height: 100px;
 }
 
-.width-200{
-    width: 200px;
+.width-50{
+    width: 50px;
 }
 
 .width-100{
     width: 100px;
+}
+
+.width-200{
+    width: 200px;
+}
+
+.width-400{
+    width: 400px;
 }
 
 .h-30{
@@ -128,12 +148,41 @@ a {
     margin-top: 70px;
 }
 
+.margin-bottom-0{
+    margin-bottom: 0;
+}
+
 .margin-bottom-70{
     margin-bottom: 70px;
 }
 
 .margin-right-10{
     margin-right: 10px;
+}
+
+.padding-5{
+    padding: 5px;
+}
+
+.padding-left-0{
+    padding-left: 0px;
+}
+
+.padding-right-0{
+    padding-right: 0px;
+}
+
+.padding-right-5{
+    padding-right: 5px;
+}
+
+.padding-h-10{
+    padding: 0 10px;
+}
+
+.padding-h-50{
+    padding-right: 50px;
+    padding-left: 50px;
 }
 
 .spacer10 {
@@ -144,6 +193,10 @@ a {
     padding: 0;
     border: 0;
     display: block;
+}
+
+.overflow-hidden{
+    overflow: hidden;
 }
 
 /*超出宽度就换行*/

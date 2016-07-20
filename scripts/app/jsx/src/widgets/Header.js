@@ -6,6 +6,9 @@ var Header = React.createClass({
     },
     componentWillMount: function () {
         this.state.user = JSON.parse(sessionStorage.getItem(SessionKey.user));
+        if(this.state.user == null){
+            location.href = SiteProperties.clientURL + Page.login;
+        }
     },
     render: function () {
         return (
@@ -29,7 +32,7 @@ var Header = React.createClass({
 
 
 var MainMenu = React.createClass({
-    componentDidUpdate: function () {
+    componentDidMount: function () {
         var activeMenuID = this.props.activeMenuID;
         $("#" + activeMenuID).addClass("active");
     },

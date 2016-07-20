@@ -22,9 +22,9 @@ SessionKey = {
     user: "SECURITY_USER",
     siteID: "SITE_ID",
     channelID: "CHANNEL_ID",
-    pageMode: "PAGE_MODE",
     contentID: "CONTENT_ID",
-    contentType: "CONTENT_TYPE"
+    contentType: "CONTENT_TYPE",
+    pictureID: "PICTURE_ID"
 };
 
 SecurityClient = {
@@ -36,18 +36,16 @@ Message = {
     LOGIN_INFO_REQUIRED: "登陆信息不能为空",
     LOGIN_FAILED: "身份验证失败，请确认登陆信息",
     INPUT_REQUIRED: "红色区域为必填项！",
-
+    SAVE_FIRST: "请先保存当前编辑内容",
+    SAVE_SUCCESS: "保存成功",
+    UPLOAD_UMCOMPRESS_CONFIRM: "上传图片不进行压缩，确认吗？",
+    UPLOAD_COMPRESS_CONFIRM: "上传图片将进行压缩，确认吗？",
     EMAIL_REQUIRED: "请输入正确的Email地址!",
     VERIFY_CODE_REQUIRED: "请输入正确的验证码",
     NO_PERMISSION: "你所在的用户组无权限执行该操作！",
     NO_PERMISSION_BY_READONLY_USER: "只读角色用户，无法进行编辑操作！",
     NO_PERMISSION_BY_CREATE_USER: "非此内容创建者，无法进行编辑操作！",
     NO_PERMISSION_BY_CONTENT_STATUS: "审核权限不够，无法进行编辑操作！"
-};
-
-PageMode = {
-    CREATE: "1",
-    UPDATE: "2"
 };
 
 ContentStatus = {
@@ -67,13 +65,13 @@ ContentStatusMap = {
 ContentType = {
     DEFAULT: "1",
     NEWS : "2",
-    DOWNLOAD : "3"
+    FILE : "3"
 };
 
 ContentTypeMap = {
     "1": "默认",
     "2": "新闻",
-    "3": "下载",
+    "3": "文件",
 };
 
 ContentTypeList = [];
@@ -87,7 +85,16 @@ API = {
     updateContent: "/admin/updateContent",
     getContent: "/admin/getContent",
     uploadFile: "/admin/uploadFile",
-
+    getPicture: "/admin/getPicture",
+    getPictures: "/admin/getPictures",
+    createPicture: "/admin/createPicture",
+    updatePicture: "/admin/updatePicture",
+    deletePicture: "/admin/deletePicture",
+    getFile: "/admin/getFile",
+    getFiles: "/admin/getFiles",
+    createFile: "/admin/createFile",
+    updateFile: "/admin/updateFile",
+    deleteFile: "/admin/deleteFile",
 
     sendVerifyCode: "/core/sendVerifyCode",
     getAccessTokenByMail: "/core/getAccessTokenByMail",
@@ -172,7 +179,7 @@ function getQueryStr(key) {
 function ajaxPost(url, data, callback) {
     $.ajax({
         type: "POST",
-        timeout: 3000, //超时时间设置，单位毫秒
+        timeout: 10000, //超时时间设置，单位毫秒
         url: url,
         dataType: "json",
         data: data,

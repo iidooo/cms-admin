@@ -40,6 +40,9 @@ var Sites = React.createClass({displayName: "Sites",
     componentWillMount: function () {
         SitesActions.getOwnSiteList(this.state);
     },
+    handleCreateSite : function(){
+        alert("还未开放该功能！");
+    },
     render: function () {
         return (
             React.createElement("div", null, 
@@ -51,7 +54,7 @@ var Sites = React.createClass({displayName: "Sites",
                             "我的站点"
                         ), 
                         React.createElement("div", {className: "pull-right"}, 
-                            React.createElement("a", {className: "btn btn-primary"}, 
+                            React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreateSite, className: "btn btn-primary"}, 
                                 React.createElement("i", {className: "fa fa-plus"}), "  ", 
                                 React.createElement("span", null, "增加一个新站点")
                             )

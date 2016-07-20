@@ -1,6 +1,3 @@
-/**
- * Created by Ethan on 16/5/13.
- */
 var Footer = React.createClass({displayName: "Footer",
     render: function () {
         return (

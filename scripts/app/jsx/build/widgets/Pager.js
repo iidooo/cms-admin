@@ -10,7 +10,6 @@ var Pager = React.createClass({displayName: "Pager",
     },
 
     handleMove: function (pageNumber) {
-        console.log(pageNumber);
         if(pageNumber > 0 && pageNumber <= this.props.pageSum) {
             this.state.currentPage = pageNumber;
             this.props.callbackParent(this.state);
@@ -21,7 +20,6 @@ var Pager = React.createClass({displayName: "Pager",
         if(this.refs.inputToPage.value > 0 && this.refs.inputToPage.value <= this.props.pageSum){
             this.state.currentPage = this.refs.inputToPage.value;
             this.props.callbackParent(this.state);
-
         }
     },
 

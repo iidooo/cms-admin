@@ -15,9 +15,9 @@ var ContentTypeList = React.createClass({
         return (
             <select id="inputContentType" className="form-control" defaultValue={this.props.contentType} disabled={this.props.disabled}>
                 {this.checkIsContainAll()}
-                <option value="1">默认</option>
-                <option value="2">新闻</option>
-                <option value="3">下载</option>
+                <option value="1">{ContentTypeMap["1"]}</option>
+                <option value="2">{ContentTypeMap["2"]}</option>
+                <option value="3">{ContentTypeMap["3"]}</option>
             </select>
         );
     }
