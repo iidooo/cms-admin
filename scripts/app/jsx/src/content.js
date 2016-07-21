@@ -2,7 +2,7 @@
  * Created by Ethan on 16/5/20.
  */
 
-var ContentActions = Reflux.createActions(['save', 'getContent']);
+var ContentActions = Reflux.createActions(['save', 'getContent', 'delete']);
 
 var ContentStore = Reflux.createStore({
     listenables: [ContentActions],
@@ -21,7 +21,7 @@ var ContentStore = Reflux.createStore({
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
-            location.href = Page.login;
+            location.href = SiteProperties.clientURL + Page.login;
             return false;
         }
 
@@ -38,6 +38,33 @@ var ContentStore = Reflux.createStore({
 
         ajaxPost(url, data, callback);
     },
+    onDelete: function (data) {
+        var url = SiteProperties.serverURL + API.deleteContent;
+        data.appID = SecurityClient.appID;
+        data.secret = SecurityClient.secret;
+        data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
+        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.siteID = sessionStorage.getItem(SessionKey.siteID);
+        data.contentID = sessionStorage.getItem(SessionKey.contentID);
+        // 检查token是否过期
+        if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
+            location.href = SiteProperties.clientURL + Page.login;
+            return false;
+        }
+
+        var self = this;
+        var callback = function (result) {
+            if (result.status == 200) {
+                sessionStorage.setItem(SessionKey.contentID, result.data.contentID);
+                alert(Message.DELETE_SUCCESS);
+                location.href = SiteProperties.clientURL + Page.contents;
+            } else {
+                console.log(result);
+            }
+        };
+
+        ajaxPost(url, data, callback);
+    },
     onGetContent: function (data) {
         var url = SiteProperties.serverURL + API.getContent;
         data.appID = SecurityClient.appID;
@@ -46,7 +73,7 @@ var ContentStore = Reflux.createStore({
         data.userID = sessionStorage.getItem(SessionKey.userID);
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
-            location.href = Page.login;
+            location.href = SiteProperties.clientURL + Page.login;
             return false;
         }
 
@@ -131,6 +158,13 @@ var Content = React.createClass({
 
         $("#inputChannelTree").val(this.state.content.channelID);
         $("#inputContentType").val(this.state.content.contentType);
+        $("#inputContentStatus").val(this.state.content.status);
+        if(this.state.content.isSilent == 1){
+            $("#checkboxIsSilent").attr("checked",true);
+        } else{
+            $("#checkboxIsSilent").attr("checked",false);
+        }
+        $("#inputStickyIndex").val(this.state.content.stickyIndex);
         this.refs.inputContentTitle.value = this.state.content.contentTitle;
         this.refs.inputContentSubTitle.value = this.state.content.contentSubTitle;
 
@@ -150,6 +184,14 @@ var Content = React.createClass({
         this.state.content.contentTitle = this.refs.inputContentTitle.value;
         this.state.content.contentSubTitle = this.refs.inputContentSubTitle.value;
         this.state.content.contentImageTitle = this.refs.inputContentImageTitle.value;
+        this.state.content.stickyIndex = this.refs.inputStickyIndex.value;
+        this.state.content.status = $("#inputContentStatus").val();
+        var isSilent = $("#checkboxIsSilent").prop("checked");
+        if(isSilent == true){
+            this.state.content.isSilent = 1;
+        } else {
+            this.state.content.isSilent = 0;
+        }
         this.state.content.author = this.refs.inputAuthor.value;
         this.state.content.source = this.refs.inputSource.value;
         this.state.content.sourceURL = this.refs.inputSourceURL.value;
@@ -162,6 +204,9 @@ var Content = React.createClass({
         }
 
         ContentActions.save(this.state.content);
+    },
+    handleDelete : function(){
+        ContentActions.delete(this.state.content);
     },
     uploadImageTitle: function () {
         openFileBrowse("uploadContentImageTitle");
@@ -193,7 +238,7 @@ var Content = React.createClass({
             <div>
                 <Header activeMenuID="menuContentManage"/>
 
-                <div id="main" className="container margin-top-70">
+                <div id="main" className="container margin-top-70 margin-bottom-70">
                     <MessageBox/>
                     <PictureListDialog/>
                     <FileListDialog/>
@@ -292,6 +337,31 @@ var Content = React.createClass({
                         </div>
                     </div>
 
+                    <div className="row form-group form-horizontal">
+                        <div className="col-sm-6">
+                            <div className="col-sm-3 control-label">
+                                <label>置顶级别</label>
+                            </div>
+                            <div className="col-sm-9">
+                                <input type="number" className="form-control" ref="inputStickyIndex"/>
+                            </div>
+                        </div>
+                        <div className="col-sm-6">
+                            <div className="col-sm-3 control-label">
+                                <label>状态</label>
+                            </div>
+                            <div className="col-sm-5">
+                                <ContentStatusList contentType={this.state.content.status}/>
+                            </div>
+                            <div className="col-sm-4 checkbox">
+                                <label>
+                                <input type="checkbox" id="checkboxIsSilent" ref="checkboxIsSilent"/>
+                                    禁止评论
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="newsFields" style={{display:"none"}}>
                         <div className="row form-group form-horizontal">
                             <div className="col-sm-6">
@@ -330,7 +400,7 @@ var Content = React.createClass({
                         <button className="btn btn-primary" type="button" onClick={this.handleSave}>保&nbsp;存
                         </button>
                         &nbsp;
-                        <button className="btn btn-danger" type="button">重&nbsp;置</button>
+                        <button className="btn btn-danger" type="button" onClick={this.handleDelete}>删&nbsp;除</button>
                     </div>
                 </div>
             </div>

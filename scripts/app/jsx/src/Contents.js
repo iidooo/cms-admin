@@ -127,13 +127,13 @@ var ContentsTable = React.createClass({
             <table className="table table-hover">
                 <thead>
                 <tr>
-                    <th className="col-sm-1">栏目</th>
-                    <th className="col-sm-4">标题</th>
-                    <th className="col-sm-1">类型</th>
-                    <th className="col-sm-1">状态</th>
-                    <th className="col-sm-1">发布者</th>
-                    <th className="col-sm-2">发布时间</th>
-                    <th className="col-sm-2">更新时间</th>
+                    <th>栏目</th>
+                    <th className="width-400">标题</th>
+                    <th>类型</th>
+                    <th>状态</th>
+                    <th>发布者</th>
+                    <th>发布时间</th>
+                    <th>更新时间</th>
                 </tr>
                 </thead>
                 <tbody>

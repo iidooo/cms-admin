@@ -38,6 +38,7 @@ Message = {
     INPUT_REQUIRED: "红色区域为必填项！",
     SAVE_FIRST: "请先保存当前编辑内容",
     SAVE_SUCCESS: "保存成功",
+    DELETE_SUCCESS: "删除成功",
     UPLOAD_UMCOMPRESS_CONFIRM: "上传图片不进行压缩，确认吗？",
     UPLOAD_COMPRESS_CONFIRM: "上传图片将进行压缩，确认吗？",
     EMAIL_REQUIRED: "请输入正确的Email地址!",
@@ -49,17 +50,17 @@ Message = {
 };
 
 ContentStatus = {
-    PUBLISHED: "0",
-    APPROVED: "2",
-    REFUSE: "3"
+    PUBLISHED: "1",
+    APPROVED: "3",
+    REFUSE: "4"
 };
 
 ContentStatusMap = {
-    "0": "已发布",
-    "1": "未审核",
-    "2": "审核通过",
-    "3": "审核驳回",
-    "4": "审核驳回修正"
+    "1": "已发布",
+    "2": "未审核",
+    "3": "审核通过",
+    "4": "审核驳回",
+    "5": "已修正"
 };
 
 ContentType = {
@@ -84,6 +85,7 @@ API = {
     createContent: "/admin/createContent",
     updateContent: "/admin/updateContent",
     getContent: "/admin/getContent",
+    deleteContent: "/admin/deleteContent",
     uploadFile: "/admin/uploadFile",
     getPicture: "/admin/getPicture",
     getPictures: "/admin/getPictures",
@@ -101,7 +103,6 @@ API = {
     getUserByToken: "/core/getUserByToken",
     getChannelList: "/admin/getChannelList",
     getDictItemList: "/core/getDictItemList",
-    deleteContent: "/admin/deleteContent",
     content: "/content"
 };
 
