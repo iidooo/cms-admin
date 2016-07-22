@@ -1,9 +1,9 @@
-var FileListDialogActions = Reflux.createActions(['getFiles', 'deleteFile']);
+var FileListDialogActions = Reflux.createActions(['getFileList', 'deleteFile']);
 
 var FileListDialogStore = Reflux.createStore({
     listenables: [FileListDialogActions],
-    onGetFiles: function (data) {
-        var url = SiteProperties.serverURL + API.getFiles;
+    onGetFileList: function (data) {
+        var url = SiteProperties.serverURL + API.getFileList;
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
@@ -48,7 +48,7 @@ var FileListDialogStore = Reflux.createStore({
         var self = this;
         var callback = function (result) {
             if (result.status == 200) {
-                FileListDialogActions.getFiles(data);
+                FileListDialogActions.getFileList(data);
             } else {
                 console.log(result);
             }
@@ -59,23 +59,23 @@ var FileListDialogStore = Reflux.createStore({
 });
 
 var FileListDialog = React.createClass({displayName: "FileListDialog",
-    mixins: [Reflux.connect(FileListDialogStore, 'files')],
+    mixins: [Reflux.connect(FileListDialogStore, 'fileList')],
     getInitialState: function () {
         return {
-            files: []
+            fileList: []
         };
     },
     componentDidMount: function () {
         $('#fileListDialog').on('show.bs.modal', function (e) {
             var data = {};
-            FileListDialogActions.getFiles(data);
+            FileListDialogActions.getFileList(data);
         });
     },
     openFileDialog: function () {
         $('#fileDialog').modal('show');
     },
     onFileDialogConfirm: function () {
-        FileListDialogActions.getFiles(this.state);
+        FileListDialogActions.getFileList(this.state);
     },
     handleClose: function () {
         $('#fileListDialog').modal('toggle');
@@ -102,7 +102,7 @@ var FileListDialog = React.createClass({displayName: "FileListDialog",
                                 )
                                 ), 
                                 React.createElement("tbody", null, 
-                                this.state.files.map(function (item) {
+                                this.state.fileList.map(function (item) {
                                     return React.createElement(FileListRow, {key: item.fileID, file: item})
                                 }), 
                                 React.createElement("tr", null, 

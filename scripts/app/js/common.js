@@ -1,18 +1,18 @@
 SiteProperties = {
     // 开发环境
-    clientURL: "http://localhost:63342/cms-admin",
-    serverURL: "http://localhost:8080/cms-server",
+    //clientURL: "http://localhost:63342/cms-admin",
+    //serverURL: "http://192.168.31.103:8080/cms-server",
     // 测试环境
     //clientURL: "http://www.iidooo.com/gauge-web",
     //serverURL : "http://zgvemc.iidooo.com/gauge-server"
 
 
     // 正式环境
-    //clientURL : "http://www.zgvemc.com",
-    //serverURL : "http://zgvemc.iidooo.com/iidooo-cms",
-    //plantClientURL: "http://www.zgvemc.com/gauge-web",
+    clientURL : "http://www.iidooo.com/cms-admin",
+    serverURL : "http://www.iidooo.com/cms-server",
 
-    version: "version 0.1.0.0 B20160711"
+    siteVersion: "0.1.1.0 B20160711",
+    cmsAPIVersion: "0.1.1.0 B20160711",
 };
 
 // 存储在SessionStorage中的key
@@ -28,7 +28,7 @@ SessionKey = {
 };
 
 SecurityClient = {
-    appID: "CMSSystem",
+    appID: "cmsadmin",
     secret: "e96b669ba65848bcb20f5de53dcc370e"
 };
 
@@ -39,8 +39,11 @@ Message = {
     SAVE_FIRST: "请先保存当前编辑内容",
     SAVE_SUCCESS: "保存成功",
     DELETE_SUCCESS: "删除成功",
+    DELETE_CONFIRM: "确定要删除吗？",
     UPLOAD_UMCOMPRESS_CONFIRM: "上传图片不进行压缩，确认吗？",
     UPLOAD_COMPRESS_CONFIRM: "上传图片将进行压缩，确认吗？",
+
+
     EMAIL_REQUIRED: "请输入正确的Email地址!",
     VERIFY_CODE_REQUIRED: "请输入正确的验证码",
     NO_PERMISSION: "你所在的用户组无权限执行该操作！",
@@ -81,19 +84,19 @@ API = {
     loginByEmail: "/core/loginByEmail",
     getSiteList: "/admin/getSiteList",
     getChannelTree: "/admin/getChannelTree",
-    searchContents: "/admin/searchContents",
+    searchContentList: "/admin/searchContentList",
     createContent: "/admin/createContent",
     updateContent: "/admin/updateContent",
     getContent: "/admin/getContent",
     deleteContent: "/admin/deleteContent",
     uploadFile: "/admin/uploadFile",
     getPicture: "/admin/getPicture",
-    getPictures: "/admin/getPictures",
+    getPictureList: "/admin/getPictureList",
     createPicture: "/admin/createPicture",
     updatePicture: "/admin/updatePicture",
     deletePicture: "/admin/deletePicture",
     getFile: "/admin/getFile",
-    getFiles: "/admin/getFiles",
+    getFileList: "/admin/getFileList",
     createFile: "/admin/createFile",
     updateFile: "/admin/updateFile",
     deleteFile: "/admin/deleteFile",

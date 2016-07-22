@@ -1,9 +1,9 @@
-var PictureListDialogActions = Reflux.createActions(['getPictures', 'deletePicture']);
+var PictureListDialogActions = Reflux.createActions(['getPictureList', 'deletePicture']);
 
 var PictureListDialogStore = Reflux.createStore({
     listenables: [PictureListDialogActions],
-    onGetPictures: function (data) {
-        var url = SiteProperties.serverURL + API.getPictures;
+    onGetPictureList: function (data) {
+        var url = SiteProperties.serverURL + API.getPictureList;
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
@@ -46,7 +46,7 @@ var PictureListDialogStore = Reflux.createStore({
         var self = this;
         var callback = function (result) {
             if (result.status == 200) {
-                PictureListDialogActions.getPictures(data);
+                PictureListDialogActions.getPictureList(data);
             } else {
                 console.log(result);
             }
@@ -57,16 +57,16 @@ var PictureListDialogStore = Reflux.createStore({
 });
 
 var PictureListDialog = React.createClass({displayName: "PictureListDialog",
-    mixins: [Reflux.connect(PictureListDialogStore, 'pictures')],
+    mixins: [Reflux.connect(PictureListDialogStore, 'pictureList')],
     getInitialState: function () {
         return {
-            pictures: []
+            pictureList: []
         };
     },
     componentDidMount: function () {
         $('#pictureListDialog').on('show.bs.modal', function (e) {
             var data = {};
-            PictureListDialogActions.getPictures(data);
+            PictureListDialogActions.getPictureList(data);
         });
     },
     openPictureDialog: function () {
@@ -101,7 +101,7 @@ var PictureListDialog = React.createClass({displayName: "PictureListDialog",
                                 )
                                 ), 
                                 React.createElement("tbody", null, 
-                                this.state.pictures.map(function (item) {
+                                this.state.pictureList.map(function (item) {
                                     return React.createElement(PictureListRow, {key: item.pictureID, picture: item})
                                 }), 
                                 React.createElement("tr", null, 

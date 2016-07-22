@@ -7,7 +7,7 @@ var ContentsActions = Reflux.createActions(['search']);
 var ContentsStore = Reflux.createStore({
     listenables: [ContentsActions],
     onSearch: function (data) {
-        var url = SiteProperties.serverURL + API.searchContents;
+        var url = SiteProperties.serverURL + API.searchContentList;
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
@@ -42,7 +42,7 @@ var Contents = React.createClass({displayName: "Contents",
         return {
             contentsData: {
                 page: {},
-                contents: []
+                contentList: []
             }
         };
     },
@@ -107,7 +107,7 @@ var Contents = React.createClass({displayName: "Contents",
                         ), 
                         React.createElement("div", {className: "clearfix"}), 
                         React.createElement("div", {className: "spacer10"}), 
-                        React.createElement(ContentsTable, {contents: this.state.contentsData.contents}), 
+                        React.createElement(ContentsTable, {contentList: this.state.contentsData.contentList}), 
 
                         React.createElement(Pager, {callbackParent: this.onChildChanged, 
                                recordSum: this.state.contentsData.page.recordSum, 
@@ -137,7 +137,7 @@ var ContentsTable = React.createClass({displayName: "ContentsTable",
                 )
                 ), 
                 React.createElement("tbody", null, 
-                this.props.contents.map(function (item) {
+                this.props.contentList.map(function (item) {
                     return React.createElement(ContentsTableRow, {key: item.contentID, content: item})
                 })
                 )

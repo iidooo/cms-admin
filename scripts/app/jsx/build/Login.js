@@ -81,7 +81,8 @@ var LoginForm = React.createClass({displayName: "LoginForm",
                             "登录"
                         )
                     )
-                )
+                ), 
+                React.createElement(Footer, null)
             )
         );
     }

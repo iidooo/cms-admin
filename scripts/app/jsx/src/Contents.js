@@ -7,7 +7,7 @@ var ContentsActions = Reflux.createActions(['search']);
 var ContentsStore = Reflux.createStore({
     listenables: [ContentsActions],
     onSearch: function (data) {
-        var url = SiteProperties.serverURL + API.searchContents;
+        var url = SiteProperties.serverURL + API.searchContentList;
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
@@ -42,7 +42,7 @@ var Contents = React.createClass({
         return {
             contentsData: {
                 page: {},
-                contents: []
+                contentList: []
             }
         };
     },
@@ -107,7 +107,7 @@ var Contents = React.createClass({
                         </div>
                         <div className="clearfix"></div>
                         <div className="spacer10"></div>
-                        <ContentsTable contents={this.state.contentsData.contents}/>
+                        <ContentsTable contentList={this.state.contentsData.contentList}/>
 
                         <Pager callbackParent={this.onChildChanged}
                                recordSum={this.state.contentsData.page.recordSum}
@@ -137,7 +137,7 @@ var ContentsTable = React.createClass({
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.contents.map(function (item) {
+                {this.props.contentList.map(function (item) {
                     return <ContentsTableRow key={item.contentID} content={item}/>
                 })}
                 </tbody>

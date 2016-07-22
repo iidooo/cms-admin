@@ -206,7 +206,9 @@ var Content = React.createClass({displayName: "Content",
         ContentActions.save(this.state.content);
     },
     handleDelete : function(){
-        ContentActions.delete(this.state.content);
+        if(window.confirm(Message.DELETE_CONFIRM)) {
+            ContentActions.delete(this.state.content);
+        }
     },
     uploadImageTitle: function () {
         openFileBrowse("uploadContentImageTitle");

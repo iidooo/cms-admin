@@ -82,6 +82,7 @@ var LoginForm = React.createClass({
                         </button>
                     </div>
                 </div>
+                <Footer/>
             </div>
         );
     }
