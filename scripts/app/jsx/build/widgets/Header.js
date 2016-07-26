@@ -41,6 +41,9 @@ var MainMenu = React.createClass({displayName: "MainMenu",
             React.createElement("ul", {className: "nav navbar-nav"}, 
                 React.createElement("li", {id: "menuContentManage"}, 
                     React.createElement("a", {href: SiteProperties.clientURL + Page.contents}, "内容管理")
+                ), 
+                React.createElement("li", {id: "menuAccountManage"}, 
+                    React.createElement("a", {href: SiteProperties.clientURL + Page.account}, "账户管理")
                 )
             )
         );
@@ -65,7 +68,7 @@ var LoginInfo = React.createClass({displayName: "LoginInfo",
                     React.createElement("ul", {className: "dropdown-menu"}, 
                         React.createElement("li", null, React.createElement("a", {href: SiteProperties.clientURL + Page.sites}, React.createElement("i", {
                             className: "fa fa-database"}), "  站点")), 
-                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)"}, React.createElement("i", {className: "fa fa-user"}), "  帐户")), 
+                        React.createElement("li", null, React.createElement("a", {href: SiteProperties.clientURL + Page.account}, React.createElement("i", {className: "fa fa-user"}), "  帐户")), 
                         
                             //<li><a href="/pricing"><i className="fa fa-clipboard"></i>&nbsp;&nbsp;Plans</a></li>
                             //<li><a href="/docs"><i className="fa fa-files-o"></i>&nbsp;&nbsp;Documentation</a></li>

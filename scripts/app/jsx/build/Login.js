@@ -10,7 +10,6 @@ var LoginStore = Reflux.createStore({
         data.secret = SecurityClient.secret;
 
         var callback = function (result) {
-            console.log(result);
             if (result.status == 200) {
                 sessionStorage.setItem(SessionKey.accessToken, result.data.token);
                 sessionStorage.setItem(SessionKey.userID, result.data.userID);
@@ -76,11 +75,18 @@ var LoginForm = React.createClass({displayName: "LoginForm",
                         React.createElement("input", {ref: "inputPassword", type: "password", placeholder: "请输入密码", 
                                className: "form-control input-lg"})
                     ), 
-                    React.createElement("div", null, 
+                    React.createElement("div", {className: "form-group"}, 
                         React.createElement("button", {type: "button", className: "btn btn-primary btn-lg btn-block", onClick: this.handleLogin}, 
                             "登录"
                         )
                     )
+                    
+                        //<div>
+                        //    <div className="text-right">
+                        //        <label>还没有账号？</label><a href={SiteProperties.clientURL + Page.register}>免费注册</a>
+                        //    </div>
+                        //</div>
+                    
                 ), 
                 React.createElement(Footer, null)
             )

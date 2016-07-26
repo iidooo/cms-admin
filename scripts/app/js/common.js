@@ -1,15 +1,15 @@
 SiteProperties = {
     // 开发环境
-    //clientURL: "http://localhost:63342/cms-admin",
-    //serverURL: "http://192.168.31.103:8080/cms-server",
+    clientURL: "http://localhost:63342/cms-admin",
+    serverURL: "http://localhost:8080/cms-server",
     // 测试环境
     //clientURL: "http://www.iidooo.com/gauge-web",
     //serverURL : "http://zgvemc.iidooo.com/gauge-server"
 
 
     // 正式环境
-    clientURL : "http://www.iidooo.com/cms-admin",
-    serverURL : "http://www.iidooo.com/cms-server",
+    //clientURL : "http://www.iidooo.com/cms-admin",
+    //serverURL : "http://www.iidooo.com/cms-server",
 
     siteVersion: "0.1.1.0 B20160711",
     cmsAPIVersion: "0.1.1.0 B20160711",
@@ -42,7 +42,10 @@ Message = {
     DELETE_CONFIRM: "确定要删除吗？",
     UPLOAD_UMCOMPRESS_CONFIRM: "上传图片不进行压缩，确认吗？",
     UPLOAD_COMPRESS_CONFIRM: "上传图片将进行压缩，确认吗？",
-
+    USER_NAME_REPEAT: "用户名重复",
+    EMAIL_REPEAT: "邮箱重复",
+    OLD_PASSWORD_WRONG: "旧密码不正确",
+    TWICE_PASSWORD_NOT_EQUAL: "两次密码输入不想等",
 
     EMAIL_REQUIRED: "请输入正确的Email地址!",
     VERIFY_CODE_REQUIRED: "请输入正确的验证码",
@@ -82,6 +85,8 @@ ContentTypeList = [];
 
 API = {
     loginByEmail: "/core/loginByEmail",
+    registerByEmail: "/core/registerByEmail",
+    sendMailVerifyCode: "/core/sendMailVerifyCode",
     getSiteList: "/admin/getSiteList",
     getChannelTree: "/admin/getChannelTree",
     searchContentList: "/admin/searchContentList",
@@ -100,10 +105,11 @@ API = {
     createFile: "/admin/createFile",
     updateFile: "/admin/updateFile",
     deleteFile: "/admin/deleteFile",
+    getUser: "/core/getUser",
+    updateUserInfo: "/core/updateUserInfo",
+    updateUserPassword: "/core/updateUserPassword",
 
-    sendVerifyCode: "/core/sendVerifyCode",
     getAccessTokenByMail: "/core/getAccessTokenByMail",
-    getUserByToken: "/core/getUserByToken",
     getChannelList: "/admin/getChannelList",
     getDictItemList: "/core/getDictItemList",
     content: "/content"
@@ -119,14 +125,13 @@ role = {
 Page = {
     index: "/pages/index.html",
     login: "/pages/login.html",
+    register: "/pages/register.html",
     sites: "/pages/sites.html",
     contents: "/pages/contents.html",
     content: "/pages/content.html",
-    contentNews: "/pages/createNews.html",
+    account: "/pages/account.html",
+    password: "/pages/password.html",
 };
-
-// 保存所获得的SecurityUser Model对象
-securityUser = {};
 
 var CmsPicture = {
     contentID: 0,

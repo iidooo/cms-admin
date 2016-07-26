@@ -42,6 +42,9 @@ var MainMenu = React.createClass({
                 <li id="menuContentManage">
                     <a href={SiteProperties.clientURL + Page.contents}>内容管理</a>
                 </li>
+                <li id="menuAccountManage">
+                    <a href={SiteProperties.clientURL + Page.account}>账户管理</a>
+                </li>
             </ul>
         );
     }
@@ -65,7 +68,7 @@ var LoginInfo = React.createClass({
                     <ul className="dropdown-menu">
                         <li><a href={SiteProperties.clientURL + Page.sites}><i
                             className="fa fa-database"></i>&nbsp;&nbsp;站点</a></li>
-                        <li><a href="javascript:void(0)"><i className="fa fa-user"></i>&nbsp;&nbsp;帐户</a></li>
+                        <li><a href={SiteProperties.clientURL + Page.account}><i className="fa fa-user"></i>&nbsp;&nbsp;帐户</a></li>
                         {
                             //<li><a href="/pricing"><i className="fa fa-clipboard"></i>&nbsp;&nbsp;Plans</a></li>
                             //<li><a href="/docs"><i className="fa fa-files-o"></i>&nbsp;&nbsp;Documentation</a></li>

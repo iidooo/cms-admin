@@ -34,6 +34,11 @@ a {
     border-color: #007d9a;
 }
 
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+    background-color: #00afd7;
+    border-color: #00afd7;
+}
+
 .table tr {
     background-color: #fefefe;
     border-bottom: 1px solid #f3f3f3;
@@ -130,6 +135,14 @@ a {
 
 .width-400{
     width: 400px;
+}
+
+.width-per-60{
+    width: 60%;
+}
+
+.width-per-40{
+    width: 40%;
 }
 
 .height-30{
