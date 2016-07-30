@@ -2,10 +2,10 @@
  * Created by Ethan on 16/5/18.
  */
 
-var ContentsActions = Reflux.createActions(['search']);
+var UsersActions = Reflux.createActions(['search']);
 
-var ContentsStore = Reflux.createStore({
-    listenables: [ContentsActions],
+var UsersStore = Reflux.createStore({
+    listenables: [UsersActions],
     onSearch: function (data) {
         var url = SiteProperties.serverURL + API.searchContentList;
         data.appID = SecurityClient.appID;
@@ -36,25 +36,24 @@ var ContentsStore = Reflux.createStore({
     }
 });
 
-var Contents = React.createClass({
-    mixins: [Reflux.connect(ContentsStore, 'contentsData')],
+var Users = React.createClass({
+    mixins: [Reflux.connect(UsersStore, 'usersData')],
     getInitialState: function () {
         return {
-            contentsData: {
+            usersData: {
                 page: {},
-                contentList: []
+                userList: []
             }
         };
     },
     componentWillMount: function () {
-        sessionStorage.removeItem(SessionKey.channelID);
-        ContentsActions.search(this.state);
+
     },
     onChildChanged: function (childState) {
         if (childState.currentPage != null) {
             this.state.currentPage = childState.currentPage;
 
-            ContentsActions.search(this.state);
+            UsersActions.search(this.state);
         }
     },
     handleCreate: function (contentType) {
@@ -65,22 +64,21 @@ var Contents = React.createClass({
     render: function () {
         return (
             <div>
-                <Header activeMenuID="menuContentManage"/>
+                <Header activeMenuID="menuSystemManage"/>
 
                 <div id="main" className="container-fluid margin-top-70">
-                    {
-                        //<div className="col-sm-2 sidebar margin-top-20">
-                        //    <div className="title">
-                        //        <h4>栏目管理</h4>
-                        //    </div>
-                        //    <ChannelTree/>
-                        //</div>
-                    }
-                    <SideBarMenu/>
-                    <div className="content-page">
+                    <div className="col-sm-2 sidebar margin-top-20">
+                        <div className="list-group">
+                            <a href={SiteProperties.clientURL + Page.account} className="list-group-item active">
+                                用户管理
+                            </a>
+                            <a href={SiteProperties.clientURL + Page.password} className="list-group-item">密码重设</a>
+                        </div>
+                    </div>
+                    <div className="col-sm-offset-2">
                         <div>
                             <div className="title pull-left">
-                                <h4>内容管理</h4>
+                                <h4>用户管理</h4>
                             </div>
                             <div className="pull-right form-inline">
                                 <div className="btn-group">
@@ -110,12 +108,12 @@ var Contents = React.createClass({
                         </div>
                         <div className="clearfix"></div>
                         <div className="spacer10"></div>
-                        <ContentsTable contentList={this.state.contentsData.contentList}/>
+                        <UsersTable userList={this.state.usersData.userList}/>
 
                         <Pager callbackParent={this.onChildChanged}
-                               recordSum={this.state.contentsData.page.recordSum}
-                               currentPage={this.state.contentsData.page.currentPage}
-                               pageSum={this.state.contentsData.page.pageSum}/>
+                               recordSum={this.state.usersData.page.recordSum}
+                               currentPage={this.state.usersData.page.currentPage}
+                               pageSum={this.state.usersData.page.pageSum}/>
                     </div>
                 </div>
 
@@ -124,24 +122,24 @@ var Contents = React.createClass({
     }
 });
 
-var ContentsTable = React.createClass({
+var UsersTable = React.createClass({
     render: function () {
         return (
             <table className="table table-hover">
                 <thead>
                 <tr>
-                    <th>栏目</th>
-                    <th className="width-400">标题</th>
-                    <th>类型</th>
-                    <th>状态</th>
-                    <th>发布者</th>
-                    <th>发布时间</th>
+                    <th>用户ID</th>
+                    <th>用户名</th>
+                    <th>手机号</th>
+                    <th>邮箱</th>
+                    <th>微信号</th>
+                    <th>角色</th>
                     <th>更新时间</th>
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.contentList.map(function (item) {
-                    return <ContentsTableRow key={item.contentID} content={item}/>
+                {this.props.userList.map(function (item) {
+                    return <UsersTableRow key={item.userID} user={item}/>
                 })}
                 </tbody>
             </table>
@@ -149,27 +147,27 @@ var ContentsTable = React.createClass({
     }
 });
 
-var ContentsTableRow = React.createClass({
+var UsersTableRow = React.createClass({
     handleLink: function (contentID) {
         sessionStorage.setItem(SessionKey.contentID, contentID);
         location.href = SiteProperties.clientURL + Page.content;
     },
     render: function () {
         return (
-            <tr onClick={this.handleLink.bind(null, this.props.content.contentID)}>
-                <td>{this.props.content.channel.channelName}</td>
-                <td><a href="javascript:void(0)" onClick={this.handleLink.bind(null, this.props.content.contentID)}>{this.props.content.contentTitle}</a></td>
-                <td>{ContentTypeMap[this.props.content.contentType]}</td>
-                <td>{ContentStatusMap[this.props.content.status]}</td>
-                <td>{this.props.content.createUser.userName}</td>
-                <td>{new Date(this.props.content.createTime).format('yyyy-MM-dd hh:mm:ss')}</td>
-                <td>{new Date(this.props.content.updateTime).format('yyyy-MM-dd hh:mm:ss')}</td>
+            <tr onClick={this.handleLink.bind(null, this.props.user.userID)}>
+                <td>{this.props.user.userName}</td>
+                <td><a href="javascript:void(0)" onClick={this.handleLink.bind(null, this.props.user.userID)}>{this.props.user.userName}</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{new Date(this.props.user.updateTime).format('yyyy-MM-dd hh:mm:ss')}</td>
             </tr>
         );
     }
 });
 
 ReactDOM.render(
-    <Contents />,
+    <Users />,
     document.getElementById('page')
 );

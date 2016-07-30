@@ -21,6 +21,8 @@ SessionKey = {
     userID: "USER_ID",
     user: "SECURITY_USER",
     siteID: "SITE_ID",
+    siteMap: "SITE_MAP",
+    siteOwnerMap:"SITE_OWNER_MAP",
     channelID: "CHANNEL_ID",
     contentID: "CONTENT_ID",
     contentType: "CONTENT_TYPE",
@@ -87,9 +89,10 @@ API = {
     loginByEmail: "/core/loginByEmail",
     registerByEmail: "/core/registerByEmail",
     sendMailVerifyCode: "/core/sendMailVerifyCode",
-    getSiteList: "/admin/getSiteList",
+    getRelatedSiteList: "/admin/getRelatedSiteList",
     getChannelTree: "/admin/getChannelTree",
     searchContentList: "/admin/searchContentList",
+    getContentCount: "/admin/getContentCount",
     createContent: "/admin/createContent",
     updateContent: "/admin/updateContent",
     getContent: "/admin/getContent",
@@ -106,6 +109,7 @@ API = {
     updateFile: "/admin/updateFile",
     deleteFile: "/admin/deleteFile",
     getUser: "/core/getUser",
+    getSiteUserCount: "/admin/getSiteUserCount",
     updateUserInfo: "/core/updateUserInfo",
     updateUserPassword: "/core/updateUserPassword",
 
@@ -113,6 +117,12 @@ API = {
     getChannelList: "/admin/getChannelList",
     getDictItemList: "/core/getDictItemList",
     content: "/content"
+};
+
+SiteRole={
+    "1": "管理员",
+    "2": "编辑",
+    "3": "普通会员"
 };
 
 role = {
@@ -127,10 +137,12 @@ Page = {
     login: "/pages/login.html",
     register: "/pages/register.html",
     sites: "/pages/sites.html",
+    dashboard: "/pages/dashboard.html",
     contents: "/pages/contents.html",
     content: "/pages/content.html",
     account: "/pages/account.html",
     password: "/pages/password.html",
+    users: "/pages/users.html",
 };
 
 var CmsPicture = {

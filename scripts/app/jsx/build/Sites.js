@@ -1,10 +1,10 @@
-var SitesActions = Reflux.createActions(['getOwnSiteList']);
+var SitesActions = Reflux.createActions(['getRelatedSiteList']);
 
 var SitesStore = Reflux.createStore({
     listenables: [SitesActions],
-    onGetOwnSiteList: function (data) {
+    onGetRelatedSiteList: function (data) {
 
-        var url = SiteProperties.serverURL + API.getSiteList;
+        var url = SiteProperties.serverURL + API.getRelatedSiteList;
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
@@ -20,6 +20,21 @@ var SitesStore = Reflux.createStore({
 
         var callback = function (result) {
             if (result.status == 200) {
+
+                // 把站点用户信息建立一个Map存入Session，Sidebar显示用户站点角色时会用到
+                var siteMap = {};
+                var siteOwnerMap = {};
+                $.each(result.data, function (siteIndex, site) {
+                    siteMap[site.siteID] = site;
+                    $.each(site.ownerList, function(ownerIndex, owner){
+                        if(owner.userID == data.userID){
+                            siteOwnerMap[site.siteID] = owner;
+                        }
+                    });
+                });
+                sessionStorage.setItem(SessionKey.siteMap, JSON.stringify(siteMap));
+                sessionStorage.setItem(SessionKey.siteOwnerMap, JSON.stringify(siteOwnerMap));
+
                 self.trigger(result.data);
             } else {
                 console.log(result);
@@ -38,7 +53,7 @@ var Sites = React.createClass({displayName: "Sites",
         };
     },
     componentWillMount: function () {
-        SitesActions.getOwnSiteList(this.state);
+        SitesActions.getRelatedSiteList(this.state);
     },
     handleCreateSite : function(){
         alert("还未开放该功能！");
@@ -95,7 +110,7 @@ var SitesTable = React.createClass({displayName: "SitesTable",
 var SitesTableRow = React.createClass({displayName: "SitesTableRow",
     handleLink: function (siteID) {
         sessionStorage.setItem(SessionKey.siteID, siteID);
-        location.href = SiteProperties.clientURL + Page.contents;
+        location.href = SiteProperties.clientURL + Page.dashboard;
     },
     render: function () {
         return (

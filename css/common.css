@@ -1,18 +1,29 @@
 /*重写Html默认标签*/
-body{
-    font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;
+body {
+    font-family: "Microsoft YaHei", "Arial", "黑体", "宋体", sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
-    color: #333;
+    color: #444444;
+    background: #ecf0f1;
 }
 
 h2 {
     font-size: 30px;
 }
 
-a {
-    color: #428bca;
+img {
+    vertical-align: middle;
+    border:0;
 }
+
+a:hover{
+    text-decoration: none;
+}
+
+a:focus{
+    text-decoration: none;
+}
+
 /*End*/
 
 /*重写bootstrap默认样式*/
@@ -34,7 +45,7 @@ a {
     border-color: #007d9a;
 }
 
-.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     background-color: #00afd7;
     border-color: #00afd7;
 }
@@ -44,15 +55,15 @@ a {
     border-bottom: 1px solid #f3f3f3;
 }
 
-.table>thead>tr>th {
+.table > thead > tr > th {
     border-bottom: 1px solid #f3f3f3;
 }
 
-.table>tbody>tr>td{
+.table > tbody > tr > td {
     border-top: 0px solid #ddd;
 }
 
-.list-group-item:first-child{
+.list-group-item:first-child {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
@@ -62,28 +73,51 @@ a {
     border-bottom-left-radius: 0px;
 }
 
-.tab-content{
+.tab-content {
     padding: 10px 0;
 }
 
-.breadcrumb{
+.breadcrumb {
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+.navbar {
     border-radius: 0px;
 }
 
-.navbar{
-    border-radius: 0px;
+.bg-info {
+    background-color: #2b9ac9 !important;
+}
+
+.bg-success {
+    background-color: #58c9c7 !important;
 }
 /*End*/
 
 /*定义一些常用背景色*/
-.bg-222{
+.bg-222 {
     background-color: #222222;
 }
 
-.bg-f5{
+.bg-f5 {
     background-color: #f5f5f5;
 }
+
+.bg-white{
+    background-color: #ffffff;
+}
+
+.text-dark {
+    color: #797979 !important;
+}
 /*End*/
+
+.box-shadow {
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
 
 .input-error {
     border-color: #de615e;
@@ -101,99 +135,116 @@ a {
     color: red;
 }
 
-.img-square-50{
+.img-square-48 {
+    width: 48px;
+    height: 48px;
+}
+
+.img-square-50 {
     width: 50px;
     height: 50px;
 }
 
-.img-square-100{
+.img-square-100 {
     width: 100px;
     height: 100px;
 }
 
-.img-square-200{
+.img-square-200 {
     width: 200px;
     height: 200px;
 }
 
-.img-rect-200x100{
+.img-rect-200x100 {
     width: 200px;
     height: 100px;
 }
 
-.width-50{
+.width-50 {
     width: 50px;
 }
 
-.width-100{
+.width-100 {
     width: 100px;
 }
 
-.width-200{
+.width-200 {
     width: 200px;
 }
 
-.width-400{
+.width-240 {
+    width: 240px;
+}
+
+.width-400 {
     width: 400px;
 }
 
-.width-per-60{
+.width-per-60 {
     width: 60%;
 }
 
-.width-per-40{
+.width-per-40 {
     width: 40%;
 }
 
-.height-30{
+.height-30 {
     height: 30px;
 }
 
-.margin-left-5{
+.margin-0{
+    margin: 0;
+}
+
+.margin-left-5 {
     margin-left: 5px;
 }
 
-.margin-top-20{
+.margin-top-20 {
     margin-top: 20px;
 }
 
-.margin-top-70{
+.margin-top-70 {
     margin-top: 70px;
 }
 
-.margin-bottom-0{
+.margin-bottom-0 {
     margin-bottom: 0;
 }
 
-.margin-bottom-70{
+.margin-bottom-70 {
     margin-bottom: 70px;
 }
 
-.margin-right-10{
+.margin-right-10 {
     margin-right: 10px;
 }
 
-.padding-5{
+.padding-5 {
     padding: 5px;
 }
 
-.padding-left-0{
+.padding-20{
+    padding: 20px;
+}
+
+.padding-left-0 {
     padding-left: 0px;
 }
 
-.padding-right-0{
+.padding-right-0 {
     padding-right: 0px;
 }
 
-.padding-right-5{
+.padding-right-5 {
     padding-right: 5px;
 }
 
-.padding-h-10{
+.padding-h-10 {
     padding: 0 10px;
 }
 
-.padding-h-50{
+.padding-h-50 {
     padding-right: 50px;
     padding-left: 50px;
 }
@@ -208,39 +259,39 @@ a {
     display: block;
 }
 
-.overflow-hidden{
+.overflow-hidden {
     overflow: hidden;
 }
 
 /*超出宽度就换行*/
-.break-word{
-    word-wrap:break-word;
+.break-word {
+    word-wrap: break-word;
 }
 
 /*将对象呈递为内联对象，但是对象的内容作为块对象呈递。旁边的内联对象会被呈递在同一行内*/
-.inline-block{
+.inline-block {
     display: inline-block;
 }
 
-.sidebar {
-    position: fixed;
-    top: 51px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    display: block;
-    /*padding: 10px;*/
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-/*    background-color: #f5f5f5;*/
-    border-right: 1px solid #eee;
+.content-page {
+    margin-left: 240px;
+    overflow: hidden;
 }
 
-.title h4{
+.title h4 {
     display: inline-block;
     text-indent: 8px;
     border-left: 2px solid #428bca;
     margin-right: 8px;
     margin-top: 8px;
     margin-bottom: 8px;
+}
+
+/*定义字体样式*/
+.font-size-24{
+    font-size: 24px;
+}
+
+.font-weight-600{
+    font-weight: 600;
 }

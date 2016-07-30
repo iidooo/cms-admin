@@ -14,14 +14,16 @@ var Header = React.createClass({
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div className="container-fluid">
-                    <div className="navbar-header">
+                    <div className="navbar-header width-240">
                         <a className="navbar-brand" href={SiteProperties.clientURL + Page.sites}>
                             <i className="fa fa-home" aria-hidden="true"></i>
                             <span>EDO CMS SYSTEM</span>
                         </a>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">
-                        <MainMenu activeMenuID={this.props.activeMenuID}/>
+                        {
+                            <MainMenu activeMenuID={this.props.activeMenuID}/>
+                        }
                         <LoginInfo userName={this.state.user.userName}/>
                     </div>
                 </div>
@@ -44,6 +46,9 @@ var MainMenu = React.createClass({
                 </li>
                 <li id="menuAccountManage">
                     <a href={SiteProperties.clientURL + Page.account}>账户管理</a>
+                </li>
+                <li id="menuSystemManage">
+                    <a href={SiteProperties.clientURL + Page.users}>系统管理</a>
                 </li>
             </ul>
         );

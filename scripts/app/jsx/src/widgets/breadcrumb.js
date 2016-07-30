@@ -1,20 +1,34 @@
-/**
- * Created by Ethan on 16/5/20.
- */
 var Breadcrumb = React.createClass({
     getInitialState: function () {
         return {
-            indexPageURL: Page.contentList,
-            contentListPageURL: Page.contentList
+            site: ""
         };
     },
+    componentDidMount: function () {
+        var siteID = sessionStorage.getItem(SessionKey.siteID);
+        var siteMap = JSON.parse(sessionStorage.getItem(SessionKey.siteMap));
+        this.state.site = siteMap[siteID];
+
+        this.setState(this.state);
+    },
     render: function () {
+        var path = "";
+        if(this.props.page == Page.dashboard){
+            path = <DashboardBreadcrumb/>;
+        }
         return (
             <ol className="breadcrumb">
-                <li><a href={this.state.indexPageURL}>首页</a></li>
-                <li><a href={this.state.contentListPageURL}>内容管理</a></li>
-                <li className="active">内容发布</li>
+                <li><a href="javascript:void(0)">{this.state.site.siteCode}</a></li>
+                {path}
             </ol>
+        );
+    }
+});
+
+var DashboardBreadcrumb = React.createClass({
+    render: function () {
+        return (
+            <li className='active'>我的控制台</li>
         );
     }
 });

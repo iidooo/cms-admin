@@ -14,14 +14,16 @@ var Header = React.createClass({displayName: "Header",
         return (
             React.createElement("nav", {className: "navbar navbar-inverse navbar-fixed-top", role: "navigation"}, 
                 React.createElement("div", {className: "container-fluid"}, 
-                    React.createElement("div", {className: "navbar-header"}, 
+                    React.createElement("div", {className: "navbar-header width-240"}, 
                         React.createElement("a", {className: "navbar-brand", href: SiteProperties.clientURL + Page.sites}, 
                             React.createElement("i", {className: "fa fa-home", "aria-hidden": "true"}), 
                             React.createElement("span", null, "EDO CMS SYSTEM")
                         )
                     ), 
                     React.createElement("div", {id: "navbar", className: "navbar-collapse collapse"}, 
-                        React.createElement(MainMenu, {activeMenuID: this.props.activeMenuID}), 
+                        
+                            React.createElement(MainMenu, {activeMenuID: this.props.activeMenuID}), 
+                        
                         React.createElement(LoginInfo, {userName: this.state.user.userName})
                     )
                 )
@@ -44,6 +46,9 @@ var MainMenu = React.createClass({displayName: "MainMenu",
                 ), 
                 React.createElement("li", {id: "menuAccountManage"}, 
                     React.createElement("a", {href: SiteProperties.clientURL + Page.account}, "账户管理")
+                ), 
+                React.createElement("li", {id: "menuSystemManage"}, 
+                    React.createElement("a", {href: SiteProperties.clientURL + Page.users}, "系统管理")
                 )
             )
         );

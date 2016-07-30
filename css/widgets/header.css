@@ -5,3 +5,7 @@
     left: -4px;
     width: 19px;
 }
+
+.navbar-inverse .navbar-brand{
+    color: #fff;
+}

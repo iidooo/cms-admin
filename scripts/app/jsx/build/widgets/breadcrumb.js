@@ -1,20 +1,34 @@
-/**
- * Created by Ethan on 16/5/20.
- */
 var Breadcrumb = React.createClass({displayName: "Breadcrumb",
     getInitialState: function () {
         return {
-            indexPageURL: Page.contentList,
-            contentListPageURL: Page.contentList
+            site: ""
         };
     },
+    componentDidMount: function () {
+        var siteID = sessionStorage.getItem(SessionKey.siteID);
+        var siteMap = JSON.parse(sessionStorage.getItem(SessionKey.siteMap));
+        this.state.site = siteMap[siteID];
+
+        this.setState(this.state);
+    },
     render: function () {
+        var path = "";
+        if(this.props.page == Page.dashboard){
+            path = React.createElement(DashboardBreadcrumb, null);
+        }
         return (
             React.createElement("ol", {className: "breadcrumb"}, 
-                React.createElement("li", null, React.createElement("a", {href: this.state.indexPageURL}, "首页")), 
-                React.createElement("li", null, React.createElement("a", {href: this.state.contentListPageURL}, "内容管理")), 
-                React.createElement("li", {className: "active"}, "内容发布")
+                React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)"}, this.state.site.siteCode)), 
+                path
             )
+        );
+    }
+});
+
+var DashboardBreadcrumb = React.createClass({displayName: "DashboardBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "我的控制台")
         );
     }
 });
