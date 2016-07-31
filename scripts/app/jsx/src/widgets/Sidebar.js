@@ -55,13 +55,30 @@ var SideBarMenu = React.createClass({
 
         // 设置menu的active
         var activeMenuID = this.props.activeMenuID;
-        $("#" + activeMenuID).addClass("active");
+        var activeMenuLinkID = this.props.activeMenuLinkID;
 
+        $("#" + activeMenuID).addClass("active");
+        $("#" + activeMenuLinkID).addClass("active");
+
+        // 展开所有的父UL
+        var $parentULList = $("#" + activeMenuLinkID).parents("ul");
+        $.each($parentULList, function(index, item){
+            $ul = $(item);
+            $a = $ul.prev();
+            if($ul.is(":hidden")){
+                $a.find(".fa-plus").removeClass("fa-plus").addClass("fa-minus");
+                $ul.toggle(300)
+            }
+        });
         this.setState(this.state);
     },
     handleToggleSub: function(event){
 
+        console.log("handleToggleSub");
+
         var $a = $(event.target);
+
+        console.log($a);
         //$a.addClass("active");
         var $next = $a.next("ul");
 
@@ -102,29 +119,16 @@ var SideBarMenu = React.createClass({
                 <div id="sidebarMenu" className="sidebar-menu">
                     <ul>
                         <li>
-                            <a id="menuDashboard" href="javascript:void(0)">
+                            <a id="menuDashboard" href={SiteProperties.clientURL + Page.dashboard}>
                                 <i className="fa fa-dashboard"></i>
                                 <span>我的控制台</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:void(0)" className="has-sub" onClick={this.handleToggleSub}>
-                                <i className="fa fa-sitemap"></i>
-                                <span>站点维护</span>
-                                <span className="pull-right">
-                                    <i className="fa fa-plus"></i>
-                                </span>
-                            </a>
-                            <ul style={{display: 'none'}}>
-                                <li>
-                                    <a href="javascript:void(0)">站点信息</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">会员管理</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">站长管理</a>
-                                </li>
+                        <li className="has-sub">
+                            <a href="javascript:void(0)">内容管理</a>
+                            <ul id="channelTree" style={{display: 'none'}}>
+                                <li>首页</li>
+                                <li>产品一览</li>
                             </ul>
                         </li>
                         <li className="has-sub">
@@ -141,24 +145,28 @@ var SideBarMenu = React.createClass({
                             </ul>
                         </li>
                         <li className="has-sub">
-                            <a href="javascript:void(0)">内容管理</a>
+                            <a href="javascript:void(0)">用户管理</a>
                             <ul id="channelTree" style={{display: 'none'}}>
-                                <li>首页</li>
-                                <li>产品一览</li>
+                                <li>
+                                    <a href="javascript:void(0)">会员管理</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">站长管理</a>
+                                </li>
                             </ul>
                         </li>
-                        <li className="has-sub">
-                            <a href="javascript:void(0)">系统管理</a>
-                            <ul id="channelTree" style={{display: 'none'}}>
-                                <li>用户一览</li>
-                                <li>产品一览</li>
-                            </ul>
-                        </li>
-                        <li className="has-sub">
-                            <a href="javascript:void(0)">个人账户</a>
-                            <ul id="channelTree" style={{display: 'none'}}>
-                                <li>首页</li>
-                                <li>产品一览</li>
+                        <li>
+                            <a id="menuSiteMaintenance" href="javascript:void(0)" className="has-sub" onClick={this.handleToggleSub}>
+                                <i className="fa fa-sitemap"></i>
+                                <span>站点维护</span>
+                                <span className="pull-right">
+                                    <i className="fa fa-plus"></i>
+                                </span>
+                            </a>
+                            <ul style={{display: 'none'}}>
+                                <li>
+                                    <a id="menuLinkSite" href={SiteProperties.clientURL + Page.site}>站点信息</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

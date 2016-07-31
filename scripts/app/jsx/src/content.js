@@ -97,15 +97,14 @@ var Content = React.createClass({
             content: {}
         };
     },
-    componentWillMount: function () {
+    componentDidMount: function(){
+
         this.state.content.contentID = sessionStorage.getItem(SessionKey.contentID);
         if (this.state.content.contentID != null) {
             ContentActions.getContent(this.state.content);
         } else {
             this.state.content.contentType = sessionStorage.getItem(SessionKey.contentType);
         }
-    },
-    componentDidMount: function(){
         //文件上传前触发事件
         $('#uploadContentImageTitle').bind('fileuploadsubmit', function (e, data) {
             data.formData = {

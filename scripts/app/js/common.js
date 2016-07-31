@@ -22,7 +22,7 @@ SessionKey = {
     user: "SECURITY_USER",
     siteID: "SITE_ID",
     siteMap: "SITE_MAP",
-    siteOwnerMap:"SITE_OWNER_MAP",
+    siteOwnerMap: "SITE_OWNER_MAP",
     channelID: "CHANNEL_ID",
     contentID: "CONTENT_ID",
     contentType: "CONTENT_TYPE",
@@ -73,8 +73,8 @@ ContentStatusMap = {
 
 ContentType = {
     DEFAULT: "1",
-    NEWS : "2",
-    FILE : "3"
+    NEWS: "2",
+    FILE: "3"
 };
 
 ContentTypeMap = {
@@ -89,6 +89,8 @@ API = {
     loginByEmail: "/core/loginByEmail",
     registerByEmail: "/core/registerByEmail",
     sendMailVerifyCode: "/core/sendMailVerifyCode",
+    getSite: "/admin/getSite",
+    updateSite: "/admin/updateSite",
     getRelatedSiteList: "/admin/getRelatedSiteList",
     getChannelTree: "/admin/getChannelTree",
     searchContentList: "/admin/searchContentList",
@@ -119,7 +121,7 @@ API = {
     content: "/content"
 };
 
-SiteRole={
+SiteRole = {
     "1": "管理员",
     "2": "编辑",
     "3": "普通会员"
@@ -136,6 +138,7 @@ Page = {
     index: "/pages/index.html",
     login: "/pages/login.html",
     register: "/pages/register.html",
+    site: "/pages/site.html",
     sites: "/pages/sites.html",
     dashboard: "/pages/dashboard.html",
     contents: "/pages/contents.html",

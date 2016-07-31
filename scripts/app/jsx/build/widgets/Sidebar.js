@@ -55,13 +55,30 @@ var SideBarMenu = React.createClass({displayName: "SideBarMenu",
 
         // 设置menu的active
         var activeMenuID = this.props.activeMenuID;
-        $("#" + activeMenuID).addClass("active");
+        var activeMenuLinkID = this.props.activeMenuLinkID;
 
+        $("#" + activeMenuID).addClass("active");
+        $("#" + activeMenuLinkID).addClass("active");
+
+        // 展开所有的父UL
+        var $parentULList = $("#" + activeMenuLinkID).parents("ul");
+        $.each($parentULList, function(index, item){
+            $ul = $(item);
+            $a = $ul.prev();
+            if($ul.is(":hidden")){
+                $a.find(".fa-plus").removeClass("fa-plus").addClass("fa-minus");
+                $ul.toggle(300)
+            }
+        });
         this.setState(this.state);
     },
     handleToggleSub: function(event){
 
+        console.log("handleToggleSub");
+
         var $a = $(event.target);
+
+        console.log($a);
         //$a.addClass("active");
         var $next = $a.next("ul");
 
@@ -102,29 +119,16 @@ var SideBarMenu = React.createClass({displayName: "SideBarMenu",
                 React.createElement("div", {id: "sidebarMenu", className: "sidebar-menu"}, 
                     React.createElement("ul", null, 
                         React.createElement("li", null, 
-                            React.createElement("a", {id: "menuDashboard", href: "javascript:void(0)"}, 
+                            React.createElement("a", {id: "menuDashboard", href: SiteProperties.clientURL + Page.dashboard}, 
                                 React.createElement("i", {className: "fa fa-dashboard"}), 
                                 React.createElement("span", null, "我的控制台")
                             )
                         ), 
-                        React.createElement("li", null, 
-                            React.createElement("a", {href: "javascript:void(0)", className: "has-sub", onClick: this.handleToggleSub}, 
-                                React.createElement("i", {className: "fa fa-sitemap"}), 
-                                React.createElement("span", null, "站点维护"), 
-                                React.createElement("span", {className: "pull-right"}, 
-                                    React.createElement("i", {className: "fa fa-plus"})
-                                )
-                            ), 
-                            React.createElement("ul", {style: {display: 'none'}}, 
-                                React.createElement("li", null, 
-                                    React.createElement("a", {href: "javascript:void(0)"}, "站点信息")
-                                ), 
-                                React.createElement("li", null, 
-                                    React.createElement("a", {href: "javascript:void(0)"}, "会员管理")
-                                ), 
-                                React.createElement("li", null, 
-                                    React.createElement("a", {href: "javascript:void(0)"}, "站长管理")
-                                )
+                        React.createElement("li", {className: "has-sub"}, 
+                            React.createElement("a", {href: "javascript:void(0)"}, "内容管理"), 
+                            React.createElement("ul", {id: "channelTree", style: {display: 'none'}}, 
+                                React.createElement("li", null, "首页"), 
+                                React.createElement("li", null, "产品一览")
                             )
                         ), 
                         React.createElement("li", {className: "has-sub"}, 
@@ -141,24 +145,28 @@ var SideBarMenu = React.createClass({displayName: "SideBarMenu",
                             )
                         ), 
                         React.createElement("li", {className: "has-sub"}, 
-                            React.createElement("a", {href: "javascript:void(0)"}, "内容管理"), 
+                            React.createElement("a", {href: "javascript:void(0)"}, "用户管理"), 
                             React.createElement("ul", {id: "channelTree", style: {display: 'none'}}, 
-                                React.createElement("li", null, "首页"), 
-                                React.createElement("li", null, "产品一览")
+                                React.createElement("li", null, 
+                                    React.createElement("a", {href: "javascript:void(0)"}, "会员管理")
+                                ), 
+                                React.createElement("li", null, 
+                                    React.createElement("a", {href: "javascript:void(0)"}, "站长管理")
+                                )
                             )
                         ), 
-                        React.createElement("li", {className: "has-sub"}, 
-                            React.createElement("a", {href: "javascript:void(0)"}, "系统管理"), 
-                            React.createElement("ul", {id: "channelTree", style: {display: 'none'}}, 
-                                React.createElement("li", null, "用户一览"), 
-                                React.createElement("li", null, "产品一览")
-                            )
-                        ), 
-                        React.createElement("li", {className: "has-sub"}, 
-                            React.createElement("a", {href: "javascript:void(0)"}, "个人账户"), 
-                            React.createElement("ul", {id: "channelTree", style: {display: 'none'}}, 
-                                React.createElement("li", null, "首页"), 
-                                React.createElement("li", null, "产品一览")
+                        React.createElement("li", null, 
+                            React.createElement("a", {id: "menuSiteMaintenance", href: "javascript:void(0)", className: "has-sub", onClick: this.handleToggleSub}, 
+                                React.createElement("i", {className: "fa fa-sitemap"}), 
+                                React.createElement("span", null, "站点维护"), 
+                                React.createElement("span", {className: "pull-right"}, 
+                                    React.createElement("i", {className: "fa fa-plus"})
+                                )
+                            ), 
+                            React.createElement("ul", {style: {display: 'none'}}, 
+                                React.createElement("li", null, 
+                                    React.createElement("a", {id: "menuLinkSite", href: SiteProperties.clientURL + Page.site}, "站点信息")
+                                )
                             )
                         )
                     )
