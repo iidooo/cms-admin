@@ -59,7 +59,6 @@ var Contents = React.createClass({displayName: "Contents",
         this.state.searchCondition.startDateTime = this.refs.inputStartDate.value;
         this.state.searchCondition.endDateTime = this.refs.inputEndDate.value;
         this.state.searchCondition.contentStatus = $("#inputContentStatus").val();
-        console.log(this.state.searchCondition);
         ContentsActions.search(this.state.searchCondition);
     },
     handleCreate: function (contentType) {
@@ -85,7 +84,7 @@ var Contents = React.createClass({displayName: "Contents",
                                             React.createElement("label", null, "所属栏目")
                                         ), 
                                         React.createElement("div", {className: "col-xs-8"}, 
-                                            React.createElement(ChannelTreeList, {channelID: this.state.searchCondition.channelID, isContainAll: "true"})
+                                            React.createElement(ChannelTreeList, {channelID: this.state.searchCondition.channelID})
                                         )
                                     ), 
                                     React.createElement("div", {className: "col-xs-4"}, 

@@ -45,12 +45,9 @@ var ChannelTreeList = React.createClass({
     componentDidUpdate: function () {
         var $channelTree = $("#inputChannelTree");
         $channelTree.children().remove();
-        if(this.props.isContainAll == 'true') {
-            $channelTree.append("<option value=''>全部</option>");
-        }
         $.each(this.state.channelList, function (index, item) {
-            var index = 0;
-            createOption($channelTree, item, index);
+            var level = 0;
+            createOption($channelTree, item, level);
         });
         $channelTree.val(this.props.channelID);
     },
@@ -63,22 +60,23 @@ var ChannelTreeList = React.createClass({
     }
 });
 
-function createOption($channelTree, item, index) {
+function createOption($channelTree, item, level) {
+
     var $option = $("<option></option>");
     $option.attr("value", item.data.channelID);
 
     var text = "";
-    for (var i = 0; i < index; i++) {
-        text += "&nbsp;";
+    for (var i = 0; i < level; i++) {
+        text += "&nbsp;&nbsp;&nbsp;&nbsp;";
     }
     text = text + item.text;
     $option.html(text);
     $channelTree.append($option);
 
     if (item.nodes.length > 0) {
+        level = level + 1;
         $.each(item.nodes, function (index, item) {
-            index = index + 1;
-            createOption($channelTree, item, index);
+            createOption($channelTree, item, level);
         });
     }
 }

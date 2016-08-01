@@ -39,13 +39,13 @@ var ChannelTree = React.createClass({
             channelList: []
         };
     },
-    componentWillMount: function () {
+    componentDidMount: function () {
         ChannelTreeActions.getChannelTree(this.state);
     },
     componentDidUpdate: function () {
+        console.log(this.state.channelList);
         var options = {
-            color: "#428bca",
-            showBorder: false,
+            selectedBackColor: '#00afd7',
             expandIcon: 'fa fa-folder-o',
             collapseIcon: 'fa fa-folder-open-o',
             nodeIcon: '',
@@ -53,16 +53,16 @@ var ChannelTree = React.createClass({
             onNodeSelected: function(event, node) {
                 sessionStorage.setItem(SessionKey.channelID, node.data.channelID);
                 var data = {};
-                ContentsActions.search(data);
+                //ContentsActions.search(data);
             },
         };
 
-        var $tree = $('#channelTree').treeview(options);
-        //$tree.treeview('selectNode', 0 );
+        var $tree = $('#channelTreeView').treeview(options);
+        $tree.treeview('selectNode', 0 );
     },
     render: function () {
         return (
-            <div id="channelTree">
+            <div id="channelTreeView">
 
             </div>
         );

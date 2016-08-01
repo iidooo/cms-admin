@@ -131,18 +131,11 @@ var SideBar = React.createClass({
                                 <span>内容管理</span>
                             </a>
                         </li>
-                        <li className="has-sub">
-                            <a href="javascript:void(0)" className="has-sub" onClick={this.handleToggleSub}>
+                        <li>
+                            <a  id="menuChannelManage" href={SiteProperties.clientURL + Page.channels}>
                                 <i className="fa fa-th-list"></i>
                                 <span>栏目管理</span>
-                                <span className="pull-right">
-                                    <i className="fa fa-plus"></i>
-                                </span>
                             </a>
-                            <ul id="channelTree" style={{display: 'none'}}>
-                                <li>首页</li>
-                                <li>产品一览</li>
-                            </ul>
                         </li>
                         <li className="has-sub">
                             <a href="javascript:void(0)">用户管理</a>

@@ -131,17 +131,10 @@ var SideBar = React.createClass({displayName: "SideBar",
                                 React.createElement("span", null, "内容管理")
                             )
                         ), 
-                        React.createElement("li", {className: "has-sub"}, 
-                            React.createElement("a", {href: "javascript:void(0)", className: "has-sub", onClick: this.handleToggleSub}, 
+                        React.createElement("li", null, 
+                            React.createElement("a", {id: "menuChannelManage", href: SiteProperties.clientURL + Page.channels}, 
                                 React.createElement("i", {className: "fa fa-th-list"}), 
-                                React.createElement("span", null, "栏目管理"), 
-                                React.createElement("span", {className: "pull-right"}, 
-                                    React.createElement("i", {className: "fa fa-plus"})
-                                )
-                            ), 
-                            React.createElement("ul", {id: "channelTree", style: {display: 'none'}}, 
-                                React.createElement("li", null, "首页"), 
-                                React.createElement("li", null, "产品一览")
+                                React.createElement("span", null, "栏目管理")
                             )
                         ), 
                         React.createElement("li", {className: "has-sub"}, 

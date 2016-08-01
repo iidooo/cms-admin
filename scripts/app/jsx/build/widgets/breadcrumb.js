@@ -13,14 +13,22 @@ var Breadcrumb = React.createClass({displayName: "Breadcrumb",
     },
     render: function () {
         var path = new Array();
-        if (this.props.page == Page.dashboard) {
-            path.push(React.createElement(DashboardBreadcrumb, {key: "DashboardBreadcrumb"}));
-        } else if(this.props.page == Page.contents){
-            path.push(React.createElement(ContentsBreadcrumb, {key: "ContentsBreadcrumb"}))
-        } else if (this.props.page == Page.site) {
-            path.push(React.createElement(SiteMaintenanceBreadcrumb, {key: "SiteMaintenanceBreadcrumb"}));
-            path.push(React.createElement(SiteBreadcrumb, {key: "SiteBreadcrumb"}));
+        switch (this.props.page){
+            case Page.dashboard:
+                path.push(React.createElement(DashboardBreadcrumb, {key: "DashboardBreadcrumb"}));
+                break;
+            case Page.contents:
+                path.push(React.createElement(ContentsBreadcrumb, {key: "ContentsBreadcrumb"}))
+                break;
+            case Page.channels:
+                path.push(React.createElement(ChannelsBreadcrumb, {key: "ChannelsBreadcrumb"}))
+                break;
+            case Page.site:
+                path.push(React.createElement(SiteMaintenanceBreadcrumb, {key: "SiteMaintenanceBreadcrumb"}));
+                path.push(React.createElement(SiteBreadcrumb, {key: "SiteBreadcrumb"}));
+                break;
         }
+
         return (
             React.createElement("ol", {className: "breadcrumb"}, 
                 React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)"}, this.state.site.siteCode)), 
@@ -44,6 +52,14 @@ var ContentsBreadcrumb = React.createClass({displayName: "ContentsBreadcrumb",
     render: function () {
         return (
             React.createElement("li", {className: "active"}, "内容管理")
+        );
+    }
+});
+
+var ChannelsBreadcrumb = React.createClass({displayName: "ChannelsBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "栏目管理")
         );
     }
 });

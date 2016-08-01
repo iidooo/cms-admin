@@ -13,14 +13,22 @@ var Breadcrumb = React.createClass({
     },
     render: function () {
         var path = new Array();
-        if (this.props.page == Page.dashboard) {
-            path.push(<DashboardBreadcrumb key="DashboardBreadcrumb"/>);
-        } else if(this.props.page == Page.contents){
-            path.push(<ContentsBreadcrumb key="ContentsBreadcrumb"/>)
-        } else if (this.props.page == Page.site) {
-            path.push(<SiteMaintenanceBreadcrumb key="SiteMaintenanceBreadcrumb"/>);
-            path.push(<SiteBreadcrumb key="SiteBreadcrumb"/>);
+        switch (this.props.page){
+            case Page.dashboard:
+                path.push(<DashboardBreadcrumb key="DashboardBreadcrumb"/>);
+                break;
+            case Page.contents:
+                path.push(<ContentsBreadcrumb key="ContentsBreadcrumb"/>)
+                break;
+            case Page.channels:
+                path.push(<ChannelsBreadcrumb key="ChannelsBreadcrumb"/>)
+                break;
+            case Page.site:
+                path.push(<SiteMaintenanceBreadcrumb key="SiteMaintenanceBreadcrumb"/>);
+                path.push(<SiteBreadcrumb key="SiteBreadcrumb"/>);
+                break;
         }
+
         return (
             <ol className="breadcrumb">
                 <li><a href="javascript:void(0)">{this.state.site.siteCode}</a></li>
@@ -44,6 +52,14 @@ var ContentsBreadcrumb = React.createClass({
     render: function () {
         return (
             <li className='active'>内容管理</li>
+        );
+    }
+});
+
+var ChannelsBreadcrumb = React.createClass({
+    render: function () {
+        return (
+            <li className='active'>栏目管理</li>
         );
     }
 });

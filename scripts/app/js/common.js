@@ -46,6 +46,7 @@ Message = {
     UPLOAD_COMPRESS_CONFIRM: "上传图片将进行压缩，确认吗？",
     USER_NAME_REPEAT: "用户名重复",
     EMAIL_REPEAT: "邮箱重复",
+    CHANNEL_PATH_REPEAT: "栏目路径重复",
     OLD_PASSWORD_WRONG: "旧密码不正确",
     TWICE_PASSWORD_NOT_EQUAL: "两次密码输入不想等",
 
@@ -92,6 +93,10 @@ API = {
     getSite: "/admin/getSite",
     updateSite: "/admin/updateSite",
     getRelatedSiteList: "/admin/getRelatedSiteList",
+    getChannel: "/admin/getChannel",
+    createChannel: "/admin/createChannel",
+    updateChannel: "/admin/updateChannel",
+    deleteChannel: "/admin/deleteChannel",
     getChannelTree: "/admin/getChannelTree",
     searchContentList: "/admin/searchContentList",
     getContentCount: "/admin/getContentCount",
@@ -116,7 +121,6 @@ API = {
     updateUserPassword: "/core/updateUserPassword",
 
     getAccessTokenByMail: "/core/getAccessTokenByMail",
-    getChannelList: "/admin/getChannelList",
     getDictItemList: "/core/getDictItemList",
     content: "/content"
 };
@@ -141,6 +145,7 @@ Page = {
     site: "/pages/site.html",
     sites: "/pages/sites.html",
     dashboard: "/pages/dashboard.html",
+    channels: "/pages/channels.html",
     contents: "/pages/contents.html",
     content: "/pages/content.html",
     account: "/pages/account.html",
@@ -161,7 +166,7 @@ var CmsPicture = {
     updateTime: 0,
     updateUserID: 0,
     version: 0,
-}
+};
 
 // 日期格式化
 Date.prototype.format = function (format) {
@@ -208,12 +213,7 @@ function ajaxPost(url, data, callback) {
         dataType: "json",
         data: data,
         success: function (result) {
-            if (result && null != result.status && ((result.status + "").indexOf("20") == 0)) {
-                callback(result);
-            } else {
-                alert("服务器端处理失败，出现异常，详细请看控制台！错误编号：" + result.status);
-                console.log(result);
-            }
+            callback(result);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             //ajaxpost(url, data, callback);

@@ -59,7 +59,6 @@ var Contents = React.createClass({
         this.state.searchCondition.startDateTime = this.refs.inputStartDate.value;
         this.state.searchCondition.endDateTime = this.refs.inputEndDate.value;
         this.state.searchCondition.contentStatus = $("#inputContentStatus").val();
-        console.log(this.state.searchCondition);
         ContentsActions.search(this.state.searchCondition);
     },
     handleCreate: function (contentType) {
@@ -85,7 +84,7 @@ var Contents = React.createClass({
                                             <label>所属栏目</label>
                                         </div>
                                         <div className="col-xs-8">
-                                            <ChannelTreeList channelID={this.state.searchCondition.channelID} isContainAll="true"/>
+                                            <ChannelTreeList channelID={this.state.searchCondition.channelID}/>
                                         </div>
                                     </div>
                                     <div className="col-xs-4">
