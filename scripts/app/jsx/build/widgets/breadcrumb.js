@@ -15,6 +15,8 @@ var Breadcrumb = React.createClass({displayName: "Breadcrumb",
         var path = new Array();
         if (this.props.page == Page.dashboard) {
             path.push(React.createElement(DashboardBreadcrumb, {key: "DashboardBreadcrumb"}));
+        } else if(this.props.page == Page.contents){
+            path.push(React.createElement(ContentsBreadcrumb, {key: "ContentsBreadcrumb"}))
         } else if (this.props.page == Page.site) {
             path.push(React.createElement(SiteMaintenanceBreadcrumb, {key: "SiteMaintenanceBreadcrumb"}));
             path.push(React.createElement(SiteBreadcrumb, {key: "SiteBreadcrumb"}));
@@ -38,6 +40,14 @@ var DashboardBreadcrumb = React.createClass({displayName: "DashboardBreadcrumb",
     }
 });
 
+var ContentsBreadcrumb = React.createClass({displayName: "ContentsBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "内容管理")
+        );
+    }
+});
+
 var SiteMaintenanceBreadcrumb = React.createClass({displayName: "SiteMaintenanceBreadcrumb",
     render: function () {
         return (
@@ -53,3 +63,4 @@ var SiteBreadcrumb = React.createClass({displayName: "SiteBreadcrumb",
         );
     }
 });
+

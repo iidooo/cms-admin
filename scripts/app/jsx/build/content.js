@@ -352,7 +352,7 @@ var Content = React.createClass({displayName: "Content",
                                 React.createElement("label", null, "状态")
                             ), 
                             React.createElement("div", {className: "col-sm-5"}, 
-                                React.createElement(ContentStatusList, {contentType: this.state.content.status})
+                                React.createElement(ContentStatusList, {contentStatus: this.state.content.status})
                             ), 
                             React.createElement("div", {className: "col-sm-4 checkbox"}, 
                                 React.createElement("label", null, 

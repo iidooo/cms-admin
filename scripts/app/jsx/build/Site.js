@@ -80,7 +80,7 @@ var Site = React.createClass({displayName: "Site",
                 React.createElement(Header, null), 
 
                 React.createElement("div", {id: "main", className: "container-fluid margin-top-70"}, 
-                    React.createElement(SideBarMenu, {activeMenuID: "menuSiteMaintenance", activeMenuLinkID: "menuLinkSite"}), 
+                    React.createElement(SideBar, {activeMenuID: "menuSiteMaintenance", activeMenuLinkID: "menuLinkSite"}), 
 
                     React.createElement("div", {className: "content-page"}, 
                         React.createElement(Breadcrumb, {page: Page.site}), 

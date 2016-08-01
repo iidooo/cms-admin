@@ -1,7 +1,3 @@
-/**
- * Created by Ethan on 16/5/18.
- */
-
 var ContentsActions = Reflux.createActions(['search']);
 
 var ContentsStore = Reflux.createStore({
@@ -13,7 +9,6 @@ var ContentsStore = Reflux.createStore({
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.userID = sessionStorage.getItem(SessionKey.userID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
-        data.channelID = sessionStorage.getItem(SessionKey.channelID);
 
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
@@ -40,22 +35,32 @@ var Contents = React.createClass({
     mixins: [Reflux.connect(ContentsStore, 'contentsData')],
     getInitialState: function () {
         return {
+            searchCondition:{},
             contentsData: {
                 page: {},
                 contentList: []
             }
         };
     },
-    componentWillMount: function () {
-        sessionStorage.removeItem(SessionKey.channelID);
-        ContentsActions.search(this.state);
+    componentDidMount: function () {
+        ContentsActions.search(this.state.searchCondition);
     },
     onChildChanged: function (childState) {
         if (childState.currentPage != null) {
-            this.state.currentPage = childState.currentPage;
+            this.state.searchCondition.currentPage = childState.currentPage;
 
-            ContentsActions.search(this.state);
+            ContentsActions.search(this.state.searchCondition);
         }
+    },
+    handleSearch: function () {
+        this.state.searchCondition.channelID = $("#inputChannelTree").val();
+        this.state.searchCondition.contentTitle = this.refs.inputContentTitle.value;
+        this.state.searchCondition.contentType = $("#inputContentType").val();
+        this.state.searchCondition.startDateTime = this.refs.inputStartDate.value;
+        this.state.searchCondition.endDateTime = this.refs.inputEndDate.value;
+        this.state.searchCondition.contentStatus = $("#inputContentStatus").val();
+        console.log(this.state.searchCondition);
+        ContentsActions.search(this.state.searchCondition);
     },
     handleCreate: function (contentType) {
         sessionStorage.setItem(SessionKey.contentType, contentType);
@@ -65,51 +70,106 @@ var Contents = React.createClass({
     render: function () {
         return (
             <div>
-                <Header activeMenuID="menuContentManage"/>
+                <Header/>
 
-                <div id="main" className="container-fluid margin-top-70">
-                    {
-                        //<div className="col-sm-2 sidebar margin-top-20">
-                        //    <div className="title">
-                        //        <h4>栏目管理</h4>
-                        //    </div>
-                        //    <ChannelTree/>
-                        //</div>
-                    }
-                    <SideBarMenu/>
+                <div id="main" className="container-fluid margin-top-60">
+                    <SideBar activeMenuID="menuContentManage"/>
                     <div className="content-page">
-                        <div>
-                            <div className="title pull-left">
-                                <h4>内容管理</h4>
-                            </div>
-                            <div className="pull-right form-inline">
-                                <div className="btn-group">
-                                    <a className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        <span>创建内容</span>&nbsp;&nbsp;
-                                        <i className="fa fa-caret-down"></i>
-                                    </a>
-                                    <ul className="dropdown-menu">
-                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.DEFAULT)}><i
-                                            className="fa fa-file-o"></i>&nbsp;&nbsp;默认</a></li>
-                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.NEWS)}><i className="fa fa-newspaper-o"></i>&nbsp;
-                                            新闻</a>
-                                        </li>
-                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.FILE)}><i className="fa fa-download"></i>&nbsp;&nbsp;文件</a>
-                                        </li>
-                                    </ul>
+                        <Breadcrumb page={Page.contents}/>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">查询条件</div>
+                            <div className="panel-body">
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>所属栏目</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <ChannelTreeList channelID={this.state.searchCondition.channelID} isContainAll="true"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>内容标题</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <input type="text" className="form-control" ref="inputContentTitle"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>内容类型</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <ContentTypeList contentType={this.state.searchCondition.contentType} isContainAll="true"/>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="searchForm" className="input-group margin-left-5">
-                                    <input type="text" className="form-control" placeholder="请输入内容关键字"/>
-                                    <span className="input-group-btn">
-                                        <a className="btn btn-default">
-                                            <i className="fa fa-search"></i>搜索
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>发布开始日</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <div className="input-group date form_date" data-date=""
+                                                 data-date-format="yyyy-mm-dd"
+                                                 data-link-field="startDate" data-link-format="yyyy-mm-dd">
+                                                <input id="startDate" className="form-control" type="text"
+                                                       ref="inputStartDate"
+                                                       readonly/>
+                                                <span className="input-group-addon">
+                                                    <span className="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>发布结束日</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <div className="input-group date form_date" data-date=""
+                                                 data-date-format="yyyy-mm-dd"
+                                                 data-link-field="endDate" data-link-format="yyyy-mm-dd">
+                                                <input id="endDate" className="form-control" type="text" ref="inputEndDate"
+                                                       readonly/>
+                                                <span className="input-group-addon">
+                                                    <span className="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>内容状态</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <ContentStatusList  contentStatus={this.state.searchCondition.contentStatus} isContainAll="true"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="text-right">
+                                    <button type="button" className="btn btn-primary" onClick={this.handleSearch}>查&nbsp;询</button>
+                                    &nbsp;&nbsp;
+                                    <div className="btn-group">
+                                        <a className="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                            <span>创建内容</span>&nbsp;&nbsp;
+                                            <i className="fa fa-caret-down"></i>
                                         </a>
-                                    </span>
+                                        <ul className="dropdown-menu">
+                                            <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.DEFAULT)}><i
+                                                className="fa fa-file-o"></i>&nbsp;&nbsp;文章</a></li>
+                                            <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.NEWS)}><i className="fa fa-newspaper-o"></i>&nbsp;
+                                                新闻</a>
+                                            </li>
+                                            <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.FILE)}><i className="fa fa-download"></i>&nbsp;&nbsp;文件</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="clearfix"></div>
-                        <div className="spacer10"></div>
                         <ContentsTable contentList={this.state.contentsData.contentList}/>
 
                         <Pager callbackParent={this.onChildChanged}
@@ -173,3 +233,17 @@ ReactDOM.render(
     <Contents />,
     document.getElementById('page')
 );
+
+
+$(function () {
+    $('.form_date').datetimepicker({
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        format: 'yyyy-mm-dd'
+    });
+});

@@ -15,6 +15,8 @@ var Breadcrumb = React.createClass({
         var path = new Array();
         if (this.props.page == Page.dashboard) {
             path.push(<DashboardBreadcrumb key="DashboardBreadcrumb"/>);
+        } else if(this.props.page == Page.contents){
+            path.push(<ContentsBreadcrumb key="ContentsBreadcrumb"/>)
         } else if (this.props.page == Page.site) {
             path.push(<SiteMaintenanceBreadcrumb key="SiteMaintenanceBreadcrumb"/>);
             path.push(<SiteBreadcrumb key="SiteBreadcrumb"/>);
@@ -38,6 +40,14 @@ var DashboardBreadcrumb = React.createClass({
     }
 });
 
+var ContentsBreadcrumb = React.createClass({
+    render: function () {
+        return (
+            <li className='active'>内容管理</li>
+        );
+    }
+});
+
 var SiteMaintenanceBreadcrumb = React.createClass({
     render: function () {
         return (
@@ -53,3 +63,4 @@ var SiteBreadcrumb = React.createClass({
         );
     }
 });
+

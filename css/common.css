@@ -50,8 +50,16 @@ a:focus{
     border-color: #00afd7;
 }
 
+.panel{
+    border-radius: 0px;
+}
+
+.table{
+    margin-bottom: 0px;
+}
+
 .table tr {
-    background-color: #fefefe;
+    background-color: #ffffff;
     border-bottom: 1px solid #f3f3f3;
 }
 
@@ -80,6 +88,7 @@ a:focus{
 .breadcrumb {
     border-radius: 0px;
     background-color: transparent;
+    margin-bottom: 0px;
 }
 
 .navbar {
@@ -204,12 +213,20 @@ a:focus{
     margin-top: 20px;
 }
 
+.margin-top-60 {
+    margin-top: 60px;
+}
+
 .margin-top-70 {
     margin-top: 70px;
 }
 
 .margin-bottom-0 {
     margin-bottom: 0;
+}
+
+.margin-bottom-60 {
+    margin-bottom: 60px;
 }
 
 .margin-bottom-70 {

@@ -80,7 +80,7 @@ var Site = React.createClass({
                 <Header/>
 
                 <div id="main" className="container-fluid margin-top-70">
-                    <SideBarMenu activeMenuID="menuSiteMaintenance" activeMenuLinkID="menuLinkSite"/>
+                    <SideBar activeMenuID="menuSiteMaintenance" activeMenuLinkID="menuLinkSite"/>
 
                     <div className="content-page">
                         <Breadcrumb page={Page.site}/>

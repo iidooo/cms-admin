@@ -32,7 +32,7 @@ var SideBarMenuStore = Reflux.createStore({
     },
 });
 
-var SideBarMenu = React.createClass({displayName: "SideBarMenu",
+var SideBar = React.createClass({displayName: "SideBar",
     mixins: [Reflux.connect(SideBarMenuStore, 'channelList')],
     getInitialState: function () {
         return {
@@ -42,6 +42,8 @@ var SideBarMenu = React.createClass({displayName: "SideBarMenu",
         };
     },
     componentDidMount: function () {
+        //SideBarMenuActions.getChannelTree(this.state);
+
         this.state.user = JSON.parse(sessionStorage.getItem(SessionKey.user));
         if(this.state.user == null){
             location.href = SiteProperties.clientURL + Page.login;
@@ -72,14 +74,16 @@ var SideBarMenu = React.createClass({displayName: "SideBarMenu",
         });
         this.setState(this.state);
     },
+    componentDidUpdate: function () {
+        //var $contentChannelTree = $("#contentChannelTree");
+        //$contentChannelTree.children().remove();
+        //$.each(this.state.channelList, function (index, item) {
+        //    var index = 0;
+        //    createChannelTree($contentChannelTree, item, index);
+        //});
+    },
     handleToggleSub: function(event){
-
-        console.log("handleToggleSub");
-
         var $a = $(event.target);
-
-        console.log($a);
-        //$a.addClass("active");
         var $next = $a.next("ul");
 
         if($next.is(":hidden")){
@@ -106,9 +110,6 @@ var SideBarMenu = React.createClass({displayName: "SideBarMenu",
                                 ), 
                                 React.createElement("li", null, 
                                     React.createElement("a", {href: SiteProperties.clientURL + Page.password}, React.createElement("i", {className: "fa fa-pencil"}), "  密码修改")
-                                ), 
-                                React.createElement("li", null, 
-                                    React.createElement("a", {href: "javascript:void(0)", onClick: this.handleLogout}, React.createElement("i", {className: "fa fa-power-off"}), "  注销")
                                 )
                             )
                         ), 
@@ -124,11 +125,10 @@ var SideBarMenu = React.createClass({displayName: "SideBarMenu",
                                 React.createElement("span", null, "我的控制台")
                             )
                         ), 
-                        React.createElement("li", {className: "has-sub"}, 
-                            React.createElement("a", {href: "javascript:void(0)"}, "内容管理"), 
-                            React.createElement("ul", {id: "channelTree", style: {display: 'none'}}, 
-                                React.createElement("li", null, "首页"), 
-                                React.createElement("li", null, "产品一览")
+                        React.createElement("li", null, 
+                            React.createElement("a", {id: "menuContentManage", href: SiteProperties.clientURL + Page.contents}, 
+                                React.createElement("i", {className: "fa fa-book"}), 
+                                React.createElement("span", null, "内容管理")
                             )
                         ), 
                         React.createElement("li", {className: "has-sub"}, 
@@ -175,3 +175,27 @@ var SideBarMenu = React.createClass({displayName: "SideBarMenu",
         );
     }
 });
+
+function createChannelTree($channelTree, item, index) {
+    var $li = $("<li></li>");
+    var $a = $("<a href='javascript:void(0)'></a>");
+    $a.text(item.text);
+    $li.append($a);
+
+    //var text = "";
+    //for (var i = 0; i < index; i++) {
+    //    text += "&nbsp;";
+    //}
+    //text = text + item.text;
+    //$option.html(text);
+    $channelTree.append($li);
+
+    if (item.nodes.length > 0) {
+        var $ul = $("<ul></ul>");
+        $li.append($ul);
+        $.each(item.nodes, function (index, item) {
+            index = index + 1;
+            createChannelTree($ul, item, index);
+        });
+    }
+}

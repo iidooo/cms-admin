@@ -4,8 +4,8 @@ var Dashboard = React.createClass({displayName: "Dashboard",
             React.createElement("div", null, 
                 React.createElement(Header, null), 
 
-                React.createElement("div", {id: "main", className: "container-fluid margin-top-70"}, 
-                    React.createElement(SideBarMenu, {activeMenuID: "menuDashboard"}), 
+                React.createElement("div", {id: "main", className: "container-fluid margin-top-60"}, 
+                    React.createElement(SideBar, {activeMenuID: "menuDashboard"}), 
 
                     React.createElement("div", {className: "content-page"}, 
                         React.createElement(Breadcrumb, {page: Page.dashboard}), 

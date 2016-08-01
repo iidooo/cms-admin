@@ -22,7 +22,7 @@ var Header = React.createClass({displayName: "Header",
                     ), 
                     React.createElement("div", {id: "navbar", className: "navbar-collapse collapse"}, 
                         
-                            React.createElement(MainMenu, {activeMenuID: this.props.activeMenuID}), 
+                            //<MainMenu activeMenuID={this.props.activeMenuID}/>
                         
                         React.createElement(LoginInfo, {userName: this.state.user.userName})
                     )
@@ -32,29 +32,29 @@ var Header = React.createClass({displayName: "Header",
     }
 });
 
-
-var MainMenu = React.createClass({displayName: "MainMenu",
-    componentDidMount: function () {
-        var activeMenuID = this.props.activeMenuID;
-        $("#" + activeMenuID).addClass("active");
-    },
-    render: function () {
-        return (
-            React.createElement("ul", {className: "nav navbar-nav"}, 
-                React.createElement("li", {id: "menuContentManage"}, 
-                    React.createElement("a", {href: SiteProperties.clientURL + Page.contents}, "内容管理")
-                ), 
-                React.createElement("li", {id: "menuAccountManage"}, 
-                    React.createElement("a", {href: SiteProperties.clientURL + Page.account}, "账户管理")
-                ), 
-                React.createElement("li", {id: "menuSystemManage"}, 
-                    React.createElement("a", {href: SiteProperties.clientURL + Page.users}, "系统管理")
-                )
-            )
-        );
-    }
-});
-
+{
+//var MainMenu = React.createClass({
+//    componentDidMount: function () {
+//        var activeMenuID = this.props.activeMenuID;
+//        $("#" + activeMenuID).addClass("active");
+//    },
+//    render: function () {
+//        return (
+//            <ul className="nav navbar-nav">
+//                <li id="menuContentManage">
+//                    <a href={SiteProperties.clientURL + Page.contents}>内容管理</a>
+//                </li>
+//                <li id="menuAccountManage">
+//                    <a href={SiteProperties.clientURL + Page.account}>账户管理</a>
+//                </li>
+//                <li id="menuSystemManage">
+//                    <a href={SiteProperties.clientURL + Page.users}>系统管理</a>
+//                </li>
+//            </ul>
+//        );
+//    }
+//});
+}
 var LoginInfo = React.createClass({displayName: "LoginInfo",
     handleLogout: function () {
         sessionStorage.removeItem(SessionKey.accessToken);

@@ -32,7 +32,7 @@ var SideBarMenuStore = Reflux.createStore({
     },
 });
 
-var SideBarMenu = React.createClass({
+var SideBar = React.createClass({
     mixins: [Reflux.connect(SideBarMenuStore, 'channelList')],
     getInitialState: function () {
         return {
@@ -42,6 +42,8 @@ var SideBarMenu = React.createClass({
         };
     },
     componentDidMount: function () {
+        //SideBarMenuActions.getChannelTree(this.state);
+
         this.state.user = JSON.parse(sessionStorage.getItem(SessionKey.user));
         if(this.state.user == null){
             location.href = SiteProperties.clientURL + Page.login;
@@ -72,14 +74,16 @@ var SideBarMenu = React.createClass({
         });
         this.setState(this.state);
     },
+    componentDidUpdate: function () {
+        //var $contentChannelTree = $("#contentChannelTree");
+        //$contentChannelTree.children().remove();
+        //$.each(this.state.channelList, function (index, item) {
+        //    var index = 0;
+        //    createChannelTree($contentChannelTree, item, index);
+        //});
+    },
     handleToggleSub: function(event){
-
-        console.log("handleToggleSub");
-
         var $a = $(event.target);
-
-        console.log($a);
-        //$a.addClass("active");
         var $next = $a.next("ul");
 
         if($next.is(":hidden")){
@@ -107,9 +111,6 @@ var SideBarMenu = React.createClass({
                                 <li>
                                     <a href={SiteProperties.clientURL + Page.password}><i className="fa fa-pencil"></i>&nbsp;&nbsp;密码修改</a>
                                 </li>
-                                <li>
-                                    <a href="javascript:void(0)" onClick={this.handleLogout}><i className="fa fa-power-off"></i>&nbsp;&nbsp;注销</a>
-                                </li>
                             </ul>
                         </div>
 
@@ -124,12 +125,11 @@ var SideBarMenu = React.createClass({
                                 <span>我的控制台</span>
                             </a>
                         </li>
-                        <li className="has-sub">
-                            <a href="javascript:void(0)">内容管理</a>
-                            <ul id="channelTree" style={{display: 'none'}}>
-                                <li>首页</li>
-                                <li>产品一览</li>
-                            </ul>
+                        <li>
+                            <a id="menuContentManage" href={SiteProperties.clientURL + Page.contents}>
+                                <i className="fa fa-book"></i>
+                                <span>内容管理</span>
+                            </a>
                         </li>
                         <li className="has-sub">
                             <a href="javascript:void(0)" className="has-sub" onClick={this.handleToggleSub}>
@@ -175,3 +175,27 @@ var SideBarMenu = React.createClass({
         );
     }
 });
+
+function createChannelTree($channelTree, item, index) {
+    var $li = $("<li></li>");
+    var $a = $("<a href='javascript:void(0)'></a>");
+    $a.text(item.text);
+    $li.append($a);
+
+    //var text = "";
+    //for (var i = 0; i < index; i++) {
+    //    text += "&nbsp;";
+    //}
+    //text = text + item.text;
+    //$option.html(text);
+    $channelTree.append($li);
+
+    if (item.nodes.length > 0) {
+        var $ul = $("<ul></ul>");
+        $li.append($ul);
+        $.each(item.nodes, function (index, item) {
+            index = index + 1;
+            createChannelTree($ul, item, index);
+        });
+    }
+}

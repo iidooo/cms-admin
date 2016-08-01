@@ -352,7 +352,7 @@ var Content = React.createClass({
                                 <label>状态</label>
                             </div>
                             <div className="col-sm-5">
-                                <ContentStatusList contentType={this.state.content.status}/>
+                                <ContentStatusList contentStatus={this.state.content.status}/>
                             </div>
                             <div className="col-sm-4 checkbox">
                                 <label>

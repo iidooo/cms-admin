@@ -7,7 +7,7 @@ var ContentTypeList = React.createClass({
     checkIsContainAll: function(){
         if(this.props.isContainAll == 'true') {
             return (
-                <option value="0">全部</option>
+                <option value="">全部</option>
             );
         }
     },

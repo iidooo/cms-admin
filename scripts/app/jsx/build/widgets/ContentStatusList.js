@@ -7,7 +7,7 @@ var ContentStatusList = React.createClass({displayName: "ContentStatusList",
     checkIsContainAll: function(){
         if(this.props.isContainAll == 'true') {
             return (
-                React.createElement("option", {value: "0"}, "全部")
+                React.createElement("option", {value: ""}, "全部")
             );
         }
     },

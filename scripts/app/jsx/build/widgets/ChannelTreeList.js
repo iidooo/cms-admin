@@ -45,15 +45,19 @@ var ChannelTreeList = React.createClass({displayName: "ChannelTreeList",
     componentDidUpdate: function () {
         var $channelTree = $("#inputChannelTree");
         $channelTree.children().remove();
+        if(this.props.isContainAll == 'true') {
+            $channelTree.append("<option value=''>全部</option>");
+        }
         $.each(this.state.channelList, function (index, item) {
             var index = 0;
             createOption($channelTree, item, index);
         });
+        $channelTree.val(this.props.channelID);
     },
+
     render: function () {
         return (
             React.createElement("select", {id: "inputChannelTree", className: "form-control"}
-
             )
         );
     }

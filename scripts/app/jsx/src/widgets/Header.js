@@ -22,7 +22,7 @@ var Header = React.createClass({
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">
                         {
-                            <MainMenu activeMenuID={this.props.activeMenuID}/>
+                            //<MainMenu activeMenuID={this.props.activeMenuID}/>
                         }
                         <LoginInfo userName={this.state.user.userName}/>
                     </div>
@@ -32,29 +32,29 @@ var Header = React.createClass({
     }
 });
 
-
-var MainMenu = React.createClass({
-    componentDidMount: function () {
-        var activeMenuID = this.props.activeMenuID;
-        $("#" + activeMenuID).addClass("active");
-    },
-    render: function () {
-        return (
-            <ul className="nav navbar-nav">
-                <li id="menuContentManage">
-                    <a href={SiteProperties.clientURL + Page.contents}>内容管理</a>
-                </li>
-                <li id="menuAccountManage">
-                    <a href={SiteProperties.clientURL + Page.account}>账户管理</a>
-                </li>
-                <li id="menuSystemManage">
-                    <a href={SiteProperties.clientURL + Page.users}>系统管理</a>
-                </li>
-            </ul>
-        );
-    }
-});
-
+{
+//var MainMenu = React.createClass({
+//    componentDidMount: function () {
+//        var activeMenuID = this.props.activeMenuID;
+//        $("#" + activeMenuID).addClass("active");
+//    },
+//    render: function () {
+//        return (
+//            <ul className="nav navbar-nav">
+//                <li id="menuContentManage">
+//                    <a href={SiteProperties.clientURL + Page.contents}>内容管理</a>
+//                </li>
+//                <li id="menuAccountManage">
+//                    <a href={SiteProperties.clientURL + Page.account}>账户管理</a>
+//                </li>
+//                <li id="menuSystemManage">
+//                    <a href={SiteProperties.clientURL + Page.users}>系统管理</a>
+//                </li>
+//            </ul>
+//        );
+//    }
+//});
+}
 var LoginInfo = React.createClass({
     handleLogout: function () {
         sessionStorage.removeItem(SessionKey.accessToken);
