@@ -8,7 +8,7 @@ var SiteStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
@@ -31,10 +31,10 @@ var SiteStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         // 检查token是否过期
-        if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
+        if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
             return false;
         }

@@ -7,7 +7,7 @@ var FileDialogStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         data.contentID = sessionStorage.getItem(SessionKey.contentID);
 
@@ -41,7 +41,7 @@ var FileDialogStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         data.contentID = sessionStorage.getItem(SessionKey.contentID);
         data.pictureID = sessionStorage.getItem(SessionKey.pictureID);
@@ -80,7 +80,7 @@ var FileDialog = React.createClass({displayName: "FileDialog",
                 'appID': SecurityClient.appID,
                 'secret': SecurityClient.secret,
                 'accessToken': sessionStorage.getItem(SessionKey.accessToken),
-                'userID': sessionStorage.getItem(SessionKey.userID),
+                'operatorID': sessionStorage.getItem(SessionKey.operatorID),
                 'siteID': sessionStorage.getItem(SessionKey.siteID),
             };  //如果需要额外添加参数可以在这里添加
         });

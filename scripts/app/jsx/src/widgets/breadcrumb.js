@@ -23,6 +23,13 @@ var Breadcrumb = React.createClass({
             case Page.channels:
                 path.push(<ChannelsBreadcrumb key="ChannelsBreadcrumb"/>)
                 break;
+            case Page.users:
+                path.push(<UsersBreadcrumb key="UsersBreadcrumb" active="active" href="javascript:void(0)"/>);
+                break;
+            case Page.user:
+                path.push(<UsersBreadcrumb key="UsersBreadcrumb" active="" href={SiteProperties.clientURL + Page.users}/>);
+                path.push(<UserBreadcrumb key="UserBreadcrumb" active=""/>);
+                break;
             case Page.site:
                 path.push(<SiteMaintenanceBreadcrumb key="SiteMaintenanceBreadcrumb"/>);
                 path.push(<SiteBreadcrumb key="SiteBreadcrumb"/>);
@@ -60,6 +67,24 @@ var ChannelsBreadcrumb = React.createClass({
     render: function () {
         return (
             <li className='active'>栏目管理</li>
+        );
+    }
+});
+
+var UsersBreadcrumb = React.createClass({
+    render: function () {
+        return (
+            <li className={this.props.active}>
+                <a href={this.props.href}>用户管理</a>
+            </li>
+        );
+    }
+});
+
+var UserBreadcrumb = React.createClass({
+    render: function () {
+        return (
+            <li className='active'>用户信息</li>
         );
     }
 });

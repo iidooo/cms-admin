@@ -12,7 +12,7 @@ var LoginStore = Reflux.createStore({
         var callback = function (result) {
             if (result.status == 200) {
                 sessionStorage.setItem(SessionKey.accessToken, result.data.token);
-                sessionStorage.setItem(SessionKey.userID, result.data.userID);
+                sessionStorage.setItem(SessionKey.operatorID, result.data.userID);
                 // 用户信息用的地方比较多，以json格式存储进sessionStorage
                 sessionStorage.setItem(SessionKey.user, JSON.stringify(result.data.user));
                 location.href = location.href = SiteProperties.clientURL + Page.sites;

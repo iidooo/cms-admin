@@ -2,18 +2,18 @@
  * Created by Ethan on 16/5/18.
  */
 
-var UsersActions = Reflux.createActions(['search']);
+var UsersActions = Reflux.createActions(['searchSiteUserList']);
 
 var UsersStore = Reflux.createStore({
     listenables: [UsersActions],
-    onSearch: function (data) {
-        var url = SiteProperties.serverURL + API.searchContentList;
+    onSearchSiteUserList: function (data) {
+        var url = SiteProperties.serverURL + API.searchSiteUserList;
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
-        data.channelID = sessionStorage.getItem(SessionKey.channelID);
+        data.roles = "[3]";
 
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
@@ -46,68 +46,99 @@ var Users = React.createClass({displayName: "Users",
             }
         };
     },
-    componentWillMount: function () {
-
+    componentDidMount: function () {
+        UsersActions.searchSiteUserList(this.state);
     },
     onChildChanged: function (childState) {
         if (childState.currentPage != null) {
             this.state.currentPage = childState.currentPage;
 
-            UsersActions.search(this.state);
+            UsersActions.searchSiteUserList(this.state);
         }
     },
-    handleCreate: function (contentType) {
-        sessionStorage.setItem(SessionKey.contentType, contentType);
-        sessionStorage.removeItem(SessionKey.contentID);
-        location.href = SiteProperties.clientURL + Page.content;
+    handleSearch: function(){
+        this.state.loginID = this.refs.inputLoginID.value;
+        this.state.userName = this.refs.inputUserName.value;
+        this.state.sex = this.refs.inputSex.value;
+        this.state.mobile = this.refs.inputMobile.value;
+        this.state.email = this.refs.inputEmail.value;
+        this.state.weixinID = this.refs.inputWeixinID.value;
+        UsersActions.searchSiteUserList(this.state);
     },
     render: function () {
         return (
             React.createElement("div", null, 
-                React.createElement(Header, {activeMenuID: "menuSystemManage"}), 
+                React.createElement(Header, null), 
 
-                React.createElement("div", {id: "main", className: "container-fluid margin-top-70"}, 
-                    React.createElement("div", {className: "col-sm-2 sidebar margin-top-20"}, 
-                        React.createElement("div", {className: "list-group"}, 
-                            React.createElement("a", {href: SiteProperties.clientURL + Page.account, className: "list-group-item active"}, 
-                                "用户管理"
-                            ), 
-                            React.createElement("a", {href: SiteProperties.clientURL + Page.password, className: "list-group-item"}, "密码重设")
-                        )
-                    ), 
-                    React.createElement("div", {className: "col-sm-offset-2"}, 
-                        React.createElement("div", null, 
-                            React.createElement("div", {className: "title pull-left"}, 
-                                React.createElement("h4", null, "用户管理")
-                            ), 
-                            React.createElement("div", {className: "pull-right form-inline"}, 
-                                React.createElement("div", {className: "btn-group"}, 
-                                    React.createElement("a", {className: "btn btn-primary dropdown-toggle", "data-toggle": "dropdown"}, 
-                                        React.createElement("span", null, "创建内容"), "  ", 
-                                        React.createElement("i", {className: "fa fa-caret-down"})
-                                    ), 
-                                    React.createElement("ul", {className: "dropdown-menu"}, 
-                                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.DEFAULT)}, React.createElement("i", {
-                                            className: "fa fa-file-o"}), "  默认")), 
-                                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.NEWS)}, React.createElement("i", {className: "fa fa-newspaper-o"}), " " + ' ' +
-                                            "新闻")
+                React.createElement("div", {id: "main", className: "container-fluid margin-top-60 margin-bottom-60"}, 
+                    React.createElement(SideBar, {activeMenuID: "menuUsersManage"}), 
+                    React.createElement("div", {className: "content-page"}, 
+                        React.createElement(Breadcrumb, {page: Page.users}), 
+                        React.createElement("div", {className: "panel panel-default"}, 
+                            React.createElement("div", {className: "panel-heading"}, "查询条件"), 
+                            React.createElement("div", {className: "panel-body"}, 
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-4"}, 
+                                        React.createElement("div", {className: "col-xs-4 control-label"}, 
+                                            React.createElement("label", null, "用户ID")
                                         ), 
-                                        React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.FILE)}, React.createElement("i", {className: "fa fa-download"}), "  文件")
+                                        React.createElement("div", {className: "col-xs-8"}, 
+                                            React.createElement("input", {type: "text", className: "form-control", ref: "inputLoginID"})
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-4"}, 
+                                        React.createElement("div", {className: "col-xs-4 control-label"}, 
+                                            React.createElement("label", null, "用户名")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-8"}, 
+                                            React.createElement("input", {type: "text", className: "form-control", ref: "inputUserName"})
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-4"}, 
+                                        React.createElement("div", {className: "col-xs-4 control-label"}, 
+                                            React.createElement("label", null, "用户性别")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-8"}, 
+                                            React.createElement("select", {ref: "inputSex", className: "form-control"}, 
+                                                React.createElement("option", {value: ""}, "全部"), 
+                                                React.createElement("option", {value: "1"}, "男"), 
+                                                React.createElement("option", {value: "2"}, "女")
+                                            )
                                         )
                                     )
                                 ), 
-                                React.createElement("div", {id: "searchForm", className: "input-group margin-left-5"}, 
-                                    React.createElement("input", {type: "text", className: "form-control", placeholder: "请输入内容关键字"}), 
-                                    React.createElement("span", {className: "input-group-btn"}, 
-                                        React.createElement("a", {className: "btn btn-default"}, 
-                                            React.createElement("i", {className: "fa fa-search"}), "搜索"
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-4"}, 
+                                        React.createElement("div", {className: "col-xs-4 control-label"}, 
+                                            React.createElement("label", null, "手机号")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-8"}, 
+                                            React.createElement("input", {type: "text", className: "form-control", ref: "inputMobile"})
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-4"}, 
+                                        React.createElement("div", {className: "col-xs-4 control-label"}, 
+                                            React.createElement("label", null, "Email")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-8"}, 
+                                            React.createElement("input", {type: "text", className: "form-control", ref: "inputEmail"})
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-4"}, 
+                                        React.createElement("div", {className: "col-xs-4 control-label"}, 
+                                            React.createElement("label", null, "微信号")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-8"}, 
+                                            React.createElement("input", {type: "text", className: "form-control", ref: "inputWeixinID"})
                                         )
                                     )
+                                ), 
+
+                                React.createElement("div", {className: "text-right"}, 
+                                    React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleSearch}, "查 询")
                                 )
                             )
                         ), 
-                        React.createElement("div", {className: "clearfix"}), 
-                        React.createElement("div", {className: "spacer10"}), 
                         React.createElement(UsersTable, {userList: this.state.usersData.userList}), 
 
                         React.createElement(Pager, {callbackParent: this.onChildChanged, 
@@ -130,16 +161,17 @@ var UsersTable = React.createClass({displayName: "UsersTable",
                 React.createElement("tr", null, 
                     React.createElement("th", null, "用户ID"), 
                     React.createElement("th", null, "用户名"), 
+                    React.createElement("th", null, "性别"), 
                     React.createElement("th", null, "手机号"), 
                     React.createElement("th", null, "邮箱"), 
                     React.createElement("th", null, "微信号"), 
-                    React.createElement("th", null, "角色"), 
+                    React.createElement("th", null, "创建时间"), 
                     React.createElement("th", null, "更新时间")
                 )
                 ), 
                 React.createElement("tbody", null, 
                 this.props.userList.map(function (item) {
-                    return React.createElement(UsersTableRow, {key: item.userID, user: item})
+                    return React.createElement(UsersTableRow, {key: item.userID, siteUser: item})
                 })
                 )
             )
@@ -148,20 +180,21 @@ var UsersTable = React.createClass({displayName: "UsersTable",
 });
 
 var UsersTableRow = React.createClass({displayName: "UsersTableRow",
-    handleLink: function (contentID) {
-        sessionStorage.setItem(SessionKey.contentID, contentID);
-        location.href = SiteProperties.clientURL + Page.content;
+    handleLink: function (userID) {
+        sessionStorage.setItem(SessionKey.userID, userID);
+        location.href = SiteProperties.clientURL + Page.user;
     },
     render: function () {
         return (
-            React.createElement("tr", {onClick: this.handleLink.bind(null, this.props.user.userID)}, 
-                React.createElement("td", null, this.props.user.userName), 
-                React.createElement("td", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleLink.bind(null, this.props.user.userID)}, this.props.user.userName)), 
-                React.createElement("td", null), 
-                React.createElement("td", null), 
-                React.createElement("td", null), 
-                React.createElement("td", null), 
-                React.createElement("td", null, new Date(this.props.user.updateTime).format('yyyy-MM-dd hh:mm:ss'))
+            React.createElement("tr", null, 
+                React.createElement("td", null, this.props.siteUser.user.loginID), 
+                React.createElement("td", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleLink.bind(null, this.props.siteUser.userID)}, this.props.siteUser.user.userName)), 
+                React.createElement("td", null, SexMap[this.props.siteUser.user.sex]), 
+                React.createElement("td", null, this.props.siteUser.user.mobile), 
+                React.createElement("td", null, this.props.siteUser.user.email), 
+                React.createElement("td", null, this.props.siteUser.user.weixinID), 
+                React.createElement("td", null, new Date(this.props.siteUser.user.createTime).format('yyyy-MM-dd hh:mm:ss')), 
+                React.createElement("td", null, new Date(this.props.siteUser.user.updateTime).format('yyyy-MM-dd hh:mm:ss'))
             )
         );
     }

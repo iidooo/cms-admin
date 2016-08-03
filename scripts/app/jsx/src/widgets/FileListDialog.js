@@ -7,7 +7,7 @@ var FileListDialogStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         data.contentID = sessionStorage.getItem(SessionKey.contentID);
 
@@ -35,7 +35,7 @@ var FileListDialogStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         data.contentID = sessionStorage.getItem(SessionKey.contentID);
 

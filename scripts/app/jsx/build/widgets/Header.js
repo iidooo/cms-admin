@@ -58,7 +58,7 @@ var Header = React.createClass({displayName: "Header",
 var LoginInfo = React.createClass({displayName: "LoginInfo",
     handleLogout: function () {
         sessionStorage.removeItem(SessionKey.accessToken);
-        sessionStorage.removeItem(SessionKey.userID);
+        sessionStorage.removeItem(SessionKey.operatorID);
         location.href = SiteProperties.clientURL + Page.login;
     },
 

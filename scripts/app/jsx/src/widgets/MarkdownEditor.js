@@ -110,7 +110,7 @@ var MarkdownPictureDialog = React.createClass({
                 'appID': SecurityClient.appID,
                 'secret': SecurityClient.secret,
                 'accessToken': sessionStorage.getItem(SessionKey.accessToken),
-                'userID': sessionStorage.getItem(SessionKey.userID),
+                'operatorID': sessionStorage.getItem(SessionKey.operatorID),
                 'siteID': sessionStorage.getItem(SessionKey.siteID),
                 'width': $("#inputMarkdownPictureWidth").val(),
                 'height': $("#inputMarkdownPictureHeight").val(),

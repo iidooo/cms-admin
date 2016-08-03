@@ -48,7 +48,7 @@ var DashboardContentCountStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
 
         // 检查token是否过期
@@ -101,7 +101,7 @@ var DashboardNewContentCountStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         data.startDateTime = new Date().format("yyyy-MM-dd");
         // 检查token是否过期
@@ -154,7 +154,7 @@ var DashboardUserCountStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
 
         // 检查token是否过期
@@ -207,7 +207,7 @@ var DashboardNewUserCountStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         data.startDateTime = new Date().format("yyyy-MM-dd");
 
@@ -261,7 +261,7 @@ var DashboardNewContentListStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
 
         // 检查token是否过期
@@ -337,7 +337,7 @@ var DashboardPVContentListStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         data.sortField = "pageViewCount";
         // 检查token是否过期

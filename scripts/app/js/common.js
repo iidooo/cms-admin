@@ -18,7 +18,8 @@ SiteProperties = {
 // 存储在SessionStorage中的key
 SessionKey = {
     accessToken: "ACCESS_TOKEN",
-    userID: "USER_ID",
+    operatorID: "OPERATOR_ID",// Login 的User ID
+    userID: "USER_ID", // 编辑中的User ID
     user: "SECURITY_USER",
     siteID: "SITE_ID",
     siteMap: "SITE_MAP",
@@ -84,6 +85,11 @@ ContentTypeMap = {
     "3": "文件",
 };
 
+SexMap = {
+    "1": "男",
+    "2": "女"
+};
+
 ContentTypeList = [];
 
 API = {
@@ -117,6 +123,7 @@ API = {
     deleteFile: "/admin/deleteFile",
     getUser: "/core/getUser",
     getSiteUserCount: "/admin/getSiteUserCount",
+    searchSiteUserList: "/admin/searchSiteUserList",
     updateUserInfo: "/core/updateUserInfo",
     updateUserPassword: "/core/updateUserPassword",
 
@@ -151,6 +158,7 @@ Page = {
     account: "/pages/account.html",
     password: "/pages/password.html",
     users: "/pages/users.html",
+    user: "/pages/user.html",
 };
 
 var CmsPicture = {

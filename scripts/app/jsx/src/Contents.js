@@ -7,7 +7,7 @@ var ContentsStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
 
         // 检查token是否过期
@@ -35,7 +35,9 @@ var Contents = React.createClass({
     mixins: [Reflux.connect(ContentsStore, 'contentsData')],
     getInitialState: function () {
         return {
-            searchCondition:{},
+            searchCondition:{
+                channelID: 0
+            },
             contentsData: {
                 page: {},
                 contentList: []

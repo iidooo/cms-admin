@@ -17,10 +17,10 @@ var ContentStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         // 检查token是否过期
-        if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
+        if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
             return false;
         }
@@ -43,11 +43,11 @@ var ContentStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         data.contentID = sessionStorage.getItem(SessionKey.contentID);
         // 检查token是否过期
-        if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
+        if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
             return false;
         }
@@ -70,9 +70,9 @@ var ContentStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         // 检查token是否过期
-        if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
+        if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
             return false;
         }
@@ -111,7 +111,7 @@ var Content = React.createClass({
                 'appID': SecurityClient.appID,
                 'secret': SecurityClient.secret,
                 'accessToken': sessionStorage.getItem(SessionKey.accessToken),
-                'userID': sessionStorage.getItem(SessionKey.userID),
+                'operatorID': sessionStorage.getItem(SessionKey.operatorID),
                 'siteID': sessionStorage.getItem(SessionKey.siteID),
                 'width': '200',
                 'height': '200',

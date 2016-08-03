@@ -23,6 +23,13 @@ var Breadcrumb = React.createClass({displayName: "Breadcrumb",
             case Page.channels:
                 path.push(React.createElement(ChannelsBreadcrumb, {key: "ChannelsBreadcrumb"}))
                 break;
+            case Page.users:
+                path.push(React.createElement(UsersBreadcrumb, {key: "UsersBreadcrumb", active: "active", href: "javascript:void(0)"}));
+                break;
+            case Page.user:
+                path.push(React.createElement(UsersBreadcrumb, {key: "UsersBreadcrumb", active: "", href: SiteProperties.clientURL + Page.users}));
+                path.push(React.createElement(UserBreadcrumb, {key: "UserBreadcrumb", active: ""}));
+                break;
             case Page.site:
                 path.push(React.createElement(SiteMaintenanceBreadcrumb, {key: "SiteMaintenanceBreadcrumb"}));
                 path.push(React.createElement(SiteBreadcrumb, {key: "SiteBreadcrumb"}));
@@ -60,6 +67,24 @@ var ChannelsBreadcrumb = React.createClass({displayName: "ChannelsBreadcrumb",
     render: function () {
         return (
             React.createElement("li", {className: "active"}, "栏目管理")
+        );
+    }
+});
+
+var UsersBreadcrumb = React.createClass({displayName: "UsersBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: this.props.active}, 
+                React.createElement("a", {href: this.props.href}, "用户管理")
+            )
+        );
+    }
+});
+
+var UserBreadcrumb = React.createClass({displayName: "UserBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "用户信息")
         );
     }
 });

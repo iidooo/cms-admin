@@ -2,18 +2,18 @@
  * Created by Ethan on 16/5/18.
  */
 
-var UsersActions = Reflux.createActions(['search']);
+var UsersActions = Reflux.createActions(['searchSiteUserList']);
 
 var UsersStore = Reflux.createStore({
     listenables: [UsersActions],
-    onSearch: function (data) {
-        var url = SiteProperties.serverURL + API.searchContentList;
+    onSearchSiteUserList: function (data) {
+        var url = SiteProperties.serverURL + API.searchSiteUserList;
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
-        data.channelID = sessionStorage.getItem(SessionKey.channelID);
+        data.roles = "[3]";
 
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
@@ -46,68 +46,99 @@ var Users = React.createClass({
             }
         };
     },
-    componentWillMount: function () {
-
+    componentDidMount: function () {
+        UsersActions.searchSiteUserList(this.state);
     },
     onChildChanged: function (childState) {
         if (childState.currentPage != null) {
             this.state.currentPage = childState.currentPage;
 
-            UsersActions.search(this.state);
+            UsersActions.searchSiteUserList(this.state);
         }
     },
-    handleCreate: function (contentType) {
-        sessionStorage.setItem(SessionKey.contentType, contentType);
-        sessionStorage.removeItem(SessionKey.contentID);
-        location.href = SiteProperties.clientURL + Page.content;
+    handleSearch: function(){
+        this.state.loginID = this.refs.inputLoginID.value;
+        this.state.userName = this.refs.inputUserName.value;
+        this.state.sex = this.refs.inputSex.value;
+        this.state.mobile = this.refs.inputMobile.value;
+        this.state.email = this.refs.inputEmail.value;
+        this.state.weixinID = this.refs.inputWeixinID.value;
+        UsersActions.searchSiteUserList(this.state);
     },
     render: function () {
         return (
             <div>
-                <Header activeMenuID="menuSystemManage"/>
+                <Header/>
 
-                <div id="main" className="container-fluid margin-top-70">
-                    <div className="col-sm-2 sidebar margin-top-20">
-                        <div className="list-group">
-                            <a href={SiteProperties.clientURL + Page.account} className="list-group-item active">
-                                用户管理
-                            </a>
-                            <a href={SiteProperties.clientURL + Page.password} className="list-group-item">密码重设</a>
-                        </div>
-                    </div>
-                    <div className="col-sm-offset-2">
-                        <div>
-                            <div className="title pull-left">
-                                <h4>用户管理</h4>
-                            </div>
-                            <div className="pull-right form-inline">
-                                <div className="btn-group">
-                                    <a className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        <span>创建内容</span>&nbsp;&nbsp;
-                                        <i className="fa fa-caret-down"></i>
-                                    </a>
-                                    <ul className="dropdown-menu">
-                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.DEFAULT)}><i
-                                            className="fa fa-file-o"></i>&nbsp;&nbsp;默认</a></li>
-                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.NEWS)}><i className="fa fa-newspaper-o"></i>&nbsp;
-                                            新闻</a>
-                                        </li>
-                                        <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.FILE)}><i className="fa fa-download"></i>&nbsp;&nbsp;文件</a>
-                                        </li>
-                                    </ul>
+                <div id="main" className="container-fluid margin-top-60 margin-bottom-60">
+                    <SideBar activeMenuID="menuUsersManage"/>
+                    <div className="content-page">
+                        <Breadcrumb page={Page.users}/>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">查询条件</div>
+                            <div className="panel-body">
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>用户ID</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <input type="text" className="form-control" ref="inputLoginID"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>用户名</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <input type="text" className="form-control" ref="inputUserName"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>用户性别</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <select ref="inputSex" className="form-control">
+                                                <option value="">全部</option>
+                                                <option value="1">男</option>
+                                                <option value="2">女</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="searchForm" className="input-group margin-left-5">
-                                    <input type="text" className="form-control" placeholder="请输入内容关键字"/>
-                                    <span className="input-group-btn">
-                                        <a className="btn btn-default">
-                                            <i className="fa fa-search"></i>搜索
-                                        </a>
-                                    </span>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>手机号</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <input type="text" className="form-control" ref="inputMobile"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>Email</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <input type="text" className="form-control" ref="inputEmail"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4">
+                                        <div className="col-xs-4 control-label">
+                                            <label>微信号</label>
+                                        </div>
+                                        <div className="col-xs-8">
+                                            <input type="text" className="form-control" ref="inputWeixinID"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="text-right">
+                                    <button type="button" className="btn btn-primary" onClick={this.handleSearch}>查&nbsp;询</button>
                                 </div>
                             </div>
                         </div>
-                        <div className="clearfix"></div>
-                        <div className="spacer10"></div>
                         <UsersTable userList={this.state.usersData.userList}/>
 
                         <Pager callbackParent={this.onChildChanged}
@@ -130,16 +161,17 @@ var UsersTable = React.createClass({
                 <tr>
                     <th>用户ID</th>
                     <th>用户名</th>
+                    <th>性别</th>
                     <th>手机号</th>
                     <th>邮箱</th>
                     <th>微信号</th>
-                    <th>角色</th>
+                    <th>创建时间</th>
                     <th>更新时间</th>
                 </tr>
                 </thead>
                 <tbody>
                 {this.props.userList.map(function (item) {
-                    return <UsersTableRow key={item.userID} user={item}/>
+                    return <UsersTableRow key={item.userID} siteUser={item}/>
                 })}
                 </tbody>
             </table>
@@ -148,20 +180,21 @@ var UsersTable = React.createClass({
 });
 
 var UsersTableRow = React.createClass({
-    handleLink: function (contentID) {
-        sessionStorage.setItem(SessionKey.contentID, contentID);
-        location.href = SiteProperties.clientURL + Page.content;
+    handleLink: function (userID) {
+        sessionStorage.setItem(SessionKey.userID, userID);
+        location.href = SiteProperties.clientURL + Page.user;
     },
     render: function () {
         return (
-            <tr onClick={this.handleLink.bind(null, this.props.user.userID)}>
-                <td>{this.props.user.userName}</td>
-                <td><a href="javascript:void(0)" onClick={this.handleLink.bind(null, this.props.user.userID)}>{this.props.user.userName}</a></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{new Date(this.props.user.updateTime).format('yyyy-MM-dd hh:mm:ss')}</td>
+            <tr>
+                <td>{this.props.siteUser.user.loginID}</td>
+                <td><a href="javascript:void(0)" onClick={this.handleLink.bind(null, this.props.siteUser.userID)}>{this.props.siteUser.user.userName}</a></td>
+                <td>{SexMap[this.props.siteUser.user.sex]}</td>
+                <td>{this.props.siteUser.user.mobile}</td>
+                <td>{this.props.siteUser.user.email}</td>
+                <td>{this.props.siteUser.user.weixinID}</td>
+                <td>{new Date(this.props.siteUser.user.createTime).format('yyyy-MM-dd hh:mm:ss')}</td>
+                <td>{new Date(this.props.siteUser.user.updateTime).format('yyyy-MM-dd hh:mm:ss')}</td>
             </tr>
         );
     }

@@ -2,18 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e091606-c16e-4f85-a397-c84736faf033" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/content.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Content.js" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/breadcrumb.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/Breadcrumb.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/content.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Content.js" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/breadcrumb.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Breadcrumb.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Account.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Account.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Account.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Account.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/ChannelTree.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/ChannelTree.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTree.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTree.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/ChannelTreeList.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/ChannelTreeList.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTreeList.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTreeList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Channels.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Channels.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Channels.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Channels.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Contents.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Contents.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Contents.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Contents.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Dashboard.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Dashboard.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/FileDialog.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/FileDialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileDialog.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileDialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/FileListDialog.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/FileListDialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileListDialog.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileListDialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/Header.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/Header.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Header.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Header.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Login.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Login.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/MarkdownEditor.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/MarkdownEditor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/MarkdownEditor.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/MarkdownEditor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Password.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Password.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Password.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Password.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/PictureDialog.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/PictureDialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureDialog.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureDialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/PictureListDialog.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/PictureListDialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureListDialog.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureListDialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Register.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Register.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Register.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Register.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/Sidebar.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/widgets/Sidebar.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Sidebar.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Sidebar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Site.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Site.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Site.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Site.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Sites.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Sites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Sites.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Sites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/build/Users.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/build/Users.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/jsx/src/Users.js" afterPath="$PROJECT_DIR$/scripts/app/jsx/src/Users.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/js/common.js" afterPath="$PROJECT_DIR$/scripts/app/js/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/contents.html" afterPath="$PROJECT_DIR$/pages/contents.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/users.html" afterPath="$PROJECT_DIR$/pages/users.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cms-admin.iws" />
@@ -35,21 +67,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Channels.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Channels.js">
+      <file leaf-file-name="Users.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.65625">
-              <caret line="111" column="60" selection-start-line="111" selection-start-column="60" selection-end-line="111" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="183" column="48" selection-start-line="183" selection-start-column="48" selection-end-line="183" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Contents.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Contents.js">
+      <file leaf-file-name="Channels.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Channels.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="8.518518">
-              <caret line="86" column="109" selection-start-line="86" selection-start-column="109" selection-end-line="86" selection-end-column="109" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="318" column="29" selection-start-line="318" selection-start-column="27" selection-end-line="318" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sites.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Sites.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/app/js/common.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6883629">
+              <caret line="138" column="2" selection-start-line="138" selection-start-column="2" selection-end-line="138" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Users.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/build/Users.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="187" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/User.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="138" column="28" selection-start-line="138" selection-start-column="28" selection-end-line="138" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -59,31 +131,38 @@
         <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Content.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="257" column="48" selection-start-line="257" selection-start-column="33" selection-end-line="257" selection-end-column="48" />
+              <caret line="192" column="9" selection-start-line="187" selection-start-column="7" selection-end-line="192" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChannelTreeList.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTreeList.js">
+      <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/user.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="58" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="58" />
+            <state vertical-scroll-proportion="-17.375">
+              <caret line="29" column="70" selection-start-line="29" selection-start-column="70" selection-end-line="29" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap-treeview.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/bootstrap-treeview/js/bootstrap-treeview.js">
+      <file leaf-file-name="content.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/content.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.0">
+              <caret line="33" column="77" selection-start-line="33" selection-start-column="77" selection-end-line="34" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Contents.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Contents.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="822" column="6" selection-start-line="822" selection-start-column="6" selection-end-line="822" selection-end-column="6" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <marker date="1431127512000" expanded="true" signature="18166:18180" placeholder="..." />
-              </folding>
+              <caret line="249" column="3" selection-start-line="237" selection-start-column="0" selection-end-line="249" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -94,8 +173,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Html5" />
         <option value="JavaScript File" />
+        <option value="Html5" />
       </list>
     </option>
   </component>
@@ -105,57 +184,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/app/jsx/build/widgets/PictureListDialog.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureDialog.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileDialog.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Pager.js" />
-        <option value="$PROJECT_DIR$/css/content.css" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/MarkdownEditor.js" />
         <option value="$PROJECT_DIR$/css/widgets/markdown.css" />
         <option value="$PROJECT_DIR$/pages/content.html" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/build/Content.js" />
         <option value="$PROJECT_DIR$/pages/login.html" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileListDialog.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureListDialog.js" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Footer.js" />
         <option value="$PROJECT_DIR$/pages/register.html" />
         <option value="$PROJECT_DIR$/css/register.css" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Register.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Login.js" />
         <option value="$PROJECT_DIR$/pages/account.html" />
         <option value="$PROJECT_DIR$/pages/password.html" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Account.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Password.js" />
-        <option value="$PROJECT_DIR$/pages/users.html" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Users.js" />
         <option value="$PROJECT_DIR$/css/widgets/header.css" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/SideMainMenu.js" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/SideBarMenu.js" />
         <option value="$PROJECT_DIR$/css/widgets/sideBarMenu.css" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/build/widgets/Sidebar.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Sites.js" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/breadcrumb.js" />
         <option value="$PROJECT_DIR$/pages/dashboard.html" />
         <option value="$PROJECT_DIR$/css/dashboard.css" />
         <option value="$PROJECT_DIR$/pages/Site.html" />
         <option value="$PROJECT_DIR$/css/widgets/sidebar.css" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Dashboard.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Content.js" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ContentStatusList.js" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ContentTypeList.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Header.js" />
         <option value="$PROJECT_DIR$/css/login.css" />
         <option value="$PROJECT_DIR$/css/common.css" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Site.js" />
         <option value="$PROJECT_DIR$/pages/contents.html" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Breadcrumb.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Sidebar.js" />
-        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTree.js" />
         <option value="$PROJECT_DIR$/pages/channels.html" />
-        <option value="$PROJECT_DIR$/scripts/app/js/common.js" />
+        <option value="$PROJECT_DIR$/pages/users.html" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Breadcrumb.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Account.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Content.js" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/Contents.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Dashboard.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Login.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Password.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Register.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Site.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTree.js" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTreeList.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileDialog.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileListDialog.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Header.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/MarkdownEditor.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureDialog.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureListDialog.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/widgets/Sidebar.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Sites.js" />
         <option value="$PROJECT_DIR$/scripts/app/jsx/src/Channels.js" />
+        <option value="$PROJECT_DIR$/scripts/app/js/common.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/build/Users.js" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/Users.js" />
+        <option value="$PROJECT_DIR$/pages/user.html" />
+        <option value="$PROJECT_DIR$/scripts/app/jsx/src/User.js" />
       </list>
     </option>
   </component>
@@ -167,8 +246,7 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="6" />
-    <option name="y" value="25" />
+    <option name="y" value="23" />
     <option name="width" value="1427" />
     <option name="height" value="876" />
   </component>
@@ -195,7 +273,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -529,6 +606,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -556,6 +634,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../iidooo-toxic/toxic-admin" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -600,6 +679,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
   </component>
@@ -617,7 +702,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="25" width="1427" height="876" extended-state="6" />
+    <frame x="0" y="23" width="1427" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -663,86 +748,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.75">
-          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375">
-          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/register.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375">
-          <caret line="23" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="88" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="1485" column="0" selection-start-line="1485" selection-start-column="0" selection-end-line="1485" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/account.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375">
-          <caret line="23" column="70" selection-start-line="23" selection-start-column="70" selection-end-line="23" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/users.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625">
-          <caret line="9" column="60" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/widgets/header.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/Pager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7387914">
-          <caret line="43" column="104" selection-start-line="43" selection-start-column="76" selection-end-line="43" selection-end-column="104" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/app/jsx/build/Content.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -759,14 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="53" selection-start-line="91" selection-start-column="53" selection-end-line="91" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/app/jsx/build/widgets/Header.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.147929">
@@ -779,7 +776,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2662722">
           <caret line="9" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -795,7 +791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -823,35 +818,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/sites.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7763975">
-          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/dashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.5">
-          <caret line="27" column="70" selection-start-line="0" selection-start-column="0" selection-end-line="30" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/Site.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.25">
           <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Sites.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="32" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -859,7 +829,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -867,35 +836,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="69" column="18" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/ContentStatusList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-          <folding>
-            <marker date="1470034090000" expanded="true" signature="-1:-1" placeholder="&lt;xml/&gt;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/ContentTypeList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-          <folding>
-            <marker date="1470034090000" expanded="true" signature="-1:-1" placeholder="&lt;xml/&gt;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/Header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="50" selection-start-line="72" selection-start-column="50" selection-end-line="79" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -903,23 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Site.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="28" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14201184">
-          <caret line="361" column="41" selection-start-line="361" selection-start-column="41" selection-end-line="361" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,31 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/contents.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.75">
-          <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/Breadcrumb.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/Sidebar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="134" column="102" selection-start-line="134" selection-start-column="102" selection-end-line="134" selection-end-column="102" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -959,7 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -975,23 +872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7080745">
           <caret line="23" column="70" selection-start-line="23" selection-start-column="70" selection-end-line="23" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Password.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5325444">
-          <caret line="81" column="32" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTree.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6804734">
-          <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -999,39 +879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.80124223">
           <caret line="29" column="70" selection-start-line="29" selection-start-column="70" selection-end-line="29" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Register.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/content.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61490685">
-          <caret line="33" column="77" selection-start-line="33" selection-start-column="77" selection-end-line="34" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Account.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="63" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="215" column="12" selection-start-line="215" selection-start-column="12" selection-end-line="215" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,23 +888,101 @@
           <caret line="822" column="6" selection-start-line="822" selection-start-column="6" selection-end-line="822" selection-end-column="6" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1431127512000" expanded="true" signature="18166:18180" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Content.js">
+    <entry file="file://$PROJECT_DIR$/pages/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="257" column="48" selection-start-line="257" selection-start-column="33" selection-end-line="257" selection-end-column="48" />
+        <state vertical-scroll-proportion="-15.5">
+          <caret line="27" column="70" selection-start-line="25" selection-start-column="66" selection-end-line="27" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/sites.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4370861">
+          <caret line="22" column="66" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Contents.js">
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/ContentTypeList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.518518">
-          <caret line="86" column="109" selection-start-line="86" selection-start-column="109" selection-end-line="86" selection-end-column="109" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/users.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.125">
+          <caret line="29" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/Breadcrumb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="46" selection-start-line="76" selection-start-column="46" selection-end-line="76" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/ContentStatusList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28883183">
+          <caret line="15" column="117" selection-start-line="15" selection-start-column="109" selection-end-line="15" selection-end-column="117" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Account.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="62" selection-start-line="39" selection-start-column="62" selection-end-line="39" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Password.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Register.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="60" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Site.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="62" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -1065,15 +990,159 @@
     <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/ChannelTreeList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="58" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="58" />
+          <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileDialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/FileListDialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/Header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="55" selection-start-line="60" selection-start-column="55" selection-end-line="60" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/MarkdownEditor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="27" selection-start-line="112" selection-start-column="27" selection-end-line="112" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureDialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/PictureListDialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="59" selection-start-line="99" selection-start-column="59" selection-end-line="99" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/widgets/Sidebar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="75" selection-start-line="52" selection-start-column="72" selection-end-line="52" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Sites.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Channels.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.65625">
-          <caret line="111" column="60" selection-start-line="111" selection-start-column="60" selection-end-line="111" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="318" column="29" selection-start-line="318" selection-start-column="27" selection-end-line="318" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/build/Users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="187" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="183" column="48" selection-start-line="183" selection-start-column="48" selection-end-line="183" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Contents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="249" column="3" selection-start-line="237" selection-start-column="0" selection-end-line="249" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/contents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5610766">
+          <caret line="21" column="70" selection-start-line="21" selection-start-column="70" selection-end-line="22" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/Content.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="192" column="9" selection-start-line="187" selection-start-column="7" selection-end-line="192" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.0">
+          <caret line="33" column="77" selection-start-line="33" selection-start-column="77" selection-end-line="34" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.375">
+          <caret line="29" column="70" selection-start-line="29" selection-start-column="70" selection-end-line="29" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/jsx/src/User.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="138" column="28" selection-start-line="138" selection-start-column="28" selection-end-line="138" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/app/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6883629">
+          <caret line="138" column="2" selection-start-line="138" selection-start-column="2" selection-end-line="138" selection-end-column="2" />
           <folding />
         </state>
       </provider>

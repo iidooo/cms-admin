@@ -8,11 +8,11 @@ var SideBarMenuStore = Reflux.createStore({
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
+        data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
 
         // 检查token是否过期
-        if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
+        if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
             return false;
         }
@@ -137,15 +137,10 @@ var SideBar = React.createClass({displayName: "SideBar",
                                 React.createElement("span", null, "栏目管理")
                             )
                         ), 
-                        React.createElement("li", {className: "has-sub"}, 
-                            React.createElement("a", {href: "javascript:void(0)"}, "用户管理"), 
-                            React.createElement("ul", {id: "channelTree", style: {display: 'none'}}, 
-                                React.createElement("li", null, 
-                                    React.createElement("a", {href: "javascript:void(0)"}, "会员管理")
-                                ), 
-                                React.createElement("li", null, 
-                                    React.createElement("a", {href: "javascript:void(0)"}, "站长管理")
-                                )
+                        React.createElement("li", null, 
+                            React.createElement("a", {id: "menuUsersManage", href: SiteProperties.clientURL + Page.users}, 
+                                React.createElement("i", {className: "fa fa-users"}), 
+                                React.createElement("span", null, "会员管理")
                             )
                         ), 
                         React.createElement("li", null, 
@@ -159,6 +154,9 @@ var SideBar = React.createClass({displayName: "SideBar",
                             React.createElement("ul", {style: {display: 'none'}}, 
                                 React.createElement("li", null, 
                                     React.createElement("a", {id: "menuLinkSite", href: SiteProperties.clientURL + Page.site}, "站点信息")
+                                ), 
+                                React.createElement("li", null, 
+                                    React.createElement("a", {href: "javascript:void(0)"}, "站长管理")
                                 )
                             )
                         )
