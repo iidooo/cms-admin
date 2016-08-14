@@ -122,6 +122,8 @@ API = {
     updateFile: "/admin/updateFile",
     deleteFile: "/admin/deleteFile",
     getUser: "/core/getUser",
+    getSiteUser: "/admin/getSiteUser",
+    updateSiteUser: "/admin/updateSiteUser",
     getSiteUserCount: "/admin/getSiteUserCount",
     searchSiteUserList: "/admin/searchSiteUserList",
     updateUserInfo: "/core/updateUserInfo",
@@ -155,10 +157,12 @@ Page = {
     channels: "/pages/channels.html",
     contents: "/pages/contents.html",
     content: "/pages/content.html",
-    account: "/pages/account.html",
+    profile: "/pages/profile.html",
     password: "/pages/password.html",
     users: "/pages/users.html",
     user: "/pages/user.html",
+    admin: "/pages/admin.html",
+    admins: "/pages/admins.html",
 };
 
 var CmsPicture = {

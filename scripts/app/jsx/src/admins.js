@@ -1,11 +1,7 @@
-/**
- * Created by Ethan on 16/5/18.
- */
+var AdminsActions = Reflux.createActions(['searchSiteUserList']);
 
-var UsersActions = Reflux.createActions(['searchSiteUserList']);
-
-var UsersStore = Reflux.createStore({
-    listenables: [UsersActions],
+var AdminsStore = Reflux.createStore({
+    listenables: [AdminsActions],
     onSearchSiteUserList: function (data) {
         var url = SiteProperties.serverURL + API.searchSiteUserList;
         data.appID = SecurityClient.appID;
@@ -13,7 +9,7 @@ var UsersStore = Reflux.createStore({
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
-        data.roles = "[3]";
+        data.roles = "[1,2]";
 
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
@@ -36,8 +32,8 @@ var UsersStore = Reflux.createStore({
     }
 });
 
-var Users = React.createClass({
-    mixins: [Reflux.connect(UsersStore, 'usersData')],
+var Admins = React.createClass({
+    mixins: [Reflux.connect(AdminsStore, 'usersData')],
     getInitialState: function () {
         return {
             usersData: {
@@ -47,13 +43,13 @@ var Users = React.createClass({
         };
     },
     componentDidMount: function () {
-        UsersActions.searchSiteUserList(this.state);
+        AdminsActions.searchSiteUserList(this.state);
     },
     onChildChanged: function (childState) {
         if (childState.currentPage != null) {
             this.state.currentPage = childState.currentPage;
 
-            UsersActions.searchSiteUserList(this.state);
+            AdminsActions.searchSiteUserList(this.state);
         }
     },
     handleSearch: function(){
@@ -63,7 +59,7 @@ var Users = React.createClass({
         this.state.mobile = this.refs.inputMobile.value;
         this.state.email = this.refs.inputEmail.value;
         this.state.weixinID = this.refs.inputWeixinID.value;
-        UsersActions.searchSiteUserList(this.state);
+        AdminsActions.searchSiteUserList(this.state);
     },
     render: function () {
         return (
@@ -71,9 +67,9 @@ var Users = React.createClass({
                 <Header/>
 
                 <div id="main" className="container-fluid margin-top-60">
-                    <SideBar activeMenuID="menuUsersManage"/>
+                    <SideBar activeMenuID="menuAdminsManage"/>
                     <div className="content-page">
-                        <Breadcrumb page={Page.users}/>
+                        <Breadcrumb page={Page.admins}/>
                         <div className="panel panel-default">
                             <div className="panel-heading">查询条件</div>
                             <div className="panel-body">
@@ -146,7 +142,6 @@ var Users = React.createClass({
                                currentPage={this.state.usersData.page.currentPage}
                                pageSum={this.state.usersData.page.pageSum}/>
 
-
                         <Footer/>
                     </div>
                 </div>
@@ -162,6 +157,7 @@ var UsersTable = React.createClass({
             <table className="table table-hover">
                 <thead>
                 <tr>
+                    <th>角色</th>
                     <th>用户ID</th>
                     <th>用户名</th>
                     <th>性别</th>
@@ -169,7 +165,6 @@ var UsersTable = React.createClass({
                     <th>邮箱</th>
                     <th>微信号</th>
                     <th>创建时间</th>
-                    <th>更新时间</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -185,11 +180,12 @@ var UsersTable = React.createClass({
 var UsersTableRow = React.createClass({
     handleLink: function (userID) {
         sessionStorage.setItem(SessionKey.userID, userID);
-        location.href = SiteProperties.clientURL + Page.user;
+        location.href = SiteProperties.clientURL + Page.admin;
     },
     render: function () {
         return (
             <tr>
+                <td>{SiteRole[this.props.siteUser.role]}</td>
                 <td>{this.props.siteUser.user.loginID}</td>
                 <td><a href="javascript:void(0)" onClick={this.handleLink.bind(null, this.props.siteUser.userID)}>{this.props.siteUser.user.userName}</a></td>
                 <td>{SexMap[this.props.siteUser.user.sex]}</td>
@@ -197,13 +193,12 @@ var UsersTableRow = React.createClass({
                 <td>{this.props.siteUser.user.email}</td>
                 <td>{this.props.siteUser.user.weixinID}</td>
                 <td>{new Date(this.props.siteUser.user.createTime).format('yyyy-MM-dd hh:mm:ss')}</td>
-                <td>{new Date(this.props.siteUser.user.updateTime).format('yyyy-MM-dd hh:mm:ss')}</td>
             </tr>
         );
     }
 });
 
 ReactDOM.render(
-    <Users />,
+    <Admins />,
     document.getElementById('page')
 );

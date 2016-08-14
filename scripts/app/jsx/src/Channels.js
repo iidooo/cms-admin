@@ -187,7 +187,7 @@ var Channels = React.createClass({
             <div>
                 <Header/>
 
-                <div id="main" className="container-fluid margin-top-60 margin-bottom-60">
+                <div id="main" className="container-fluid margin-top-60">
                     <SideBar activeMenuID="menuChannelManage"/>
 
                     <div className="content-page">
@@ -285,6 +285,8 @@ var Channels = React.createClass({
                                 </div>
                             </div>
                         </div>
+
+                        <Footer/>
                     </div>
                 </div>
 

@@ -177,6 +177,8 @@ var Contents = React.createClass({
                                recordSum={this.state.contentsData.page.recordSum}
                                currentPage={this.state.contentsData.page.currentPage}
                                pageSum={this.state.contentsData.page.pageSum}/>
+
+                        <Footer/>
                     </div>
                 </div>
 

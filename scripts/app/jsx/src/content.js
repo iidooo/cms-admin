@@ -237,172 +237,179 @@ var Content = React.createClass({
     render: function () {
         return (
             <div>
-                <Header activeMenuID="menuContentManage"/>
+                <Header/>
 
-                <div id="main" className="container margin-top-70 margin-bottom-70">
-                    <MessageBox/>
-                    <PictureListDialog/>
-                    <FileListDialog/>
-                    <div className="row">
-                        <ol className="breadcrumb">
-                            <li><a href={SiteProperties.clientURL + Page.contents}>内容一览</a></li>
-                            <li className="active">内容维护</li>
-                        </ol>
-                    </div>
-                    <div className="row form-horizontal form-group">
-                        <div className="col-sm-6">
-                            <div className="col-sm-3 control-label">
-                                <label className="required">所属栏目</label>
-                            </div>
-                            <div className="col-sm-9">
-                                <ChannelTreeList/>
-                            </div>
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="col-sm-3 control-label">
-                                <label className="required">内容类型</label>
-                            </div>
-                            <div className="col-sm-9">
-                                <ContentTypeList contentType={this.state.content.contentType} disabled="disabled" onChange={this.handleContentTypeChange}/>
-                            </div>
-                        </div>
-                    </div>
+                <div id="main" className="container-fluid margin-top-60">
+                    <SideBar activeMenuID="menuContentManage"/>
+                    <div className="content-page">
+                        <Breadcrumb page={Page.content}/>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">内容信息</div>
+                            <div className="panel-body">
+                                <MessageBox/>
+                                <PictureListDialog/>
+                                <FileListDialog/>
+                                <div className="row form-horizontal form-group">
+                                    <div className="col-sm-6">
+                                        <div className="col-sm-3 control-label">
+                                            <label className="required">所属栏目</label>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <ChannelTreeList/>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="col-sm-3 control-label">
+                                            <label className="required">内容类型</label>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <ContentTypeList contentType={this.state.content.contentType} disabled="disabled" onChange={this.handleContentTypeChange}/>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div className="row form-group form-horizontal">
-                        <div className="col-sm-6">
-                            <div className="col-sm-3 control-label">
-                                <label className="required">内容标题</label>
-                            </div>
-                            <div className="col-sm-9">
-                                <input type="text" className="form-control" ref="inputContentTitle"/>
-                            </div>
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="col-sm-3 control-label">
-                                <label>内容副标题</label>
-                            </div>
-                            <div className="col-sm-9">
-                                <input type="text" className="form-control" ref="inputContentSubTitle"/>
-                            </div>
-                        </div>
-                    </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-sm-6">
+                                        <div className="col-sm-3 control-label">
+                                            <label className="required">内容标题</label>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <input type="text" className="form-control" ref="inputContentTitle"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="col-sm-3 control-label">
+                                            <label>内容副标题</label>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <input type="text" className="form-control" ref="inputContentSubTitle"/>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div className="row form-group form-horizontal">
-                        <div className="col-xs-6">
-                            <div className="col-xs-3 control-label">
-                                <label>摘要</label>
-                            </div>
-                            <div className="col-xs-9">
-                                <textarea id="inputContentSummary" cols="100" rows="6" ref="inputContentSummary"
-                                          className="form-control"></textarea>
-                            </div>
-                        </div>
-                        <div className="col-xs-6">
-                            <div className="col-xs-3 control-label">
-                                <label>标题图</label>
-                            </div>
-                            <div className="col-xs-9">
-                                <button type="button" className="btn btn-info btn-block" onClick={this.uploadImageTitle}>
-                                    上传标题图
-                                </button>
-                                <div id="divImageTitle" className="col-xs-9 padding-5">
-                                    <input id="inputContentImageTitle" ref="inputContentImageTitle" type="hidden"/>
-                                    <img id="imgContentImageTitle" className="width-100" src="../img/upload.png"/>
-                                    <input id="uploadContentImageTitle" type="file" name="file" className="hidden"
-                                           accept="image/gif,image/jpeg,image/x-ms-bmp,image/x-png,image/png"/>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-6">
+                                        <div className="col-xs-3 control-label">
+                                            <label>摘要</label>
+                                        </div>
+                                        <div className="col-xs-9">
+                                    <textarea id="inputContentSummary" cols="100" rows="6" ref="inputContentSummary"
+                                              className="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-6">
+                                        <div className="col-xs-3 control-label">
+                                            <label>标题图</label>
+                                        </div>
+                                        <div className="col-xs-9">
+                                            <button type="button" className="btn btn-info btn-block" onClick={this.uploadImageTitle}>
+                                                上传标题图
+                                            </button>
+                                            <div id="divImageTitle" className="col-xs-9 padding-5">
+                                                <input id="inputContentImageTitle" ref="inputContentImageTitle" type="hidden"/>
+                                                <img id="imgContentImageTitle" className="width-100" src="../img/upload.png"/>
+                                                <input id="uploadContentImageTitle" type="file" name="file" className="hidden"
+                                                       accept="image/gif,image/jpeg,image/x-ms-bmp,image/x-png,image/png"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="row form-group form-horizontal">
-                        <div className="col-xs-6">
-                            <div className="col-xs-3 control-label">
-                                <label>内容展示图</label>
-                            </div>
-                            <div className="col-xs-9">
-                                <button type="button" className="btn btn-info btn-block" onClick={this.handlePictureListDialog}>
-                                    内容展示图管理
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-xs-6">
-                            <div className="col-xs-3 control-label">
-                                <label>内容附件</label>
-                            </div>
-                            <div className="col-xs-9">
-                                <button type="button" className="btn btn-info btn-block" onClick={this.handleFileListDialog}>
-                                    内容附件管理
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-6">
+                                        <div className="col-xs-3 control-label">
+                                            <label>内容展示图</label>
+                                        </div>
+                                        <div className="col-xs-9">
+                                            <button type="button" className="btn btn-info btn-block" onClick={this.handlePictureListDialog}>
+                                                内容展示图管理
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-6">
+                                        <div className="col-xs-3 control-label">
+                                            <label>内容附件</label>
+                                        </div>
+                                        <div className="col-xs-9">
+                                            <button type="button" className="btn btn-info btn-block" onClick={this.handleFileListDialog}>
+                                                内容附件管理
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div className="row form-group form-horizontal">
-                        <div className="col-sm-6">
-                            <div className="col-sm-3 control-label">
-                                <label>置顶级别</label>
-                            </div>
-                            <div className="col-sm-9">
-                                <input type="number" className="form-control" ref="inputStickyIndex"/>
-                            </div>
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="col-sm-3 control-label">
-                                <label>状态</label>
-                            </div>
-                            <div className="col-sm-5">
-                                <ContentStatusList contentStatus={this.state.content.status}/>
-                            </div>
-                            <div className="col-sm-4 checkbox">
-                                <label>
-                                <input type="checkbox" id="checkboxIsSilent" ref="checkboxIsSilent"/>
-                                    禁止评论
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-sm-6">
+                                        <div className="col-sm-3 control-label">
+                                            <label>置顶级别</label>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <input type="number" className="form-control" ref="inputStickyIndex"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="col-sm-3 control-label">
+                                            <label>状态</label>
+                                        </div>
+                                        <div className="col-sm-5">
+                                            <ContentStatusList contentStatus={this.state.content.status}/>
+                                        </div>
+                                        <div className="col-sm-4 checkbox">
+                                            <label>
+                                                <input type="checkbox" id="checkboxIsSilent" ref="checkboxIsSilent"/>
+                                                禁止评论
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div id="newsFields" style={{display:"none"}}>
-                        <div className="row form-group form-horizontal">
-                            <div className="col-sm-6">
-                                <div className="col-sm-3 control-label">
-                                    <label>新闻作者</label>
+                                <div id="newsFields" style={{display:"none"}}>
+                                    <div className="row form-group form-horizontal">
+                                        <div className="col-sm-6">
+                                            <div className="col-sm-3 control-label">
+                                                <label>新闻作者</label>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                <input type="text" className="form-control" ref="inputAuthor"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <div className="col-sm-3 control-label">
+                                                <label>新闻来源</label>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                <input type="text" className="form-control" ref="inputSource"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row form-group form-horizontal">
+                                        <div className="col-sm-6">
+                                            <div className="col-sm-3 control-label">
+                                                <label>新闻URL</label>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                <input type="text" className="form-control" ref="inputSourceURL"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="col-sm-9">
-                                    <input type="text" className="form-control" ref="inputAuthor"/>
+                                <div className="form-group">
+                                    <MarkdownEditor text={this.state.content.contentBody}/>
                                 </div>
-                            </div>
-                            <div className="col-sm-6">
-                                <div className="col-sm-3 control-label">
-                                    <label>新闻来源</label>
-                                </div>
-                                <div className="col-sm-9">
-                                    <input type="text" className="form-control" ref="inputSource"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row form-group form-horizontal">
-                            <div className="col-sm-6">
-                                <div className="col-sm-3 control-label">
-                                    <label>新闻URL</label>
-                                </div>
-                                <div className="col-sm-9">
-                                    <input type="text" className="form-control" ref="inputSourceURL"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <MarkdownEditor text={this.state.content.contentBody}/>
-                    </div>
 
-                    <div className="text-center">
-                        <button className="btn btn-primary" type="button" onClick={this.handleSave}>保&nbsp;存
-                        </button>
-                        &nbsp;
-                        <button className="btn btn-danger" type="button" onClick={this.handleDelete}>删&nbsp;除</button>
-                    </div>
+                            </div>
+                        </div>
+
+
+                        <div className="text-right">
+                            <button className="btn btn-primary" type="button" onClick={this.handleSave}>保&nbsp;存
+                            </button>
+                            &nbsp;
+                            <button className="btn btn-danger" type="button" onClick={this.handleDelete}>删&nbsp;除</button>
+                        </div>
+
+                        <Footer/>
+                </div>
                 </div>
             </div>
         );

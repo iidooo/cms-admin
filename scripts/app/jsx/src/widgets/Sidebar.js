@@ -57,16 +57,15 @@ var SideBar = React.createClass({
 
         // 设置menu的active
         var activeMenuID = this.props.activeMenuID;
-        var activeMenuLinkID = this.props.activeMenuLinkID;
 
         $("#" + activeMenuID).addClass("active");
-        $("#" + activeMenuLinkID).addClass("active");
 
         // 展开所有的父UL
-        var $parentULList = $("#" + activeMenuLinkID).parents("ul");
+        var $parentULList = $("#" + activeMenuID).parents("ul");
         $.each($parentULList, function(index, item){
             $ul = $(item);
             $a = $ul.prev();
+            $a.addClass("active");
             if($ul.is(":hidden")){
                 $a.find(".fa-plus").removeClass("fa-plus").addClass("fa-minus");
                 $ul.toggle(300)
@@ -106,7 +105,7 @@ var SideBar = React.createClass({
                             <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{this.state.user.userName} <span className="caret"></span></a>
                             <ul className="dropdown-menu">
                                 <li>
-                                    <a href={SiteProperties.clientURL + Page.account}><i className="fa fa-user"></i>&nbsp;&nbsp;个人信息</a>
+                                    <a href={SiteProperties.clientURL + Page.profile}><i className="fa fa-user"></i>&nbsp;&nbsp;个人信息</a>
                                 </li>
                                 <li>
                                     <a href={SiteProperties.clientURL + Page.password}><i className="fa fa-pencil"></i>&nbsp;&nbsp;密码修改</a>
@@ -156,7 +155,24 @@ var SideBar = React.createClass({
                                     <a id="menuLinkSite" href={SiteProperties.clientURL + Page.site}>站点信息</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)">站长管理</a>
+                                    <a id="menuAdminsManage" href={SiteProperties.clientURL + Page.admins}>站长管理</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="menuAccount" href="javascript:void(0)" className="has-sub" onClick={this.handleToggleSub}>
+                                <i className="fa fa-user"></i>
+                                <span>账户信息</span>
+                                <span className="pull-right">
+                                    <i className="fa fa-plus"></i>
+                                </span>
+                            </a>
+                            <ul style={{display: 'none'}}>
+                                <li>
+                                    <a id="menuProfile" href={SiteProperties.clientURL + Page.profile}>个人信息</a>
+                                </li>
+                                <li>
+                                    <a id="menuPassword" href={SiteProperties.clientURL + Page.password}>密码修改</a>
                                 </li>
                             </ul>
                         </li>

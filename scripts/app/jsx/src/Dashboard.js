@@ -32,6 +32,8 @@ var Dashboard = React.createClass({
                                 <DashboardPVContentList/>
                             </div>
                         </div>
+
+                        <Footer/>
                     </div>
                 </div>
 

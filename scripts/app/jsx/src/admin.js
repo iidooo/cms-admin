@@ -1,9 +1,9 @@
-var UserActions = Reflux.createActions(['getUser','updateUserInfo']);
+var AdminActions = Reflux.createActions(['getUser','updateUserInfo']);
 
-var UserStore = Reflux.createStore({
-    listenables: [UserActions],
+var AdminStore = Reflux.createStore({
+    listenables: [AdminActions],
     onGetUser: function (data) {
-        var url = SiteProperties.serverURL + API.getUser;
+        var url = SiteProperties.serverURL + API.getSiteUser;
 
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
@@ -29,7 +29,7 @@ var UserStore = Reflux.createStore({
         ajaxPost(url, data, callback);
     },
     onUpdateUserInfo:function(data){
-        var url = SiteProperties.serverURL + API.updateUserInfo;
+        var url = SiteProperties.serverURL + API.updateSiteUser;
 
         data.appID = SecurityClient.appID;
         data.secret = SecurityClient.secret;
@@ -61,83 +61,33 @@ var UserStore = Reflux.createStore({
     },
 });
 
-var User = React.createClass({
-    mixins: [Reflux.connect(UserStore, 'user')],
+var Admin = React.createClass({
+    mixins: [Reflux.connect(AdminStore, 'siteUser')],
     getInitialState: function () {
         return {
-            user: {}
+            siteUser: {}
         };
     },
     componentDidMount: function(){
-        $(function () {
-            $('.form_date').datetimepicker({
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0,
-                format: 'yyyy-mm-dd'
-            });
-        });
 
-        UserActions.getUser(this.state);
+        AdminActions.getUser(this.state);
     },
     componentDidUpdate: function () {
-        this.refs.inputLoginID.value = this.state.user.loginID;
-        this.refs.inputUserName.value = this.state.user.userName;
-        this.refs.inputMobile.value = this.state.user.mobile;
-        this.refs.inputEmail.value = this.state.user.email;
-        this.refs.inputWeixinID.value = this.state.user.weixinID;
-        this.refs.inputBirthday.value = new Date(this.state.user.birthday).format('yyyy-MM-dd');
-        this.refs.inputSex.value = this.state.user.sex;
-
-        if(this.state.user.isSilent == 1){
-            $("#checkboxIsSilent").attr("checked",true);
-        } else{
-            $("#checkboxIsSilent").attr("checked",false);
-        }
-
-        if(this.state.user.isDisable == 1){
-            $("#checkboxIsDisable").attr("checked",true);
-        } else{
-            $("#checkboxIsDisable").attr("checked",false);
-        }
-
-        this.refs.inputCreateTime.value = new Date(this.state.user.createTime).format('yyyy-MM-dd hh:mm:ss');
-        this.refs.inputLastLoginTime.value = new Date(this.state.user.lastLoginTime).format('yyyy-MM-dd hh:mm:ss');
+        this.refs.inputLoginID.value = this.state.siteUser.user.loginID;
+        this.refs.inputUserName.value = this.state.siteUser.user.userName;
+        this.refs.inputMobile.value = this.state.siteUser.user.mobile;
+        this.refs.inputEmail.value = this.state.siteUser.user.email;
+        this.refs.inputWeixinID.value = this.state.siteUser.user.weixinID;
+        this.refs.inputBirthday.value = new Date(this.state.siteUser.user.birthday).format('yyyy-MM-dd');
+        this.refs.inputSex.value = this.state.siteUser.user.sex;
+        this.refs.inputRole.value = this.state.siteUser.role;
+        this.refs.inputCreateTime.value = new Date(this.state.siteUser.user.createTime).format('yyyy-MM-dd hh:mm:ss');
+        this.refs.inputLastLoginTime.value = new Date(this.state.siteUser.user.lastLoginTime).format('yyyy-MM-dd hh:mm:ss');
     },
     handleSave:function(){
-        this.state.user.loginID = this.refs.inputLoginID.value;
-        this.state.user.userName = this.refs.inputUserName.value;
-        this.state.user.mobile = this.refs.inputMobile.value;
-        this.state.user.email = this.refs.inputEmail.value;
-        this.state.user.weixinID = this.refs.inputWeixinID.value;
-        this.state.user.birthday = this.refs.inputBirthday.value;
-        this.state.user.sex = this.refs.inputSex.value;
-        var isSilent = $("#checkboxIsSilent").prop("checked");
-        if(isSilent == true){
-            this.state.user.isSilent = 1;
-        } else {
-            this.state.user.isSilent = 0;
-        }
-        var isDisable = $("#checkboxIsDisable").prop("checked");
-        if(isDisable == true){
-            this.state.user.isDisable = 1;
-        } else {
-            this.state.user.isDisable = 0;
-        }
+        this.state.siteUser.role = this.refs.inputRole.value;
 
-        if(this.state.user.loginID == "" || this.state.user.userName == "" || this.state.user.email == ""){
-            $("#inputLoginID").addClass("input-error");
-            $("#inputUserName").addClass("input-error");
-            $("#inputEmail").addClass("input-error");
-            $("#messageBox").show().text(Message.INPUT_REQUIRED);
-            return;
-        }
-
-        UserActions.updateUserInfo(this.state.user);
+        AdminActions.updateUserInfo(this.state.siteUser);
     },
     render: function () {
         return (
@@ -145,28 +95,50 @@ var User = React.createClass({
                 <Header/>
 
                 <div id="main" className="container-fluid margin-top-60">
-                    <SideBar activeMenuID="menuUsersManage"/>
+                    <SideBar activeMenuID="menuAdminsManage"/>
                     <div className="content-page">
-                        <Breadcrumb page={Page.user}/>
+                        <Breadcrumb page={Page.admin}/>
                         <div className="panel panel-default">
-                            <div className="panel-heading">用户信息</div>
+                            <div className="panel-heading">站长信息</div>
                             <div className="panel-body">
                                 <MessageBox/>
                                 <div className="row form-horizontal form-group">
                                     <div className="col-sm-6">
                                         <div className="col-sm-3 control-label">
-                                            <label className="required">用户ID</label>
+                                            <label>角色</label>
                                         </div>
                                         <div className="col-sm-9">
-                                            <input id="inputLoginID" ref="inputLoginID" type="text" className="form-control"/>
+                                            <select ref="inputRole" className="form-control">
+                                                <option value="1">管理员</option>
+                                                <option value="2">编辑</option>
+                                                <option value="3">普通会员</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="col-sm-6">
                                         <div className="col-sm-3 control-label">
-                                            <label className="required">用户名</label>
+                                            <label>用户ID</label>
                                         </div>
                                         <div className="col-sm-9">
-                                            <input id="inputUserName" ref="inputUserName" type="text" className="form-control"/>
+                                            <input id="inputLoginID" ref="inputLoginID" type="text" className="form-control" disabled="disabled"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row form-horizontal form-group">
+                                    <div className="col-sm-6">
+                                        <div className="col-sm-3 control-label">
+                                            <label>用户名</label>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <input id="inputUserName" ref="inputUserName" type="text" className="form-control" disabled="disabled"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="col-sm-3 control-label">
+                                            <label>邮箱</label>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <input id="inputEmail" ref="inputEmail" type="text" className="form-control" disabled="disabled"/>
                                         </div>
                                     </div>
                                 </div>
@@ -176,40 +148,15 @@ var User = React.createClass({
                                             <label>电话</label>
                                         </div>
                                         <div className="col-sm-9">
-                                            <input id="inputMobile" ref="inputMobile" type="text" className="form-control"/>
+                                            <input id="inputMobile" ref="inputMobile" type="text" className="form-control" disabled="disabled"/>
                                         </div>
                                     </div>
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label className="required">邮箱</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <input id="inputEmail" ref="inputEmail" type="text" className="form-control"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="row form-horizontal form-group">
                                     <div className="col-sm-6">
                                         <div className="col-sm-3 control-label">
                                             <label>微信号</label>
                                         </div>
                                         <div className="col-sm-9">
-                                            <input id="inputWeixinID" ref="inputWeixinID" type="text" className="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label>生日</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <div className="input-group date form_date" data-date=""
-                                                 data-date-format="yyyy-mm-dd"
-                                                 data-link-field="inputBirthday" data-link-format="yyyy-mm-dd">
-                                                <input id="inputBirthday" className="form-control" type="text" ref="inputBirthday" readonly/>
-                                                <span className="input-group-addon">
-                                                    <span className="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
+                                            <input id="inputWeixinID" ref="inputWeixinID" type="text" className="form-control" disabled="disabled"/>
                                         </div>
                                     </div>
                                 </div>
@@ -219,7 +166,7 @@ var User = React.createClass({
                                             <label>性别</label>
                                         </div>
                                         <div className="col-sm-9">
-                                            <select ref="inputSex" className="form-control">
+                                            <select ref="inputSex" className="form-control" disabled="disabled">
                                                 <option value="1">男</option>
                                                 <option value="2">女</option>
                                             </select>
@@ -227,19 +174,10 @@ var User = React.createClass({
                                     </div>
                                     <div className="col-sm-6">
                                         <div className="col-sm-3 control-label">
-                                            <label>状态</label>
+                                            <label>生日</label>
                                         </div>
-                                        <div className="col-sm-5 checkbox">
-                                            <label>
-                                                <input type="checkbox" id="checkboxIsSilent" ref="checkboxIsSilent"/>
-                                                禁止评论
-                                            </label>
-                                        </div>
-                                        <div className="col-sm-4 checkbox">
-                                            <label>
-                                                <input type="checkbox" id="checkboxIsDisable" ref="checkboxIsDisable"/>
-                                                有效性
-                                            </label>
+                                        <div className="col-sm-9">
+                                            <input id="inputBirthday" className="form-control" type="text" ref="inputBirthday"  disabled="disabled"/>
                                         </div>
                                     </div>
                                 </div>
@@ -279,6 +217,6 @@ var User = React.createClass({
 });
 
 ReactDOM.render(
-    <User/>,
+    <Admin/>,
     document.getElementById('page')
 );

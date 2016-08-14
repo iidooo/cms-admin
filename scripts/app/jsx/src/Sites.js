@@ -63,8 +63,8 @@ var Sites = React.createClass({
             <div>
                 <Header/>
 
-                <div id="main" className="container-fluid margin-top-70">
-                    <h2 className="h-30">
+                <div id="main" className="container-fluid margin-top-60">
+                    <h2 className="height-30">
                         <div className="pull-left">
                             我的站点
                         </div>
@@ -78,6 +78,7 @@ var Sites = React.createClass({
                     <div className="spacer10"></div>
                     <SitesTable sites={this.state.sites}/>
 
+                    <Footer/>
                 </div>
             </div>
         );
@@ -87,7 +88,7 @@ var Sites = React.createClass({
 var SitesTable = React.createClass({
     render: function () {
         return (
-            <table className="table table-hover">
+            <table className="table table-hover margin-bottom-60">
                 <thead>
                 <tr>
                     <th className="col-sm-2">站点Code</th>

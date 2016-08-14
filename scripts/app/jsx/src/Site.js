@@ -11,7 +11,7 @@ var SiteStore = Reflux.createStore({
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
         // 检查token是否过期
-        if (data.accessToken == null || data.accessToken == "" || data.userID == null || data.userID == "") {
+        if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
             return false;
         }
@@ -79,8 +79,8 @@ var Site = React.createClass({
             <div>
                 <Header/>
 
-                <div id="main" className="container-fluid margin-top-70">
-                    <SideBar activeMenuID="menuSiteMaintenance" activeMenuLinkID="menuLinkSite"/>
+                <div id="main" className="container-fluid margin-top-60">
+                    <SideBar activeMenuID="menuLinkSite"/>
 
                     <div className="content-page">
                         <Breadcrumb page={Page.site}/>
@@ -119,6 +119,8 @@ var Site = React.createClass({
                             <button className="btn btn-primary" type="button" onClick={this.handleSave}>保&nbsp;存
                             </button>
                         </div>
+
+                        <Footer/>
 
                     </div>
                 </div>

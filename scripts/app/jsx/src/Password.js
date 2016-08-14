@@ -63,19 +63,12 @@ var Password = React.createClass({
     render: function () {
         return (
             <div>
-                <Header activeMenuID="menuAccountManage"/>
+                <Header/>
 
-                <div id="main" className="container margin-top-70 margin-bottom-70">
-                    <MessageBox/>
-                    <div className="col-sm-3">
-                        <div className="list-group">
-                            <a href={SiteProperties.clientURL + Page.account} className="list-group-item">
-                                账户设定
-                            </a>
-                            <a href={SiteProperties.clientURL + Page.password} className="list-group-item active">密码重设</a>
-                        </div>
-                    </div>
-                    <div className="col-sm-9">
+                <div id="main" className="container-fluid margin-top-60 margin-bottom-60">
+                    <SideBar activeMenuID="menuPassword"/>
+                    <div className="content-page">
+                        <Breadcrumb page={Page.password}/>
                         <div className="panel panel-default">
                             <div className="panel-heading">密码重设</div>
                             <div className="panel-body">
@@ -104,6 +97,8 @@ var Password = React.createClass({
                             <button className="btn btn-primary" type="button" onClick={this.handleSave}>保&nbsp;存
                             </button>
                         </div>
+
+                        <Footer/>
                     </div>
                 </div>
 

@@ -237,172 +237,179 @@ var Content = React.createClass({displayName: "Content",
     render: function () {
         return (
             React.createElement("div", null, 
-                React.createElement(Header, {activeMenuID: "menuContentManage"}), 
+                React.createElement(Header, null), 
 
-                React.createElement("div", {id: "main", className: "container margin-top-70 margin-bottom-70"}, 
-                    React.createElement(MessageBox, null), 
-                    React.createElement(PictureListDialog, null), 
-                    React.createElement(FileListDialog, null), 
-                    React.createElement("div", {className: "row"}, 
-                        React.createElement("ol", {className: "breadcrumb"}, 
-                            React.createElement("li", null, React.createElement("a", {href: SiteProperties.clientURL + Page.contents}, "内容一览")), 
-                            React.createElement("li", {className: "active"}, "内容维护")
-                        )
-                    ), 
-                    React.createElement("div", {className: "row form-horizontal form-group"}, 
-                        React.createElement("div", {className: "col-sm-6"}, 
-                            React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                React.createElement("label", {className: "required"}, "所属栏目")
-                            ), 
-                            React.createElement("div", {className: "col-sm-9"}, 
-                                React.createElement(ChannelTreeList, null)
-                            )
-                        ), 
-                        React.createElement("div", {className: "col-sm-6"}, 
-                            React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                React.createElement("label", {className: "required"}, "内容类型")
-                            ), 
-                            React.createElement("div", {className: "col-sm-9"}, 
-                                React.createElement(ContentTypeList, {contentType: this.state.content.contentType, disabled: "disabled", onChange: this.handleContentTypeChange})
-                            )
-                        )
-                    ), 
-
-                    React.createElement("div", {className: "row form-group form-horizontal"}, 
-                        React.createElement("div", {className: "col-sm-6"}, 
-                            React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                React.createElement("label", {className: "required"}, "内容标题")
-                            ), 
-                            React.createElement("div", {className: "col-sm-9"}, 
-                                React.createElement("input", {type: "text", className: "form-control", ref: "inputContentTitle"})
-                            )
-                        ), 
-                        React.createElement("div", {className: "col-sm-6"}, 
-                            React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                React.createElement("label", null, "内容副标题")
-                            ), 
-                            React.createElement("div", {className: "col-sm-9"}, 
-                                React.createElement("input", {type: "text", className: "form-control", ref: "inputContentSubTitle"})
-                            )
-                        )
-                    ), 
-
-                    React.createElement("div", {className: "row form-group form-horizontal"}, 
-                        React.createElement("div", {className: "col-xs-6"}, 
-                            React.createElement("div", {className: "col-xs-3 control-label"}, 
-                                React.createElement("label", null, "摘要")
-                            ), 
-                            React.createElement("div", {className: "col-xs-9"}, 
-                                React.createElement("textarea", {id: "inputContentSummary", cols: "100", rows: "6", ref: "inputContentSummary", 
-                                          className: "form-control"})
-                            )
-                        ), 
-                        React.createElement("div", {className: "col-xs-6"}, 
-                            React.createElement("div", {className: "col-xs-3 control-label"}, 
-                                React.createElement("label", null, "标题图")
-                            ), 
-                            React.createElement("div", {className: "col-xs-9"}, 
-                                React.createElement("button", {type: "button", className: "btn btn-info btn-block", onClick: this.uploadImageTitle}, 
-                                    "上传标题图"
+                React.createElement("div", {id: "main", className: "container-fluid margin-top-60"}, 
+                    React.createElement(SideBar, {activeMenuID: "menuContentManage"}), 
+                    React.createElement("div", {className: "content-page"}, 
+                        React.createElement(Breadcrumb, {page: Page.content}), 
+                        React.createElement("div", {className: "panel panel-default"}, 
+                            React.createElement("div", {className: "panel-heading"}, "内容信息"), 
+                            React.createElement("div", {className: "panel-body"}, 
+                                React.createElement(MessageBox, null), 
+                                React.createElement(PictureListDialog, null), 
+                                React.createElement(FileListDialog, null), 
+                                React.createElement("div", {className: "row form-horizontal form-group"}, 
+                                    React.createElement("div", {className: "col-sm-6"}, 
+                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                            React.createElement("label", {className: "required"}, "所属栏目")
+                                        ), 
+                                        React.createElement("div", {className: "col-sm-9"}, 
+                                            React.createElement(ChannelTreeList, null)
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-sm-6"}, 
+                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                            React.createElement("label", {className: "required"}, "内容类型")
+                                        ), 
+                                        React.createElement("div", {className: "col-sm-9"}, 
+                                            React.createElement(ContentTypeList, {contentType: this.state.content.contentType, disabled: "disabled", onChange: this.handleContentTypeChange})
+                                        )
+                                    )
                                 ), 
-                                React.createElement("div", {id: "divImageTitle", className: "col-xs-9 padding-5"}, 
-                                    React.createElement("input", {id: "inputContentImageTitle", ref: "inputContentImageTitle", type: "hidden"}), 
-                                    React.createElement("img", {id: "imgContentImageTitle", className: "width-100", src: "../img/upload.png"}), 
-                                    React.createElement("input", {id: "uploadContentImageTitle", type: "file", name: "file", className: "hidden", 
-                                           accept: "image/gif,image/jpeg,image/x-ms-bmp,image/x-png,image/png"})
-                                )
-                            )
-                        )
-                    ), 
 
-                    React.createElement("div", {className: "row form-group form-horizontal"}, 
-                        React.createElement("div", {className: "col-xs-6"}, 
-                            React.createElement("div", {className: "col-xs-3 control-label"}, 
-                                React.createElement("label", null, "内容展示图")
-                            ), 
-                            React.createElement("div", {className: "col-xs-9"}, 
-                                React.createElement("button", {type: "button", className: "btn btn-info btn-block", onClick: this.handlePictureListDialog}, 
-                                    "内容展示图管理"
-                                )
-                            )
-                        ), 
-                        React.createElement("div", {className: "col-xs-6"}, 
-                            React.createElement("div", {className: "col-xs-3 control-label"}, 
-                                React.createElement("label", null, "内容附件")
-                            ), 
-                            React.createElement("div", {className: "col-xs-9"}, 
-                                React.createElement("button", {type: "button", className: "btn btn-info btn-block", onClick: this.handleFileListDialog}, 
-                                    "内容附件管理"
-                                )
-                            )
-                        )
-                    ), 
-
-                    React.createElement("div", {className: "row form-group form-horizontal"}, 
-                        React.createElement("div", {className: "col-sm-6"}, 
-                            React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                React.createElement("label", null, "置顶级别")
-                            ), 
-                            React.createElement("div", {className: "col-sm-9"}, 
-                                React.createElement("input", {type: "number", className: "form-control", ref: "inputStickyIndex"})
-                            )
-                        ), 
-                        React.createElement("div", {className: "col-sm-6"}, 
-                            React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                React.createElement("label", null, "状态")
-                            ), 
-                            React.createElement("div", {className: "col-sm-5"}, 
-                                React.createElement(ContentStatusList, {contentStatus: this.state.content.status})
-                            ), 
-                            React.createElement("div", {className: "col-sm-4 checkbox"}, 
-                                React.createElement("label", null, 
-                                React.createElement("input", {type: "checkbox", id: "checkboxIsSilent", ref: "checkboxIsSilent"}), 
-                                    "禁止评论"
-                                )
-                            )
-                        )
-                    ), 
-
-                    React.createElement("div", {id: "newsFields", style: {display:"none"}}, 
-                        React.createElement("div", {className: "row form-group form-horizontal"}, 
-                            React.createElement("div", {className: "col-sm-6"}, 
-                                React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                    React.createElement("label", null, "新闻作者")
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-sm-6"}, 
+                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                            React.createElement("label", {className: "required"}, "内容标题")
+                                        ), 
+                                        React.createElement("div", {className: "col-sm-9"}, 
+                                            React.createElement("input", {type: "text", className: "form-control", ref: "inputContentTitle"})
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-sm-6"}, 
+                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                            React.createElement("label", null, "内容副标题")
+                                        ), 
+                                        React.createElement("div", {className: "col-sm-9"}, 
+                                            React.createElement("input", {type: "text", className: "form-control", ref: "inputContentSubTitle"})
+                                        )
+                                    )
                                 ), 
-                                React.createElement("div", {className: "col-sm-9"}, 
-                                    React.createElement("input", {type: "text", className: "form-control", ref: "inputAuthor"})
-                                )
-                            ), 
-                            React.createElement("div", {className: "col-sm-6"}, 
-                                React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                    React.createElement("label", null, "新闻来源")
-                                ), 
-                                React.createElement("div", {className: "col-sm-9"}, 
-                                    React.createElement("input", {type: "text", className: "form-control", ref: "inputSource"})
-                                )
-                            )
-                        ), 
-                        React.createElement("div", {className: "row form-group form-horizontal"}, 
-                            React.createElement("div", {className: "col-sm-6"}, 
-                                React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                    React.createElement("label", null, "新闻URL")
-                                ), 
-                                React.createElement("div", {className: "col-sm-9"}, 
-                                    React.createElement("input", {type: "text", className: "form-control", ref: "inputSourceURL"})
-                                )
-                            )
-                        )
-                    ), 
-                    React.createElement("div", {className: "form-group"}, 
-                        React.createElement(MarkdownEditor, {text: this.state.content.contentBody})
-                    ), 
 
-                    React.createElement("div", {className: "text-center"}, 
-                        React.createElement("button", {className: "btn btn-primary", type: "button", onClick: this.handleSave}, "保 存"
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-6"}, 
+                                        React.createElement("div", {className: "col-xs-3 control-label"}, 
+                                            React.createElement("label", null, "摘要")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-9"}, 
+                                    React.createElement("textarea", {id: "inputContentSummary", cols: "100", rows: "6", ref: "inputContentSummary", 
+                                              className: "form-control"})
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-6"}, 
+                                        React.createElement("div", {className: "col-xs-3 control-label"}, 
+                                            React.createElement("label", null, "标题图")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-9"}, 
+                                            React.createElement("button", {type: "button", className: "btn btn-info btn-block", onClick: this.uploadImageTitle}, 
+                                                "上传标题图"
+                                            ), 
+                                            React.createElement("div", {id: "divImageTitle", className: "col-xs-9 padding-5"}, 
+                                                React.createElement("input", {id: "inputContentImageTitle", ref: "inputContentImageTitle", type: "hidden"}), 
+                                                React.createElement("img", {id: "imgContentImageTitle", className: "width-100", src: "../img/upload.png"}), 
+                                                React.createElement("input", {id: "uploadContentImageTitle", type: "file", name: "file", className: "hidden", 
+                                                       accept: "image/gif,image/jpeg,image/x-ms-bmp,image/x-png,image/png"})
+                                            )
+                                        )
+                                    )
+                                ), 
+
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-6"}, 
+                                        React.createElement("div", {className: "col-xs-3 control-label"}, 
+                                            React.createElement("label", null, "内容展示图")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-9"}, 
+                                            React.createElement("button", {type: "button", className: "btn btn-info btn-block", onClick: this.handlePictureListDialog}, 
+                                                "内容展示图管理"
+                                            )
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-6"}, 
+                                        React.createElement("div", {className: "col-xs-3 control-label"}, 
+                                            React.createElement("label", null, "内容附件")
+                                        ), 
+                                        React.createElement("div", {className: "col-xs-9"}, 
+                                            React.createElement("button", {type: "button", className: "btn btn-info btn-block", onClick: this.handleFileListDialog}, 
+                                                "内容附件管理"
+                                            )
+                                        )
+                                    )
+                                ), 
+
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-sm-6"}, 
+                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                            React.createElement("label", null, "置顶级别")
+                                        ), 
+                                        React.createElement("div", {className: "col-sm-9"}, 
+                                            React.createElement("input", {type: "number", className: "form-control", ref: "inputStickyIndex"})
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "col-sm-6"}, 
+                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                            React.createElement("label", null, "状态")
+                                        ), 
+                                        React.createElement("div", {className: "col-sm-5"}, 
+                                            React.createElement(ContentStatusList, {contentStatus: this.state.content.status})
+                                        ), 
+                                        React.createElement("div", {className: "col-sm-4 checkbox"}, 
+                                            React.createElement("label", null, 
+                                                React.createElement("input", {type: "checkbox", id: "checkboxIsSilent", ref: "checkboxIsSilent"}), 
+                                                "禁止评论"
+                                            )
+                                        )
+                                    )
+                                ), 
+
+                                React.createElement("div", {id: "newsFields", style: {display:"none"}}, 
+                                    React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                        React.createElement("div", {className: "col-sm-6"}, 
+                                            React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                                React.createElement("label", null, "新闻作者")
+                                            ), 
+                                            React.createElement("div", {className: "col-sm-9"}, 
+                                                React.createElement("input", {type: "text", className: "form-control", ref: "inputAuthor"})
+                                            )
+                                        ), 
+                                        React.createElement("div", {className: "col-sm-6"}, 
+                                            React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                                React.createElement("label", null, "新闻来源")
+                                            ), 
+                                            React.createElement("div", {className: "col-sm-9"}, 
+                                                React.createElement("input", {type: "text", className: "form-control", ref: "inputSource"})
+                                            )
+                                        )
+                                    ), 
+                                    React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                        React.createElement("div", {className: "col-sm-6"}, 
+                                            React.createElement("div", {className: "col-sm-3 control-label"}, 
+                                                React.createElement("label", null, "新闻URL")
+                                            ), 
+                                            React.createElement("div", {className: "col-sm-9"}, 
+                                                React.createElement("input", {type: "text", className: "form-control", ref: "inputSourceURL"})
+                                            )
+                                        )
+                                    )
+                                ), 
+                                React.createElement("div", {className: "form-group"}, 
+                                    React.createElement(MarkdownEditor, {text: this.state.content.contentBody})
+                                )
+
+                            )
                         ), 
-                        " ", 
-                        React.createElement("button", {className: "btn btn-danger", type: "button", onClick: this.handleDelete}, "删 除")
-                    )
+
+
+                        React.createElement("div", {className: "text-right"}, 
+                            React.createElement("button", {className: "btn btn-primary", type: "button", onClick: this.handleSave}, "保 存"
+                            ), 
+                            " ", 
+                            React.createElement("button", {className: "btn btn-danger", type: "button", onClick: this.handleDelete}, "删 除")
+                        ), 
+
+                        React.createElement(Footer, null)
+                )
                 )
             )
         );

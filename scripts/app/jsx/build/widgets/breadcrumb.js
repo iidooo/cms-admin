@@ -20,6 +20,10 @@ var Breadcrumb = React.createClass({displayName: "Breadcrumb",
             case Page.contents:
                 path.push(React.createElement(ContentsBreadcrumb, {key: "ContentsBreadcrumb"}))
                 break;
+            case Page.content:
+                path.push(React.createElement(ContentsBreadcrumb, {key: "ContentsBreadcrumb", active: "", href: SiteProperties.clientURL + Page.contents}))
+                path.push(React.createElement(ContentBreadcrumb, {key: "ContentBreadcrumb"}))
+                break;
             case Page.channels:
                 path.push(React.createElement(ChannelsBreadcrumb, {key: "ChannelsBreadcrumb"}))
                 break;
@@ -33,6 +37,23 @@ var Breadcrumb = React.createClass({displayName: "Breadcrumb",
             case Page.site:
                 path.push(React.createElement(SiteMaintenanceBreadcrumb, {key: "SiteMaintenanceBreadcrumb"}));
                 path.push(React.createElement(SiteBreadcrumb, {key: "SiteBreadcrumb"}));
+                break;
+            case Page.admins:
+                path.push(React.createElement(SiteMaintenanceBreadcrumb, {key: "SiteMaintenanceBreadcrumb"}));
+                path.push(React.createElement(AdminsBreadcrumb, {key: "AdminsBreadcrumb", active: "active", href: "javascript:void(0)"}));
+                break;
+            case Page.admin:
+                path.push(React.createElement(SiteMaintenanceBreadcrumb, {key: "SiteMaintenanceBreadcrumb"}));
+                path.push(React.createElement(AdminsBreadcrumb, {key: "AdminsBreadcrumb", active: "", href: SiteProperties.clientURL + Page.admins}));
+                path.push(React.createElement(AdminBreadcrumb, {key: "AdminBreadcrumb"}));
+                break;
+            case Page.profile:
+                path.push(React.createElement(AccountBreadcrumb, {key: "AccountBreadcrumb"}));
+                path.push(React.createElement(ProfileBreadcrumb, {key: "ProfileBreadcrumb"}));
+                break;
+            case Page.password:
+                path.push(React.createElement(AccountBreadcrumb, {key: "AccountBreadcrumb"}));
+                path.push(React.createElement(PasswordBreadcrumb, {key: "PasswordBreadcrumb"}));
                 break;
         }
 
@@ -58,7 +79,17 @@ var DashboardBreadcrumb = React.createClass({displayName: "DashboardBreadcrumb",
 var ContentsBreadcrumb = React.createClass({displayName: "ContentsBreadcrumb",
     render: function () {
         return (
-            React.createElement("li", {className: "active"}, "内容管理")
+            React.createElement("li", {className: this.props.active}, 
+                React.createElement("a", {href: this.props.href}, "内容管理")
+            )
+        );
+    }
+});
+
+var ContentBreadcrumb = React.createClass({displayName: "ContentBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "内容详细")
         );
     }
 });
@@ -101,6 +132,48 @@ var SiteBreadcrumb = React.createClass({displayName: "SiteBreadcrumb",
     render: function () {
         return (
             React.createElement("li", {className: "active"}, "站点信息")
+        );
+    }
+});
+
+var AdminsBreadcrumb = React.createClass({displayName: "AdminsBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: this.props.active}, 
+                React.createElement("a", {href: this.props.href}, "站长管理")
+            )
+        );
+    }
+});
+
+var AdminBreadcrumb = React.createClass({displayName: "AdminBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "站长信息")
+        );
+    }
+});
+
+var AccountBreadcrumb = React.createClass({displayName: "AccountBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)"}, "账户信息"))
+        );
+    }
+});
+
+var ProfileBreadcrumb = React.createClass({displayName: "ProfileBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "个人信息")
+        );
+    }
+});
+
+var PasswordBreadcrumb = React.createClass({displayName: "PasswordBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "密码重设")
         );
     }
 });

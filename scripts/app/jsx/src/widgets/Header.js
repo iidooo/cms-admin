@@ -71,9 +71,12 @@ var LoginInfo = React.createClass({
                         <i className="fa fa-cog"></i>
                     </a>
                     <ul className="dropdown-menu">
-                        <li><a href={SiteProperties.clientURL + Page.sites}><i
-                            className="fa fa-database"></i>&nbsp;&nbsp;站点</a></li>
-                        <li><a href={SiteProperties.clientURL + Page.account}><i className="fa fa-user"></i>&nbsp;&nbsp;帐户</a></li>
+                        <li>
+                            <a href={SiteProperties.clientURL + Page.profile}><i className="fa fa-user"></i>&nbsp;&nbsp;个人信息</a>
+                        </li>
+                        <li>
+                            <a href={SiteProperties.clientURL + Page.password}><i className="fa fa-pencil"></i>&nbsp;&nbsp;密码修改</a>
+                        </li>
                         {
                             //<li><a href="/pricing"><i className="fa fa-clipboard"></i>&nbsp;&nbsp;Plans</a></li>
                             //<li><a href="/docs"><i className="fa fa-files-o"></i>&nbsp;&nbsp;Documentation</a></li>

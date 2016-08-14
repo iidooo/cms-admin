@@ -1,7 +1,7 @@
-var UserActions = Reflux.createActions(['getUser','updateUserInfo']);
+var AccountActions = Reflux.createActions(['getUser','updateUserInfo']);
 
-var UserStore = Reflux.createStore({
-    listenables: [UserActions],
+var AccountStore = Reflux.createStore({
+    listenables: [AccountActions],
     onGetUser: function (data) {
         var url = SiteProperties.serverURL + API.getUser;
 
@@ -10,7 +10,6 @@ var UserStore = Reflux.createStore({
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
@@ -20,6 +19,7 @@ var UserStore = Reflux.createStore({
         var self = this;
         var callback = function (result) {
             if (result.status == 200) {
+                sessionStorage.setItem(SessionKey.user, JSON.stringify(result.data));
                 self.trigger(result.data);
             } else {
                 console.log(result);
@@ -36,7 +36,6 @@ var UserStore = Reflux.createStore({
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
-        data.userID = sessionStorage.getItem(SessionKey.userID);
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
@@ -46,6 +45,7 @@ var UserStore = Reflux.createStore({
         var self = this;
         var callback = function (result) {
             if (result.status == 200) {
+                sessionStorage.setItem(SessionKey.user, JSON.stringify(result.data));
                 alert(Message.SAVE_SUCCESS);
             } else if(result.status == 202){
                 var field = result.messages[0].field;
@@ -61,83 +61,31 @@ var UserStore = Reflux.createStore({
     },
 });
 
-var User = React.createClass({
-    mixins: [Reflux.connect(UserStore, 'user')],
+var Account = React.createClass({
+    mixins: [Reflux.connect(AccountStore, 'user')],
     getInitialState: function () {
         return {
             user: {}
         };
     },
     componentDidMount: function(){
-        $(function () {
-            $('.form_date').datetimepicker({
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0,
-                format: 'yyyy-mm-dd'
-            });
-        });
-
-        UserActions.getUser(this.state);
+        AccountActions.getUser(this.state);
     },
     componentDidUpdate: function () {
-        this.refs.inputLoginID.value = this.state.user.loginID;
         this.refs.inputUserName.value = this.state.user.userName;
-        this.refs.inputMobile.value = this.state.user.mobile;
         this.refs.inputEmail.value = this.state.user.email;
-        this.refs.inputWeixinID.value = this.state.user.weixinID;
-        this.refs.inputBirthday.value = new Date(this.state.user.birthday).format('yyyy-MM-dd');
-        this.refs.inputSex.value = this.state.user.sex;
-
-        if(this.state.user.isSilent == 1){
-            $("#checkboxIsSilent").attr("checked",true);
-        } else{
-            $("#checkboxIsSilent").attr("checked",false);
-        }
-
-        if(this.state.user.isDisable == 1){
-            $("#checkboxIsDisable").attr("checked",true);
-        } else{
-            $("#checkboxIsDisable").attr("checked",false);
-        }
-
-        this.refs.inputCreateTime.value = new Date(this.state.user.createTime).format('yyyy-MM-dd hh:mm:ss');
-        this.refs.inputLastLoginTime.value = new Date(this.state.user.lastLoginTime).format('yyyy-MM-dd hh:mm:ss');
     },
     handleSave:function(){
-        this.state.user.loginID = this.refs.inputLoginID.value;
         this.state.user.userName = this.refs.inputUserName.value;
-        this.state.user.mobile = this.refs.inputMobile.value;
         this.state.user.email = this.refs.inputEmail.value;
-        this.state.user.weixinID = this.refs.inputWeixinID.value;
-        this.state.user.birthday = this.refs.inputBirthday.value;
-        this.state.user.sex = this.refs.inputSex.value;
-        var isSilent = $("#checkboxIsSilent").prop("checked");
-        if(isSilent == true){
-            this.state.user.isSilent = 1;
-        } else {
-            this.state.user.isSilent = 0;
-        }
-        var isDisable = $("#checkboxIsDisable").prop("checked");
-        if(isDisable == true){
-            this.state.user.isDisable = 1;
-        } else {
-            this.state.user.isDisable = 0;
-        }
-
-        if(this.state.user.loginID == "" || this.state.user.userName == "" || this.state.user.email == ""){
-            $("#inputLoginID").addClass("input-error");
+        if(this.state.user.userName == "" || this.state.user.email == ""){
             $("#inputUserName").addClass("input-error");
             $("#inputEmail").addClass("input-error");
             $("#messageBox").show().text(Message.INPUT_REQUIRED);
             return;
         }
 
-        UserActions.updateUserInfo(this.state.user);
+        AccountActions.updateUserInfo(this.state.user);
     },
     render: function () {
         return (
@@ -145,9 +93,9 @@ var User = React.createClass({
                 <Header/>
 
                 <div id="main" className="container-fluid margin-top-60">
-                    <SideBar activeMenuID="menuUsersManage"/>
+                    <SideBar activeMenuID="menuProfile"/>
                     <div className="content-page">
-                        <Breadcrumb page={Page.user}/>
+                        <Breadcrumb page={Page.profile}/>
                         <div className="panel panel-default">
                             <div className="panel-heading">用户信息</div>
                             <div className="panel-body">
@@ -279,6 +227,6 @@ var User = React.createClass({
 });
 
 ReactDOM.render(
-    <User/>,
+    <Account/>,
     document.getElementById('page')
 );
