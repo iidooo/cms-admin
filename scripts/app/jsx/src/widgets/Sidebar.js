@@ -131,6 +131,12 @@ var SideBar = React.createClass({
                             </a>
                         </li>
                         <li>
+                            <a id="menuCommentManage" href={SiteProperties.clientURL + Page.comments}>
+                                <i className="fa fa-comments"></i>
+                                <span>评论管理</span>
+                            </a>
+                        </li>
+                        <li>
                             <a  id="menuChannelManage" href={SiteProperties.clientURL + Page.channels}>
                                 <i className="fa fa-th-list"></i>
                                 <span>栏目管理</span>

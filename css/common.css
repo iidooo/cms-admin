@@ -225,6 +225,10 @@ a:focus{
     margin-bottom: 0;
 }
 
+.margin-bottom-10{
+    margin-bottom: 10px;
+}
+
 .margin-bottom-20 {
     margin-bottom: 20px;
 }

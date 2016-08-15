@@ -24,6 +24,13 @@ var Breadcrumb = React.createClass({
                 path.push(<ContentsBreadcrumb key="ContentsBreadcrumb" active="" href={SiteProperties.clientURL + Page.contents}/>)
                 path.push(<ContentBreadcrumb key="ContentBreadcrumb"/>)
                 break;
+            case Page.comments:
+                path.push(<CommentsBreadcrumb key="CommentsBreadcrumb" active="" href="javascript:void(0)"/>);
+                break;
+            case Page.comment:
+                path.push(<CommentsBreadcrumb key="CommentsBreadcrumb" active="active" href={SiteProperties.clientURL + Page.comments}/>);
+                path.push(<CommentBreadcrumb key="CommentBreadcrumb"/>)
+                break;
             case Page.channels:
                 path.push(<ChannelsBreadcrumb key="ChannelsBreadcrumb"/>)
                 break;
@@ -90,6 +97,24 @@ var ContentBreadcrumb = React.createClass({
     render: function () {
         return (
             <li className='active'>内容详细</li>
+        );
+    }
+});
+
+var CommentsBreadcrumb = React.createClass({
+    render: function () {
+        return (
+            <li className={this.props.active}>
+                <a href={this.props.href}>评论管理</a>
+            </li>
+        );
+    }
+});
+
+var CommentBreadcrumb = React.createClass({
+    render: function () {
+        return (
+            <li className="active">评论详细</li>
         );
     }
 });

@@ -24,6 +24,13 @@ var Breadcrumb = React.createClass({displayName: "Breadcrumb",
                 path.push(React.createElement(ContentsBreadcrumb, {key: "ContentsBreadcrumb", active: "", href: SiteProperties.clientURL + Page.contents}))
                 path.push(React.createElement(ContentBreadcrumb, {key: "ContentBreadcrumb"}))
                 break;
+            case Page.comments:
+                path.push(React.createElement(CommentsBreadcrumb, {key: "CommentsBreadcrumb", active: "", href: "javascript:void(0)"}));
+                break;
+            case Page.comment:
+                path.push(React.createElement(CommentsBreadcrumb, {key: "CommentsBreadcrumb", active: "active", href: SiteProperties.clientURL + Page.comments}));
+                path.push(React.createElement(CommentBreadcrumb, {key: "CommentBreadcrumb"}))
+                break;
             case Page.channels:
                 path.push(React.createElement(ChannelsBreadcrumb, {key: "ChannelsBreadcrumb"}))
                 break;
@@ -90,6 +97,24 @@ var ContentBreadcrumb = React.createClass({displayName: "ContentBreadcrumb",
     render: function () {
         return (
             React.createElement("li", {className: "active"}, "内容详细")
+        );
+    }
+});
+
+var CommentsBreadcrumb = React.createClass({displayName: "CommentsBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: this.props.active}, 
+                React.createElement("a", {href: this.props.href}, "评论管理")
+            )
+        );
+    }
+});
+
+var CommentBreadcrumb = React.createClass({displayName: "CommentBreadcrumb",
+    render: function () {
+        return (
+            React.createElement("li", {className: "active"}, "评论详细")
         );
     }
 });

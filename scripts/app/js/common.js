@@ -26,6 +26,7 @@ SessionKey = {
     siteOwnerMap: "SITE_OWNER_MAP",
     channelID: "CHANNEL_ID",
     contentID: "CONTENT_ID",
+    commentID: "COMMENT_ID",
     contentType: "CONTENT_TYPE",
     pictureID: "PICTURE_ID"
 };
@@ -128,6 +129,10 @@ API = {
     searchSiteUserList: "/admin/searchSiteUserList",
     updateUserInfo: "/core/updateUserInfo",
     updateUserPassword: "/core/updateUserPassword",
+    searchCommentList: "/admin/searchCommentList",
+    getComment: "/admin/getComment",
+    updateComment: "/admin/updateComment",
+    deleteComment: "/admin/deleteComment",
 
     getAccessTokenByMail: "/core/getAccessTokenByMail",
     getDictItemList: "/core/getDictItemList",
@@ -157,6 +162,8 @@ Page = {
     channels: "/pages/channels.html",
     contents: "/pages/contents.html",
     content: "/pages/content.html",
+    comments: "/pages/comments.html",
+    comment: "/pages/comment.html",
     profile: "/pages/profile.html",
     password: "/pages/password.html",
     users: "/pages/users.html",

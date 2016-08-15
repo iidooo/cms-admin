@@ -131,6 +131,12 @@ var SideBar = React.createClass({displayName: "SideBar",
                             )
                         ), 
                         React.createElement("li", null, 
+                            React.createElement("a", {id: "menuCommentManage", href: SiteProperties.clientURL + Page.comments}, 
+                                React.createElement("i", {className: "fa fa-comments"}), 
+                                React.createElement("span", null, "评论管理")
+                            )
+                        ), 
+                        React.createElement("li", null, 
                             React.createElement("a", {id: "menuChannelManage", href: SiteProperties.clientURL + Page.channels}, 
                                 React.createElement("i", {className: "fa fa-th-list"}), 
                                 React.createElement("span", null, "栏目管理")
