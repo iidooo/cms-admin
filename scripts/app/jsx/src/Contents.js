@@ -4,8 +4,8 @@ var ContentsStore = Reflux.createStore({
     listenables: [ContentsActions],
     onSearch: function (data) {
         var url = SiteProperties.serverURL + API.searchContentList;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -159,7 +159,7 @@ var Contents = React.createClass({
                                             <i className="fa fa-caret-down"></i>
                                         </a>
                                         <ul className="dropdown-menu">
-                                            <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.DEFAULT)}><i
+                                            <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.ARTICLE)}><i
                                                 className="fa fa-file-o"></i>&nbsp;&nbsp;文章</a></li>
                                             <li><a href="javascript:void(0)" onClick={this.handleCreate.bind(null, ContentType.NEWS)}><i className="fa fa-newspaper-o"></i>&nbsp;
                                                 新闻</a>

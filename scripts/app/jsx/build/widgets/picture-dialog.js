@@ -4,8 +4,8 @@ var PictureDialogStore = Reflux.createStore({
     listenables: [PictureDialogActions],
     onSave: function (data) {
         var url = SiteProperties.serverURL + API.createPicture;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -27,7 +27,7 @@ var PictureDialogStore = Reflux.createStore({
 
             if (result.status == 200) {
                 sessionStorage.removeItem(SessionKey.pictureID);
-                PictureListDialogActions.getPictures(data);
+                PictureListDialogActions.getPictureList(data);
                 $('#pictureDialog').modal('toggle');
             } else {
                 console.log(result);
@@ -38,8 +38,8 @@ var PictureDialogStore = Reflux.createStore({
     },
     onGetPicture: function (data) {
         var url = SiteProperties.serverURL + API.getPicture;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -77,8 +77,8 @@ var PictureDialog = React.createClass({displayName: "PictureDialog",
         //文件上传前触发事件
         $('#uploadPicture').bind('fileuploadsubmit', function (e, data) {
             data.formData = {
-                'appID': SecurityClient.appID,
-                'secret': SecurityClient.secret,
+                'accessKey': SecurityClient.accessKey,
+                'accessSecret': SecurityClient.accessSecret,
                 'accessToken': sessionStorage.getItem(SessionKey.accessToken),
                 'operatorID': sessionStorage.getItem(SessionKey.operatorID),
                 'siteID': sessionStorage.getItem(SessionKey.siteID),

@@ -6,8 +6,8 @@ var RegisterStore = Reflux.createStore({
 
     onRegister: function (data) {
         var url = SiteProperties.serverURL + API.registerByEmail;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
 
         var callback = function (result) {
             console.log(result);
@@ -27,8 +27,8 @@ var RegisterStore = Reflux.createStore({
     },
     onSendMailVerifyCode: function(data){
         var url = SiteProperties.serverURL + API.sendMailVerifyCode;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
 
         var callback = function (result) {
             console.log(result);

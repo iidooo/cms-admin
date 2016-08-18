@@ -4,8 +4,8 @@ var PictureListDialogStore = Reflux.createStore({
     listenables: [PictureListDialogActions],
     onGetPictureList: function (data) {
         var url = SiteProperties.serverURL + API.getPictureList;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -30,8 +30,8 @@ var PictureListDialogStore = Reflux.createStore({
     },
     onDeletePicture: function (data) {
         var url = SiteProperties.serverURL + API.deletePicture;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);

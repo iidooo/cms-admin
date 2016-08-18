@@ -22,6 +22,7 @@ SessionKey = {
     userID: "USER_ID", // 编辑中的User ID
     user: "SECURITY_USER",
     siteID: "SITE_ID",
+    siteCode: "SITE_CODE",
     siteMap: "SITE_MAP",
     siteOwnerMap: "SITE_OWNER_MAP",
     channelID: "CHANNEL_ID",
@@ -32,8 +33,8 @@ SessionKey = {
 };
 
 SecurityClient = {
-    appID: "cmsadmin",
-    secret: "e96b669ba65848bcb20f5de53dcc370e"
+    accessKey: "cmsadmin",
+    accessSecret: "e96b669ba65848bcb20f5de53dcc370e"
 };
 
 Message = {
@@ -49,6 +50,8 @@ Message = {
     USER_NAME_REPEAT: "用户名重复",
     EMAIL_REPEAT: "邮箱重复",
     CHANNEL_PATH_REPEAT: "栏目路径重复",
+    SITE_CODE_REPEAT: "站点Code重复",
+    SITE_CODE_ENGLISH: "站点Code只能输入英文",
     OLD_PASSWORD_WRONG: "旧密码不正确",
     TWICE_PASSWORD_NOT_EQUAL: "两次密码输入不想等",
 
@@ -75,13 +78,13 @@ ContentStatusMap = {
 };
 
 ContentType = {
-    DEFAULT: "1",
+    ARTICLE: "1",
     NEWS: "2",
     FILE: "3"
 };
 
 ContentTypeMap = {
-    "1": "默认",
+    "1": "文章",
     "2": "新闻",
     "3": "文件",
 };
@@ -125,6 +128,7 @@ API = {
     getUser: "/core/getUser",
     getSiteUser: "/admin/getSiteUser",
     updateSiteUser: "/admin/updateSiteUser",
+    createSite: "/admin/createSite",
     getSiteUserCount: "/admin/getSiteUserCount",
     searchSiteUserList: "/admin/searchSiteUserList",
     updateUserInfo: "/core/updateUserInfo",
@@ -133,11 +137,11 @@ API = {
     getComment: "/admin/getComment",
     updateComment: "/admin/updateComment",
     deleteComment: "/admin/deleteComment",
-
-    getAccessTokenByMail: "/core/getAccessTokenByMail",
-    getDictItemList: "/core/getDictItemList",
-    content: "/content"
 };
+
+CoreAPI = {
+    getSecurityClient: "/core/admin/getSecurityClient",
+}
 
 SiteRole = {
     "1": "管理员",
@@ -170,6 +174,7 @@ Page = {
     user: "/pages/user.html",
     admin: "/pages/admin.html",
     admins: "/pages/admins.html",
+    access: "/pages/access.html",
 };
 
 var CmsPicture = {
@@ -326,11 +331,35 @@ function dataPermission(messageBoxID, content) {
     return isRefuse;
 }
 
+/*
+* 验证Email的正确格式
+* */
 function validateEmail(email) {
-    var regex = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    var regex = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.|\-]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
     if (!regex.test(email)) {
         return false;
     }
+    return true;
+}
 
+/*
+* 验证英文或数字
+* */
+function validateEnglish(input){
+    var regex = /^[a-zA-Z]*$/;
+    if(!regex.test(input)){
+        return false;
+    }
+    return true;
+}
+
+/*
+* 验证数字
+* */
+function validateNumber(input){
+    var regex = /^[0-9]*$/;
+    if(!regex.test(input)){
+        return false;
+    }
     return true;
 }

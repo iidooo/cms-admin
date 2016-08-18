@@ -1,15 +1,17 @@
-var AccountActions = Reflux.createActions(['getUser','updateUserInfo']);
+var ProfileActions = Reflux.createActions(['getUser','updateUserInfo']);
 
-var AccountStore = Reflux.createStore({
-    listenables: [AccountActions],
+var ProfileStore = Reflux.createStore({
+    listenables: [ProfileActions],
     onGetUser: function (data) {
         var url = SiteProperties.serverURL + API.getUser;
 
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
+        data.userID = sessionStorage.getItem(SessionKey.operatorID);
+
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
@@ -31,11 +33,13 @@ var AccountStore = Reflux.createStore({
     onUpdateUserInfo:function(data){
         var url = SiteProperties.serverURL + API.updateUserInfo;
 
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
+        data.userID = sessionStorage.getItem(SessionKey.operatorID);
+
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
@@ -61,23 +65,93 @@ var AccountStore = Reflux.createStore({
     },
 });
 
-var Account = React.createClass({
-    mixins: [Reflux.connect(AccountStore, 'user')],
+var Profile = React.createClass({
+    mixins: [Reflux.connect(ProfileStore, 'user')],
     getInitialState: function () {
         return {
             user: {}
         };
     },
     componentDidMount: function(){
-        AccountActions.getUser(this.state);
+
+        $('.form_date').datetimepicker({
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            format: 'yyyy-mm-dd'
+        });
+
+        //文件上传前触发事件
+        $('#uploadPhoto').bind('fileuploadsubmit', function (e, data) {
+            data.formData = {
+                'accessKey': SecurityClient.accessKey,
+                'accessSecret': SecurityClient.accessSecret,
+                'accessToken': sessionStorage.getItem(SessionKey.accessToken),
+                'operatorID': sessionStorage.getItem(SessionKey.operatorID),
+                'siteID': sessionStorage.getItem(SessionKey.siteID),
+                'width': '200',
+                'height': '200',
+                'isCompress': 'true'
+            };  //如果需要额外添加参数可以在这里添加
+        });
+
+        // 上传内容图片列表
+        $("#uploadPhoto").fileupload({
+            url: SiteProperties.serverURL + API.uploadFile,
+            dataType: 'json',
+            autoUpload: true,
+            acceptFileTypes: /(\.|\/)(jpe?g|png|gif|bmp)$/i,
+            maxNumberOfFiles: 1,
+            maxFileSize: 10000000,
+            done: function (e, result) {
+                var data = result.result;
+                if (data.status == "200") {
+                    $("#imgPhoto").attr("src", data.data.url);
+                    $("#inputPhoto").val(data.data.url);
+                } else {
+                    console.log(data);
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10) + "%";
+
+                console.log(progress);
+            },
+            error: function (e, data) {
+                console.log(data);
+            },
+            fail: function (e, data) {
+                console.log(data);
+            }
+        });
+
+        ProfileActions.getUser(this.state);
     },
     componentDidUpdate: function () {
+        this.refs.inputPhoto.value = this.state.user.photoURL;
+        $("#imgPhoto").attr("src", this.state.user.photoURL);
+        this.refs.inputLoginID.value = this.state.user.loginID;
         this.refs.inputUserName.value = this.state.user.userName;
+        this.refs.inputMobile.value = this.state.user.mobile;
         this.refs.inputEmail.value = this.state.user.email;
+        this.refs.inputWeixinID.value = this.state.user.weixinID;
+        this.refs.inputBirthday.value = new Date(this.state.user.birthday).format('yyyy-MM-dd');
+        this.refs.inputSex.value = this.state.user.sex;
+        this.refs.inputCreateTime.value = new Date(this.state.user.createTime).format('yyyy-MM-dd hh:mm:ss');
+        this.refs.inputLastLoginTime.value = new Date(this.state.user.lastLoginTime).format('yyyy-MM-dd hh:mm:ss');
     },
     handleSave:function(){
+        this.state.user.photoURL = this.refs.inputPhoto.value;
         this.state.user.userName = this.refs.inputUserName.value;
+        this.state.user.mobile = this.refs.inputMobile.value;
         this.state.user.email = this.refs.inputEmail.value;
+        this.state.user.weixinID = this.refs.inputWeixinID.value;
+        this.state.user.birthday = this.refs.inputBirthday.value;
+        this.state.user.sex = this.refs.inputSex.value;
         if(this.state.user.userName == "" || this.state.user.email == ""){
             $("#inputUserName").addClass("input-error");
             $("#inputEmail").addClass("input-error");
@@ -85,7 +159,10 @@ var Account = React.createClass({
             return;
         }
 
-        AccountActions.updateUserInfo(this.state.user);
+        ProfileActions.updateUserInfo(this.state.user);
+    },
+    uploadPhoto: function () {
+        openFileBrowse("uploadPhoto");
     },
     render: function () {
         return (
@@ -100,113 +177,101 @@ var Account = React.createClass({
                             <div className="panel-heading">用户信息</div>
                             <div className="panel-body">
                                 <MessageBox/>
-                                <div className="row form-horizontal form-group">
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label className="required">用户ID</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <input id="inputLoginID" ref="inputLoginID" type="text" className="form-control"/>
-                                        </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label>头像</label>
                                     </div>
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label className="required">用户名</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <input id="inputUserName" ref="inputUserName" type="text" className="form-control"/>
+                                    <div id="divPhoto" className="col-xs-10">
+                                        <input id="inputPhoto" ref="inputPhoto" type="hidden"/>
+                                        <a href="javascript:void(0)" onClick={this.uploadPhoto}><img id="imgPhoto" className="width-100" src="../img/upload.png"/></a>
+                                        <input id="uploadPhoto" type="file" name="file" className="hidden"
+                                               accept="image/gif,image/jpeg,image/x-ms-bmp,image/x-png,image/png"/>
+                                    </div>
+                                </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label className="required">用户ID</label>
+                                    </div>
+                                    <div className="col-xs-10">
+                                        <input id="inputLoginID" ref="inputLoginID" type="text" className="form-control"
+                                               disabled="disabled"/>
+                                    </div>
+                                </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label className="required">用户名</label>
+                                    </div>
+                                    <div className="col-xs-10">
+                                        <input id="inputUserName" ref="inputUserName" type="text" className="form-control"/>
+                                    </div>
+                                </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label>电话</label>
+                                    </div>
+                                    <div className="col-xs-10">
+                                        <input id="inputMobile" ref="inputMobile" type="text" className="form-control"/>
+                                    </div>
+                                </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label className="required">邮箱</label>
+                                    </div>
+                                    <div className="col-xs-10">
+                                        <input id="inputEmail" ref="inputEmail" type="text" className="form-control"/>
+                                    </div>
+                                </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label>微信号</label>
+                                    </div>
+                                    <div className="col-xs-10">
+                                        <input id="inputWeixinID" ref="inputWeixinID" type="text" className="form-control"/>
+                                    </div>
+                                </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label>生日</label>
+                                    </div>
+                                    <div className="col-xs-10">
+                                        <div className="input-group date form_date" data-date=""
+                                             data-date-format="yyyy-mm-dd"
+                                             data-link-field="inputBirthday" data-link-format="yyyy-mm-dd">
+                                            <input id="inputBirthday" className="form-control" type="text"
+                                                   ref="inputBirthday" readonly/>
+                                                    <span className="input-group-addon">
+                                                        <span className="glyphicon glyphicon-calendar"></span>
+                                                    </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row form-horizontal form-group">
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label>电话</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <input id="inputMobile" ref="inputMobile" type="text" className="form-control"/>
-                                        </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label>性别</label>
                                     </div>
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label className="required">邮箱</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <input id="inputEmail" ref="inputEmail" type="text" className="form-control"/>
-                                        </div>
+                                    <div className="col-xs-10">
+                                        <select ref="inputSex" className="form-control">
+                                            <option value="1">男</option>
+                                            <option value="2">女</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div className="row form-horizontal form-group">
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label>微信号</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <input id="inputWeixinID" ref="inputWeixinID" type="text" className="form-control"/>
-                                        </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label>注册日期</label>
                                     </div>
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label>生日</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <div className="input-group date form_date" data-date=""
-                                                 data-date-format="yyyy-mm-dd"
-                                                 data-link-field="inputBirthday" data-link-format="yyyy-mm-dd">
-                                                <input id="inputBirthday" className="form-control" type="text" ref="inputBirthday" readonly/>
-                                                <span className="input-group-addon">
-                                                    <span className="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
+                                    <div className="col-xs-10">
+                                        <input id="inputCreateTime" ref="inputCreateTime" type="text"
+                                               className="form-control" disabled="disabled"/>
                                     </div>
                                 </div>
-                                <div className="row form-horizontal form-group">
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label>性别</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <select ref="inputSex" className="form-control">
-                                                <option value="1">男</option>
-                                                <option value="2">女</option>
-                                            </select>
-                                        </div>
+                                <div className="row form-group form-horizontal">
+                                    <div className="col-xs-2 control-label">
+                                        <label>最后登录日期</label>
                                     </div>
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label>状态</label>
-                                        </div>
-                                        <div className="col-sm-5 checkbox">
-                                            <label>
-                                                <input type="checkbox" id="checkboxIsSilent" ref="checkboxIsSilent"/>
-                                                禁止评论
-                                            </label>
-                                        </div>
-                                        <div className="col-sm-4 checkbox">
-                                            <label>
-                                                <input type="checkbox" id="checkboxIsDisable" ref="checkboxIsDisable"/>
-                                                有效性
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="row form-horizontal form-group">
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label>注册日期</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <input id="inputCreateTime" ref="inputCreateTime" type="text" className="form-control" disabled="disabled"/>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <div className="col-sm-3 control-label">
-                                            <label>最后登录日期</label>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <input id="inputLastLoginTime" ref="inputLastLoginTime" type="text" className="form-control" disabled="disabled"/>
-                                        </div>
+                                    <div className="col-xs-10">
+                                        <input id="inputLastLoginTime" ref="inputLastLoginTime" type="text"
+                                               className="form-control" disabled="disabled"/>
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +292,6 @@ var Account = React.createClass({
 });
 
 ReactDOM.render(
-    <Account/>,
+    <Profile/>,
     document.getElementById('page')
 );

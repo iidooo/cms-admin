@@ -66,7 +66,7 @@ var Breadcrumb = React.createClass({
 
         return (
             <ol className="breadcrumb">
-                <li><a href="javascript:void(0)">{this.state.site.siteCode}</a></li>
+                <li><a href="javascript:void(0)">{this.state.site.siteName}</a></li>
                 {path.map(function (item) {
                     return item;
                 })}

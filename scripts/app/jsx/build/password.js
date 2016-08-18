@@ -5,8 +5,8 @@ var PasswordStore = Reflux.createStore({
     onUpdateUserPassword:function(data){
         var url = SiteProperties.serverURL + API.updateUserPassword;
 
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);

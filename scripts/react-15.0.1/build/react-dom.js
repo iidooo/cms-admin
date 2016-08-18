@@ -38,5 +38,5 @@
   }
 
 })(function(React) {
-  return React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+  return React.__accessSecret_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 });

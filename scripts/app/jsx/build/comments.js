@@ -4,8 +4,8 @@ var CommentsStore = Reflux.createStore({
     listenables: [CommentsActions],
     onSearch: function (data) {
         var url = SiteProperties.serverURL + API.searchCommentList;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);

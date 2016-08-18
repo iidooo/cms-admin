@@ -6,8 +6,8 @@ var LoginStore = Reflux.createStore({
 
     onLogin: function (data) {
         var url = SiteProperties.serverURL + API.loginByEmail;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
 
         var callback = function (result) {
             if (result.status == 200) {

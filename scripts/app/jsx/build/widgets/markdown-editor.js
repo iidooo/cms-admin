@@ -107,8 +107,8 @@ var MarkdownPictureDialog = React.createClass({displayName: "MarkdownPictureDial
         //文件上传前触发事件
         $('#uploadMarkdownPicture').bind('fileuploadsubmit', function (e, data) {
             data.formData = {
-                'appID': SecurityClient.appID,
-                'secret': SecurityClient.secret,
+                'accessKey': SecurityClient.accessKey,
+                'accessSecret': SecurityClient.accessSecret,
                 'accessToken': sessionStorage.getItem(SessionKey.accessToken),
                 'operatorID': sessionStorage.getItem(SessionKey.operatorID),
                 'siteID': sessionStorage.getItem(SessionKey.siteID),

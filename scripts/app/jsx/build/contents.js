@@ -4,8 +4,8 @@ var ContentsStore = Reflux.createStore({
     listenables: [ContentsActions],
     onSearch: function (data) {
         var url = SiteProperties.serverURL + API.searchContentList;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -159,7 +159,7 @@ var Contents = React.createClass({displayName: "Contents",
                                             React.createElement("i", {className: "fa fa-caret-down"})
                                         ), 
                                         React.createElement("ul", {className: "dropdown-menu"}, 
-                                            React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.DEFAULT)}, React.createElement("i", {
+                                            React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.ARTICLE)}, React.createElement("i", {
                                                 className: "fa fa-file-o"}), "  文章")), 
                                             React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)", onClick: this.handleCreate.bind(null, ContentType.NEWS)}, React.createElement("i", {className: "fa fa-newspaper-o"}), " " + ' ' +
                                                 "新闻")

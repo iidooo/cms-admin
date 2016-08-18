@@ -4,8 +4,8 @@ var FileDialogStore = Reflux.createStore({
     listenables: [FileDialogActions],
     onSave: function (data) {
         var url = SiteProperties.serverURL + API.createFile;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -38,8 +38,8 @@ var FileDialogStore = Reflux.createStore({
     },
     onGetFile: function (data) {
         var url = SiteProperties.serverURL + API.getFile;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -77,8 +77,8 @@ var FileDialog = React.createClass({
         //文件上传前触发事件
         $('#uploadFile').bind('fileuploadsubmit', function (e, data) {
             data.formData = {
-                'appID': SecurityClient.appID,
-                'secret': SecurityClient.secret,
+                'accessKey': SecurityClient.accessKey,
+                'accessSecret': SecurityClient.accessSecret,
                 'accessToken': sessionStorage.getItem(SessionKey.accessToken),
                 'operatorID': sessionStorage.getItem(SessionKey.operatorID),
                 'siteID': sessionStorage.getItem(SessionKey.siteID),

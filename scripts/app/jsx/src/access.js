@@ -1,15 +1,15 @@
-var SiteActions = Reflux.createActions(['getSite', 'updateSite']);
+var AccessActions = Reflux.createActions(['getSecurityClient', 'updateSite']);
 
-var SiteStore = Reflux.createStore({
-    listenables: [SiteActions],
-    onGetSite:function(data){
-        var url = SiteProperties.serverURL + API.getSite;
-
+var AccessStore = Reflux.createStore({
+    listenables: [AccessActions],
+    onGetSecurityClient:function(data){
+        var url = SiteProperties.serverURL + CoreAPI.getSecurityClient;
         data.accessKey = SecurityClient.accessKey;
         data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
+
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
@@ -51,28 +51,20 @@ var SiteStore = Reflux.createStore({
     },
 });
 
-var Site = React.createClass({
-    mixins: [Reflux.connect(SiteStore, 'site')],
+var Access = React.createClass({
+    mixins: [Reflux.connect(AccessStore, 'securityClient')],
     getInitialState: function () {
         return {
-            site: {}
+            securityClient: {}
         };
     },
     componentDidMount: function(){
-        SiteActions.getSite(this.state);
+        this.state.appID = sessionStorage.getItem(SessionKey.siteCode);
+        AccessActions.getSecurityClient(this.state);
     },
     componentDidUpdate: function () {
-        this.refs.inputSiteCode.value = this.state.site.siteCode;
-        this.refs.inputSiteName.value = this.state.site.siteName;
-        this.refs.inputSiteURL.value = this.state.site.siteURL;
-        this.refs.inputRemarks.value = this.state.site.remarks;
-    },
-    handleSave : function(){
-        this.state.site.siteName = this.refs.inputSiteName.value;
-        this.state.site.siteURL = this.refs.inputSiteURL.value;
-        this.state.site.remarks = this.refs.inputRemarks.value;
-
-        SiteActions.updateSite(this.state.site);
+        this.refs.inputaccessKey.value = this.state.securityClient.appID;
+        this.refs.inputaccessSecret.value = this.state.securityClient.secret;
     },
     render: function () {
         return (
@@ -80,44 +72,27 @@ var Site = React.createClass({
                 <Header/>
 
                 <div id="main" className="container-fluid margin-top-60">
-                    <SideBar activeMenuID="menuLinkSite"/>
+                    <SideBar activeMenuID="menuAccessManage"/>
 
                     <div className="content-page">
-                        <Breadcrumb page={Page.site}/>
+                        <Breadcrumb page={Page.access}/>
 
                         <div className="panel panel-default">
-                            <div className="panel-heading">站点信息维护</div>
+                            <div className="panel-heading">API Access Key 维护</div>
                             <div className="panel-body">
                                 <div className="form-group">
                                     <div className="control-label">
-                                        <label>站点Code</label>
+                                        <label>accessKey</label>
                                     </div>
-                                    <input id="inputSiteCode" ref="inputSiteCode" type="text" className="form-control" disabled="disabled"/>
+                                    <input id="inputaccessKey" ref="inputaccessKey" type="text" className="form-control" disabled="disabled"/>
                                 </div>
                                 <div className="form-group">
                                     <div className="control-label">
-                                        <label>站点名称</label>
+                                        <label>accessSecret</label>
                                     </div>
-                                    <input id="inputSiteName" ref="inputSiteName" type="text" className="form-control"/>
-                                </div>
-                                <div className="form-group">
-                                    <div className="control-label">
-                                        <label>站点URL</label>
-                                    </div>
-                                    <input id="inputSiteURL" ref="inputSiteURL" type="text" className="form-control"/>
-                                </div>
-                                <div className="form-group">
-                                    <div className="control-label">
-                                        <label>备注</label>
-                                    </div>
-                                    <textarea id="inputRemarks" ref="inputRemarks" rows="5" type="text" className="form-control"></textarea>
+                                    <input id="inputaccessSecret" ref="inputaccessSecret" type="text" className="form-control" disabled="disabled"/>
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="text-right">
-                            <button className="btn btn-primary" type="button" onClick={this.handleSave}>保&nbsp;存
-                            </button>
                         </div>
 
                         <Footer/>
@@ -131,6 +106,6 @@ var Site = React.createClass({
 });
 
 ReactDOM.render(
-    <Site />,
+    <Access />,
     document.getElementById('page')
 );

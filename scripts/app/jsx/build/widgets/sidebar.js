@@ -5,8 +5,8 @@ var SideBarMenuStore = Reflux.createStore({
     onGetChannelTree: function (data) {
 
         var url = SiteProperties.serverURL + API.getChannelTree;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -162,6 +162,9 @@ var SideBar = React.createClass({displayName: "SideBar",
                                 ), 
                                 React.createElement("li", null, 
                                     React.createElement("a", {id: "menuAdminsManage", href: SiteProperties.clientURL + Page.admins}, "站长管理")
+                                ), 
+                                React.createElement("li", null, 
+                                    React.createElement("a", {id: "menuAccessManage", href: SiteProperties.clientURL + Page.access}, "API Access Key")
                                 )
                             )
                         ), 

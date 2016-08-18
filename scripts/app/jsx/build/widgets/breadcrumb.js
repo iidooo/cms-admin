@@ -66,7 +66,7 @@ var Breadcrumb = React.createClass({displayName: "Breadcrumb",
 
         return (
             React.createElement("ol", {className: "breadcrumb"}, 
-                React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)"}, this.state.site.siteCode)), 
+                React.createElement("li", null, React.createElement("a", {href: "javascript:void(0)"}, this.state.site.siteName)), 
                 path.map(function (item) {
                     return item;
                 })

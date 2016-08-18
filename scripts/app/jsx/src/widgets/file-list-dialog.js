@@ -4,8 +4,8 @@ var FileListDialogStore = Reflux.createStore({
     listenables: [FileListDialogActions],
     onGetFileList: function (data) {
         var url = SiteProperties.serverURL + API.getFileList;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -32,8 +32,8 @@ var FileListDialogStore = Reflux.createStore({
     },
     onDeleteFile: function (data) {
         var url = SiteProperties.serverURL + API.deleteFile;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);

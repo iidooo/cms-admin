@@ -14,8 +14,8 @@ var ContentStore = Reflux.createStore({
             url = SiteProperties.serverURL + API.updateContent;
         }
 
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -40,8 +40,8 @@ var ContentStore = Reflux.createStore({
     },
     onDelete: function (data) {
         var url = SiteProperties.serverURL + API.deleteContent;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -67,8 +67,8 @@ var ContentStore = Reflux.createStore({
     },
     onGetContent: function (data) {
         var url = SiteProperties.serverURL + API.getContent;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         // 检查token是否过期
@@ -108,8 +108,8 @@ var Content = React.createClass({
         //文件上传前触发事件
         $('#uploadContentImageTitle').bind('fileuploadsubmit', function (e, data) {
             data.formData = {
-                'appID': SecurityClient.appID,
-                'secret': SecurityClient.secret,
+                'accessKey': SecurityClient.accessKey,
+                'accessSecret': SecurityClient.accessSecret,
                 'accessToken': sessionStorage.getItem(SessionKey.accessToken),
                 'operatorID': sessionStorage.getItem(SessionKey.operatorID),
                 'siteID': sessionStorage.getItem(SessionKey.siteID),

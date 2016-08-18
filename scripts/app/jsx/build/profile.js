@@ -1,15 +1,17 @@
-var AccountActions = Reflux.createActions(['getUser','updateUserInfo']);
+var ProfileActions = Reflux.createActions(['getUser','updateUserInfo']);
 
-var AccountStore = Reflux.createStore({
-    listenables: [AccountActions],
+var ProfileStore = Reflux.createStore({
+    listenables: [ProfileActions],
     onGetUser: function (data) {
         var url = SiteProperties.serverURL + API.getUser;
 
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
+        data.userID = sessionStorage.getItem(SessionKey.operatorID);
+
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
@@ -31,11 +33,13 @@ var AccountStore = Reflux.createStore({
     onUpdateUserInfo:function(data){
         var url = SiteProperties.serverURL + API.updateUserInfo;
 
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
+        data.userID = sessionStorage.getItem(SessionKey.operatorID);
+
         // 检查token是否过期
         if (data.accessToken == null || data.accessToken == "") {
             location.href = SiteProperties.clientURL + Page.login;
@@ -61,23 +65,93 @@ var AccountStore = Reflux.createStore({
     },
 });
 
-var Account = React.createClass({displayName: "Account",
-    mixins: [Reflux.connect(AccountStore, 'user')],
+var Profile = React.createClass({displayName: "Profile",
+    mixins: [Reflux.connect(ProfileStore, 'user')],
     getInitialState: function () {
         return {
             user: {}
         };
     },
     componentDidMount: function(){
-        AccountActions.getUser(this.state);
+
+        $('.form_date').datetimepicker({
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            format: 'yyyy-mm-dd'
+        });
+
+        //文件上传前触发事件
+        $('#uploadPhoto').bind('fileuploadsubmit', function (e, data) {
+            data.formData = {
+                'accessKey': SecurityClient.accessKey,
+                'accessSecret': SecurityClient.accessSecret,
+                'accessToken': sessionStorage.getItem(SessionKey.accessToken),
+                'operatorID': sessionStorage.getItem(SessionKey.operatorID),
+                'siteID': sessionStorage.getItem(SessionKey.siteID),
+                'width': '200',
+                'height': '200',
+                'isCompress': 'true'
+            };  //如果需要额外添加参数可以在这里添加
+        });
+
+        // 上传内容图片列表
+        $("#uploadPhoto").fileupload({
+            url: SiteProperties.serverURL + API.uploadFile,
+            dataType: 'json',
+            autoUpload: true,
+            acceptFileTypes: /(\.|\/)(jpe?g|png|gif|bmp)$/i,
+            maxNumberOfFiles: 1,
+            maxFileSize: 10000000,
+            done: function (e, result) {
+                var data = result.result;
+                if (data.status == "200") {
+                    $("#imgPhoto").attr("src", data.data.url);
+                    $("#inputPhoto").val(data.data.url);
+                } else {
+                    console.log(data);
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10) + "%";
+
+                console.log(progress);
+            },
+            error: function (e, data) {
+                console.log(data);
+            },
+            fail: function (e, data) {
+                console.log(data);
+            }
+        });
+
+        ProfileActions.getUser(this.state);
     },
     componentDidUpdate: function () {
+        this.refs.inputPhoto.value = this.state.user.photoURL;
+        $("#imgPhoto").attr("src", this.state.user.photoURL);
+        this.refs.inputLoginID.value = this.state.user.loginID;
         this.refs.inputUserName.value = this.state.user.userName;
+        this.refs.inputMobile.value = this.state.user.mobile;
         this.refs.inputEmail.value = this.state.user.email;
+        this.refs.inputWeixinID.value = this.state.user.weixinID;
+        this.refs.inputBirthday.value = new Date(this.state.user.birthday).format('yyyy-MM-dd');
+        this.refs.inputSex.value = this.state.user.sex;
+        this.refs.inputCreateTime.value = new Date(this.state.user.createTime).format('yyyy-MM-dd hh:mm:ss');
+        this.refs.inputLastLoginTime.value = new Date(this.state.user.lastLoginTime).format('yyyy-MM-dd hh:mm:ss');
     },
     handleSave:function(){
+        this.state.user.photoURL = this.refs.inputPhoto.value;
         this.state.user.userName = this.refs.inputUserName.value;
+        this.state.user.mobile = this.refs.inputMobile.value;
         this.state.user.email = this.refs.inputEmail.value;
+        this.state.user.weixinID = this.refs.inputWeixinID.value;
+        this.state.user.birthday = this.refs.inputBirthday.value;
+        this.state.user.sex = this.refs.inputSex.value;
         if(this.state.user.userName == "" || this.state.user.email == ""){
             $("#inputUserName").addClass("input-error");
             $("#inputEmail").addClass("input-error");
@@ -85,7 +159,10 @@ var Account = React.createClass({displayName: "Account",
             return;
         }
 
-        AccountActions.updateUserInfo(this.state.user);
+        ProfileActions.updateUserInfo(this.state.user);
+    },
+    uploadPhoto: function () {
+        openFileBrowse("uploadPhoto");
     },
     render: function () {
         return (
@@ -100,113 +177,101 @@ var Account = React.createClass({displayName: "Account",
                             React.createElement("div", {className: "panel-heading"}, "用户信息"), 
                             React.createElement("div", {className: "panel-body"}, 
                                 React.createElement(MessageBox, null), 
-                                React.createElement("div", {className: "row form-horizontal form-group"}, 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", {className: "required"}, "用户ID")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("input", {id: "inputLoginID", ref: "inputLoginID", type: "text", className: "form-control"})
-                                        )
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", null, "头像")
                                     ), 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", {className: "required"}, "用户名")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("input", {id: "inputUserName", ref: "inputUserName", type: "text", className: "form-control"})
+                                    React.createElement("div", {id: "divPhoto", className: "col-xs-10"}, 
+                                        React.createElement("input", {id: "inputPhoto", ref: "inputPhoto", type: "hidden"}), 
+                                        React.createElement("a", {href: "javascript:void(0)", onClick: this.uploadPhoto}, React.createElement("img", {id: "imgPhoto", className: "width-100", src: "../img/upload.png"})), 
+                                        React.createElement("input", {id: "uploadPhoto", type: "file", name: "file", className: "hidden", 
+                                               accept: "image/gif,image/jpeg,image/x-ms-bmp,image/x-png,image/png"})
+                                    )
+                                ), 
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", {className: "required"}, "用户ID")
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("input", {id: "inputLoginID", ref: "inputLoginID", type: "text", className: "form-control", 
+                                               disabled: "disabled"})
+                                    )
+                                ), 
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", {className: "required"}, "用户名")
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("input", {id: "inputUserName", ref: "inputUserName", type: "text", className: "form-control"})
+                                    )
+                                ), 
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", null, "电话")
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("input", {id: "inputMobile", ref: "inputMobile", type: "text", className: "form-control"})
+                                    )
+                                ), 
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", {className: "required"}, "邮箱")
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("input", {id: "inputEmail", ref: "inputEmail", type: "text", className: "form-control"})
+                                    )
+                                ), 
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", null, "微信号")
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("input", {id: "inputWeixinID", ref: "inputWeixinID", type: "text", className: "form-control"})
+                                    )
+                                ), 
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", null, "生日")
+                                    ), 
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("div", {className: "input-group date form_date", "data-date": "", 
+                                             "data-date-format": "yyyy-mm-dd", 
+                                             "data-link-field": "inputBirthday", "data-link-format": "yyyy-mm-dd"}, 
+                                            React.createElement("input", {id: "inputBirthday", className: "form-control", type: "text", 
+                                                   ref: "inputBirthday", readonly: true}), 
+                                                    React.createElement("span", {className: "input-group-addon"}, 
+                                                        React.createElement("span", {className: "glyphicon glyphicon-calendar"})
+                                                    )
                                         )
                                     )
                                 ), 
-                                React.createElement("div", {className: "row form-horizontal form-group"}, 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", null, "电话")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("input", {id: "inputMobile", ref: "inputMobile", type: "text", className: "form-control"})
-                                        )
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", null, "性别")
                                     ), 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", {className: "required"}, "邮箱")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("input", {id: "inputEmail", ref: "inputEmail", type: "text", className: "form-control"})
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("select", {ref: "inputSex", className: "form-control"}, 
+                                            React.createElement("option", {value: "1"}, "男"), 
+                                            React.createElement("option", {value: "2"}, "女")
                                         )
                                     )
                                 ), 
-                                React.createElement("div", {className: "row form-horizontal form-group"}, 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", null, "微信号")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("input", {id: "inputWeixinID", ref: "inputWeixinID", type: "text", className: "form-control"})
-                                        )
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", null, "注册日期")
                                     ), 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", null, "生日")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("div", {className: "input-group date form_date", "data-date": "", 
-                                                 "data-date-format": "yyyy-mm-dd", 
-                                                 "data-link-field": "inputBirthday", "data-link-format": "yyyy-mm-dd"}, 
-                                                React.createElement("input", {id: "inputBirthday", className: "form-control", type: "text", ref: "inputBirthday", readonly: true}), 
-                                                React.createElement("span", {className: "input-group-addon"}, 
-                                                    React.createElement("span", {className: "glyphicon glyphicon-calendar"})
-                                                )
-                                            )
-                                        )
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("input", {id: "inputCreateTime", ref: "inputCreateTime", type: "text", 
+                                               className: "form-control", disabled: "disabled"})
                                     )
                                 ), 
-                                React.createElement("div", {className: "row form-horizontal form-group"}, 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", null, "性别")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("select", {ref: "inputSex", className: "form-control"}, 
-                                                React.createElement("option", {value: "1"}, "男"), 
-                                                React.createElement("option", {value: "2"}, "女")
-                                            )
-                                        )
+                                React.createElement("div", {className: "row form-group form-horizontal"}, 
+                                    React.createElement("div", {className: "col-xs-2 control-label"}, 
+                                        React.createElement("label", null, "最后登录日期")
                                     ), 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", null, "状态")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-5 checkbox"}, 
-                                            React.createElement("label", null, 
-                                                React.createElement("input", {type: "checkbox", id: "checkboxIsSilent", ref: "checkboxIsSilent"}), 
-                                                "禁止评论"
-                                            )
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-4 checkbox"}, 
-                                            React.createElement("label", null, 
-                                                React.createElement("input", {type: "checkbox", id: "checkboxIsDisable", ref: "checkboxIsDisable"}), 
-                                                "有效性"
-                                            )
-                                        )
-                                    )
-                                ), 
-                                React.createElement("div", {className: "row form-horizontal form-group"}, 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", null, "注册日期")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("input", {id: "inputCreateTime", ref: "inputCreateTime", type: "text", className: "form-control", disabled: "disabled"})
-                                        )
-                                    ), 
-                                    React.createElement("div", {className: "col-sm-6"}, 
-                                        React.createElement("div", {className: "col-sm-3 control-label"}, 
-                                            React.createElement("label", null, "最后登录日期")
-                                        ), 
-                                        React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement("input", {id: "inputLastLoginTime", ref: "inputLastLoginTime", type: "text", className: "form-control", disabled: "disabled"})
-                                        )
+                                    React.createElement("div", {className: "col-xs-10"}, 
+                                        React.createElement("input", {id: "inputLastLoginTime", ref: "inputLastLoginTime", type: "text", 
+                                               className: "form-control", disabled: "disabled"})
                                     )
                                 )
                             )
@@ -227,6 +292,6 @@ var Account = React.createClass({displayName: "Account",
 });
 
 ReactDOM.render(
-    React.createElement(Account, null),
+    React.createElement(Profile, null),
     document.getElementById('page')
 );

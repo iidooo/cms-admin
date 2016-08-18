@@ -47,8 +47,8 @@ var DashboardContentCountStore = Reflux.createStore({
     listenables: [DashboardContentCountActions],
     onGetContentCount: function (data) {
         var url = SiteProperties.serverURL + API.getContentCount;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -100,8 +100,8 @@ var DashboardNewContentCountStore = Reflux.createStore({
     listenables: [DashboardNewContentCountActions],
     onGetContentCount: function (data) {
         var url = SiteProperties.serverURL + API.getContentCount;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -153,8 +153,8 @@ var DashboardUserCountStore = Reflux.createStore({
     listenables: [DashboardUserCountActions],
     onGetSiteUserCount: function (data) {
         var url = SiteProperties.serverURL + API.getSiteUserCount;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -206,8 +206,8 @@ var DashboardNewUserCountStore = Reflux.createStore({
     listenables: [DashboardNewUserCountActions],
     onGetSiteUserCount: function (data) {
         var url = SiteProperties.serverURL + API.getSiteUserCount;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -260,8 +260,8 @@ var DashboardNewContentListStore = Reflux.createStore({
     listenables: [DashboardNewContentListActions],
     onSearchContentList: function (data) {
         var url = SiteProperties.serverURL + API.searchContentList;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -336,8 +336,8 @@ var DashboardPVContentListStore = Reflux.createStore({
     listenables: [DashboardPVContentListActions],
     onSearchContentList: function (data) {
         var url = SiteProperties.serverURL + API.searchContentList;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);

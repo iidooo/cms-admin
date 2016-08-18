@@ -4,8 +4,8 @@ var CommentStore = Reflux.createStore({
     listenables: [CommentActions],
     onSave: function (data) {
         var url = SiteProperties.serverURL + API.updateComment;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -30,8 +30,8 @@ var CommentStore = Reflux.createStore({
     },
     onDelete: function (data) {
         var url = SiteProperties.serverURL + API.deleteComment;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.siteID = sessionStorage.getItem(SessionKey.siteID);
@@ -56,8 +56,8 @@ var CommentStore = Reflux.createStore({
     },
     onGetComment: function (data) {
         var url = SiteProperties.serverURL + API.getComment;
-        data.appID = SecurityClient.appID;
-        data.secret = SecurityClient.secret;
+        data.accessKey = SecurityClient.accessKey;
+        data.accessSecret = SecurityClient.accessSecret;
         data.accessToken = sessionStorage.getItem(SessionKey.accessToken);
         data.operatorID = sessionStorage.getItem(SessionKey.operatorID);
         data.commentID = sessionStorage.getItem(SessionKey.commentID);
