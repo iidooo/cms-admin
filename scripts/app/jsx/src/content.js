@@ -255,7 +255,7 @@ var Content = React.createClass({
                                             <label className="required">所属栏目</label>
                                         </div>
                                         <div className="col-sm-9">
-                                            <ChannelTreeList/>
+                                            <ChannelTreeList isContainBlank="false"/>
                                         </div>
                                     </div>
                                     <div className="col-sm-6">

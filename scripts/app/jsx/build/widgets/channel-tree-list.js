@@ -45,11 +45,21 @@ var ChannelTreeList = React.createClass({displayName: "ChannelTreeList",
     componentDidUpdate: function () {
         var $channelTree = $("#inputChannelTree");
         $channelTree.children().remove();
+
+        if(this.props.isContainBlank == 'true') {
+            var $option = $("<option value=''></option>");
+            $channelTree.append($option);
+        }
+
         $.each(this.state.channelList, function (index, item) {
             var level = 0;
             createOption($channelTree, item, level);
         });
-        $channelTree.val(this.props.channelID);
+
+        // 为了设置默认选中栏目
+        if(this.props.channelID != null) {
+            $channelTree.val(this.props.channelID);
+        }
     },
 
     render: function () {

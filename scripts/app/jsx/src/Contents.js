@@ -86,7 +86,7 @@ var Contents = React.createClass({
                                             <label>所属栏目</label>
                                         </div>
                                         <div className="col-xs-8">
-                                            <ChannelTreeList channelID={this.state.searchCondition.channelID}/>
+                                            <ChannelTreeList channelID={this.state.searchCondition.channelID} isContainBlank="true"/>
                                         </div>
                                     </div>
                                     <div className="col-xs-4">

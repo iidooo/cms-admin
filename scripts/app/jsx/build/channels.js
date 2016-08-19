@@ -210,7 +210,7 @@ var Channels = React.createClass({displayName: "Channels",
                                                 React.createElement("label", null, "所属父栏目")
                                             ), 
                                             React.createElement("div", {className: "col-sm-10"}, 
-                                                React.createElement(ChannelTreeList, {channelID: this.state.channel.parentID})
+                                                React.createElement(ChannelTreeList, {channelID: this.state.channel.parentID, isContainBlank: "true"})
                                             )
                                         ), 
                                         React.createElement("div", {className: "row form-group form-horizontal"}, 

@@ -210,7 +210,7 @@ var Channels = React.createClass({
                                                 <label>所属父栏目</label>
                                             </div>
                                             <div className="col-sm-10">
-                                                <ChannelTreeList channelID={this.state.channel.parentID}/>
+                                                <ChannelTreeList channelID={this.state.channel.parentID} isContainBlank="true"/>
                                             </div>
                                         </div>
                                         <div className="row form-group form-horizontal">

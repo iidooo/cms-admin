@@ -255,7 +255,7 @@ var Content = React.createClass({displayName: "Content",
                                             React.createElement("label", {className: "required"}, "所属栏目")
                                         ), 
                                         React.createElement("div", {className: "col-sm-9"}, 
-                                            React.createElement(ChannelTreeList, null)
+                                            React.createElement(ChannelTreeList, {isContainBlank: "false"})
                                         )
                                     ), 
                                     React.createElement("div", {className: "col-sm-6"}, 

@@ -86,7 +86,7 @@ var Contents = React.createClass({displayName: "Contents",
                                             React.createElement("label", null, "所属栏目")
                                         ), 
                                         React.createElement("div", {className: "col-xs-8"}, 
-                                            React.createElement(ChannelTreeList, {channelID: this.state.searchCondition.channelID})
+                                            React.createElement(ChannelTreeList, {channelID: this.state.searchCondition.channelID, isContainBlank: "true"})
                                         )
                                     ), 
                                     React.createElement("div", {className: "col-xs-4"}, 
